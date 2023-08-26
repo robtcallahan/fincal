@@ -64,6 +64,12 @@ func (r *mysqlQueryRepo) GetMerchants() []models.Merchant {
 	return merch
 }
 
+func (r *mysqlQueryRepo) GetMerchantsAndColumns() []models.MerchantAndColumns {
+	var merch []models.MerchantAndColumns
+	r.Conn.Order("name").Find(&merch)
+	return merch
+}
+
 // CreateMerchant ...
 func (r *mysqlQueryRepo) CreateMerchant(m *models.Merchant) {
 	result := r.Conn.Create(&models.Merchant{
@@ -78,7 +84,7 @@ func (r *mysqlQueryRepo) CreateMerchant(m *models.Merchant) {
 
 // GetLookupData ...
 func (r *mysqlQueryRepo) GetLookupData() []*models.DataRow {
-	var merchants []models.Merchant
+	var merchants []models.MerchantAndColumns
 
 	r.Conn.Preload("Column").Find(&merchants)
 
@@ -110,7 +116,7 @@ func (r *mysqlQueryRepo) GetNameMapToColumn() map[string]string {
 
 // PrintData ...
 func (r *mysqlQueryRepo) PrintData() {
-	var merchants []models.Merchant
+	var merchants []models.MerchantAndColumns
 	r.Conn.Preload("Column").Find(&merchants)
 
 	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Column Name", "Column Index")
@@ -123,7 +129,7 @@ func (r *mysqlQueryRepo) PrintData() {
 func (r *mysqlQueryRepo) PrintTable(table string) {
 	switch table {
 	case "merchants":
-		var merchants []models.Merchant
+		var merchants []models.MerchantAndColumns
 		result := r.Conn.Find(&merchants)
 		fmt.Printf("%d rows found\n", result.RowsAffected)
 		for _, m := range merchants {

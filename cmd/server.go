@@ -22,8 +22,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"register/pkg/driver"
 
 	cfg "register/pkg/config"
+	"register/pkg/handler"
 	"register/pkg/plaid_auth"
 
 	"github.com/gorilla/mux"
@@ -32,8 +34,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var serverCmd = &cobra.Command{
-	Use:   "server",
+var serveCmd = &cobra.Command{
+	Use:   "serve",
 	Short: "Provides a web service function",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -43,7 +45,7 @@ var serverCmd = &cobra.Command{
 
 func init() {
 	config, _ = cfg.ReadConfig(ConfigFile)
-	rootCmd.AddCommand(serverCmd)
+	rootCmd.AddCommand(serveCmd)
 
 	client = getBankingClient()
 }
@@ -56,24 +58,39 @@ func server() {
 	fs := http.FileServer(http.Dir("./frontend/dist"))
 	r.Handle("/", fs)
 
-	//r.HandleFunc("/api/test", test).Methods("GET", "OPTIONS")
-	//r.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
-	//r.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
-	//r.HandleFunc("/api/get_accounts", client.getAccounts).Methods("GET")
-	//r.HandleFunc("/api/get_balance", client.getBalance).Methods("GET")
-	//r.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
-	//r.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
+	r.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
+	r.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
+	r.HandleFunc("/api/get_accounts", client.getAccounts).Methods("GET")
+	r.HandleFunc("/api/get_balance", client.getBalance).Methods("GET")
+	r.HandleFunc("/api/get_merchants", client.getMerchants).Methods("GET")
+	r.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
+	r.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
 
 	log.Println("Server will start at https://localhost:9000/")
 	handler := cors.Default().Handler(r)
 	log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, handler))
 }
 
-func test(w http.ResponseWriter, r *http.Request) {
-	log.Println("test()")
+func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
+	conn, err := driver.ConnectSQL(&driver.ConnectParams{
+		DBType: driver.DBType(config.DBType),
+		Host:   config.DBHost,
+		Port:   config.DBPort,
+		DBName: config.DBName,
+		User:   config.DBUsername,
+		Pass:   config.DBPassword,
+	})
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	qHandler := handler.NewQueryHandler(conn)
+	merchants := qHandler.GetMerchants()
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte("{\"hello\": \"world\"}"))
+	_ = json.NewEncoder(w).Encode(merchants)
 }
 
 func (c *Client) createLinkToken(w http.ResponseWriter, r *http.Request) {

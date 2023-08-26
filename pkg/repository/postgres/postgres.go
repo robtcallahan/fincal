@@ -63,6 +63,12 @@ func (r *postgresQueryRepo) GetMerchants() []models.Merchant {
 	return merch
 }
 
+func (r *postgresQueryRepo) GetMerchantsAndColumns() []models.MerchantAndColumns {
+	var merch []models.MerchantAndColumns
+	r.Conn.Order("name").Find(&merch)
+	return merch
+}
+
 // CreateMerchant ...
 func (r *postgresQueryRepo) CreateMerchant(m *models.Merchant) {
 	result := r.Conn.Create(&models.Merchant{
@@ -77,7 +83,7 @@ func (r *postgresQueryRepo) CreateMerchant(m *models.Merchant) {
 
 // GetLookupData ...
 func (r *postgresQueryRepo) GetLookupData() []*models.DataRow {
-	var merchants []models.Merchant
+	var merchants []models.MerchantAndColumns
 
 	r.Conn.Preload("Column").Find(&merchants)
 
@@ -108,7 +114,7 @@ func (r *postgresQueryRepo) GetNameMapToColumn() map[string]string {
 
 // PrintData ...
 func (r *postgresQueryRepo) PrintData() {
-	var merchants []models.Merchant
+	var merchants []models.MerchantAndColumns
 	r.Conn.Preload("Column").Find(&merchants)
 
 	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Column Name", "Column Index")
@@ -121,7 +127,7 @@ func (r *postgresQueryRepo) PrintData() {
 func (r *postgresQueryRepo) PrintTable(table string) {
 	switch table {
 	case "merchants":
-		var merchants []models.Merchant
+		var merchants []models.MerchantAndColumns
 		result := r.Conn.Find(&merchants)
 		fmt.Printf("%d rows found\n", result.RowsAffected)
 		for _, m := range merchants {

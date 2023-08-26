@@ -29,6 +29,15 @@ type Transaction struct {
 // Merchant ...
 type Merchant struct {
 	gorm.Model
+	ID            int    `json:"id"`
+	BankName      string `json:"bank_name"`
+	Name          string `json:"name"`
+	ColumnID      int    `json:"column_id"`
+	TaxDeductible bool   `json:"tax_deductible"`
+}
+
+type MerchantAndColumns struct {
+	gorm.Model
 	ID            int
 	BankName      string
 	Name          string

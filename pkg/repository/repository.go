@@ -13,6 +13,7 @@ type QueryRepo interface {
 	GetColumns() []models.Column
 
 	GetMerchants() []models.Merchant
+	GetMerchantsAndColumns() []models.MerchantAndColumns
 	CreateMerchant(m *models.Merchant)
 
 	GetTransactions() []models.Transaction
