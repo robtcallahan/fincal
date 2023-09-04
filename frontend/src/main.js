@@ -1,5 +1,6 @@
 import {configureCompat, createApp} from '@vue/compat'
 import {BootstrapVue, BTable} from 'bootstrap-vue'
+import {BootstrapIconsPlugin} from "bootstrap-icons-vue";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -28,5 +29,7 @@ configureCompat({
 import App from './App.vue'
 const app = createApp(App)
 app.use(BootstrapVue)
+app.use(BootstrapIconsPlugin)
 app.component('b-table', BTable)
+// app.component('BIconXSquareFill', BIconXSquareFill)
 app.mount('#app')

@@ -28,14 +28,14 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"register/api/providers/sheets_provider"
-	"register/api/services/sheets_service"
-	"register/pkg/banking"
-	cfg "register/pkg/config"
-	"register/pkg/csv"
-	"register/pkg/driver"
-	"register/pkg/handler"
-	"register/pkg/models"
+	"vue-register/api/providers/sheets_provider"
+	"vue-register/api/services/sheets_service"
+	"vue-register/pkg/banking"
+	cfg "vue-register/pkg/config"
+	"vue-register/pkg/csv"
+	"vue-register/pkg/driver"
+	"vue-register/pkg/handler"
+	"vue-register/pkg/models"
 )
 
 var updateCmd = &cobra.Command{

@@ -19,9 +19,9 @@ package cmd
 import (
 	"fmt"
 
-	"register/api/providers/sheets_provider"
-	"register/api/services/sheets_service"
-	cfg "register/pkg/config"
+	"vue-register/api/providers/sheets_provider"
+	"vue-register/api/services/sheets_service"
+	cfg "vue-register/pkg/config"
 
 	"github.com/spf13/cobra"
 )

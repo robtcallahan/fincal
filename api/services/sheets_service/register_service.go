@@ -3,8 +3,8 @@ package sheets_service
 import (
 	"fmt"
 	"log"
-	"register/pkg/config"
-	"register/pkg/models"
+	"vue-register/pkg/config"
+	"vue-register/pkg/models"
 
 	"google.golang.org/api/sheets/v4"
 )

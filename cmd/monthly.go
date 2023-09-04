@@ -18,12 +18,12 @@ package cmd
 
 import (
 	"fmt"
-	"register/api/providers/sheets_provider"
+	"vue-register/api/providers/sheets_provider"
 
-	"register/pkg/driver"
-	"register/pkg/handler"
+	"vue-register/pkg/driver"
+	"vue-register/pkg/handler"
 
-	"register/api/services/sheets_service"
+	"vue-register/api/services/sheets_service"
 
 	"github.com/spf13/cobra"
 )
@@ -43,8 +43,8 @@ func init() {
 }
 
 const (
-// jsonDir = "/Users/rob/ws/go/src/register/services/sheets_service/json"
-// jsonDir = "/Users/rcallahan/workspace/go/src/register/services/sheets_service/json"
+// jsonDir = "/Users/rob/ws/go/src/vue-register/services/sheets_service/json"
+// jsonDir = "/Users/rcallahan/workspace/go/src/vue-register/services/sheets_service/json"
 )
 
 func monthly() {

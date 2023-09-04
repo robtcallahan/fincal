@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"register/pkg/config"
-	"register/pkg/models"
 	"strconv"
 	"strings"
+	"vue-register/pkg/config"
+	"vue-register/pkg/models"
 
 	"github.com/gocarina/gocsv"
 )

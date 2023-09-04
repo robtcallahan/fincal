@@ -8,11 +8,11 @@ import (
 	"math"
 	"os"
 	"regexp"
-	"register/pkg/models"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+	"vue-register/pkg/models"
 )
 
 var cellColors = map[string]*sheets.Color{

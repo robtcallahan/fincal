@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"os"
 	"reflect"
-	"register/pkg/models"
 	"testing"
+	"vue-register/pkg/models"
 
 	"google.golang.org/api/sheets/v4"
 )

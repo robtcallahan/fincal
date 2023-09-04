@@ -27,8 +27,8 @@ import (
 
 	"github.com/plaid/plaid-go/v15/plaid"
 	"golang.org/x/net/context"
-	"register/pkg/config"
-	"register/pkg/models"
+	"vue-register/pkg/config"
+	"vue-register/pkg/models"
 )
 
 const (

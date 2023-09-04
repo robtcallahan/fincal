@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+// import vue from '@vue/compat'
 
 // https://vitejs.dev/config/
 export default {
@@ -7,12 +8,13 @@ export default {
       vue: '@vue/compat'
     }
   },
+  optimizeDeps: { exclude: ["fsevents"] },
   plugins: [
     vue({
       template: {
         compilerOptions: {
           compatConfig: {
-            MODE: 2
+            MODE: 3
           }
         }
       }

@@ -19,18 +19,20 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/rs/cors"
+	"io"
 	"log"
 	"net/http"
 	"os"
-	"register/pkg/driver"
+	"vue-register/pkg/driver"
+	"vue-register/pkg/models"
 
-	cfg "register/pkg/config"
-	"register/pkg/handler"
-	"register/pkg/plaid_auth"
+	cfg "vue-register/pkg/config"
+	"vue-register/pkg/handler"
+	"vue-register/pkg/plaid_auth"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	"github.com/rs/cors"
 	"github.com/spf13/cobra"
 )
 
@@ -43,36 +45,16 @@ var serveCmd = &cobra.Command{
 	},
 }
 
+var conn *driver.DB
+var qHandler *handler.Query
+
 func init() {
 	config, _ = cfg.ReadConfig(ConfigFile)
 	rootCmd.AddCommand(serveCmd)
 
 	client = getBankingClient()
-}
 
-var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
-
-func server() {
-	r := mux.NewRouter()
-
-	fs := http.FileServer(http.Dir("./frontend/dist"))
-	r.Handle("/", fs)
-
-	r.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
-	r.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
-	r.HandleFunc("/api/get_accounts", client.getAccounts).Methods("GET")
-	r.HandleFunc("/api/get_balance", client.getBalance).Methods("GET")
-	r.HandleFunc("/api/get_merchants", client.getMerchants).Methods("GET")
-	r.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
-	r.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
-
-	log.Println("Server will start at https://localhost:9000/")
-	handler := cors.Default().Handler(r)
-	log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, handler))
-}
-
-func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
-	conn, err := driver.ConnectSQL(&driver.ConnectParams{
+	conn, _ = driver.ConnectSQL(&driver.ConnectParams{
 		DBType: driver.DBType(config.DBType),
 		Host:   config.DBHost,
 		Port:   config.DBPort,
@@ -80,17 +62,148 @@ func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
 		User:   config.DBUsername,
 		Pass:   config.DBPassword,
 	})
+	qHandler = handler.NewQueryHandler(conn)
+}
+
+var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
+
+func server() {
+	router := mux.NewRouter()
+
+	router.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
+	router.HandleFunc("/api/get_accounts", client.getAccounts).Methods("GET")
+	router.HandleFunc("/api/get_balance", client.getBalance).Methods("GET")
+
+	router.HandleFunc("/api/get_merchants", client.getMerchants).Methods("GET")
+	router.HandleFunc("/api/update_merchant", client.updateMerchant).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/delete_merchant", client.deleteMerchant).Methods("POST", "OPTIONS")
+
+	router.HandleFunc("/api/get_categories", client.getCategories).Methods("GET")
+	router.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
+	router.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
+
+	router.Use(mux.CORSMethodMiddleware(router))
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:5173"},
+		AllowCredentials: true,
+		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
+		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},
+		MaxAge:           86400,
+	})
+	myHandler := c.Handler(router)
+
+	log.Println("Server will start at http://localhost:9000/")
+
+	//log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, r))
+	log.Fatal(http.ListenAndServe(":9000", myHandler))
+}
+func (c *Client) updateMerchant(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	qHandler := handler.NewQueryHandler(conn)
+	type updateStruct struct {
+		ID     int    `json:"id"`
+		Column string `json:"column"`
+		Value  string `json:"value"`
+	}
+	var up updateStruct
+	err = json.Unmarshal(b, &up)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// if column is column_name, then we need to get the column_id first
+
+	merch := models.Merchant{ID: up.ID}
+	qHandler.UpdateMerchant(&merch, up.Column, up.Value)
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(up)
+}
+
+func (c *Client) deleteMerchant(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("json: %s", string(b))
+	type deleteStruct struct {
+		ID int `json:"id"`
+	}
+	var ds deleteStruct
+	err = json.Unmarshal(b, &ds)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	merch := models.Merchant{ID: ds.ID}
+	qHandler.DeleteMerchant(&merch)
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(ds)
+}
+
+func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
 	merchants := qHandler.GetMerchants()
+	columns := qHandler.GetColumns()
+
+	var merCols []models.MerchantColumn
+	//var merCol models.MerchantColumn
+	for _, m := range merchants {
+		merCol := models.MerchantColumn{
+			ID:            m.ID,
+			Name:          m.Name,
+			BankName:      m.BankName,
+			TaxDeductible: m.TaxDeductible,
+		}
+		for _, c := range columns {
+			if c.ID == m.ColumnID {
+				merCol.ColumnID = c.ID
+				merCol.ColumnName = c.Name
+				merCol.ColumnIsCategory = c.IsCategory
+				merCol.ColumnColor = c.Color
+			}
+		}
+		merCols = append(merCols, merCol)
+	}
 
 	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(merchants)
+	_ = json.NewEncoder(w).Encode(merCols)
+}
+
+func (c *Client) getCategories(w http.ResponseWriter, r *http.Request) {
+	columns := qHandler.GetCategoryColumns()
+
+	type CatsSelect struct {
+		ID    int    `json:"id"`
+		Value int    `json:"value"`
+		Text  string `json:"text"`
+		Color string `json:"color"`
+	}
+	var catsSelect []CatsSelect
+	for _, cat := range columns {
+		c := CatsSelect{
+			ID:    cat.ID,
+			Value: cat.ID,
+			Text:  cat.Name,
+			Color: cat.Color,
+		}
+		catsSelect = append(catsSelect, c)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(catsSelect)
 }
 
 func (c *Client) createLinkToken(w http.ResponseWriter, r *http.Request) {
@@ -169,8 +282,6 @@ func (c *Client) getAccounts(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) getBalance(w http.ResponseWriter, r *http.Request) {
-	log.Println("getBalance()")
-
 	session, err := store.Get(r, "register")
 	if err != nil {
 		log.Println(err.Error())
@@ -193,8 +304,6 @@ func (c *Client) getBalance(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) getTransactions(w http.ResponseWriter, r *http.Request) {
-	log.Println("getTransactions()")
-
 	session, err := store.Get(r, "register")
 	if err != nil {
 		log.Println(err.Error())
@@ -221,7 +330,6 @@ func (c *Client) getTransactions(w http.ResponseWriter, r *http.Request) {
 }
 
 func isAccountConnected(w http.ResponseWriter, r *http.Request) {
-	log.Println("isAccountConnected()")
 	session, err := store.Get(r, "register")
 	if err != nil {
 		log.Println(err.Error())

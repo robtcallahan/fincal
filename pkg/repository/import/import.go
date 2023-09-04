@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	cfg "register/pkg/config"
+	cfg "vue-register/pkg/config"
 
 	"github.com/gocarina/gocsv"
 	"gorm.io/driver/mysql"

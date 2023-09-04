@@ -16,7 +16,7 @@ limitations under the License.
 
 package main
 
-import "register/cmd"
+import "vue-register/cmd"
 
 func main() {
 	cmd.Execute()

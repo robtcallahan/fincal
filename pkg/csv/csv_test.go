@@ -8,13 +8,13 @@ import (
 	"reflect"
 	"testing"
 
-	cfg "register/pkg/config"
-	"register/pkg/models"
+	cfg "vue-register/pkg/config"
+	"vue-register/pkg/models"
 )
 
 const (
 	FinanceDir = "/Users/rob/Dropbox/Finances/"
-	JSONDIR    = "/Users/rob/ws/go/src/register/api/services/sheets_service/json/"
+	JSONDIR    = "/Users/rob/ws/go/src/vue-register/api/services/sheets_service/json/"
 )
 
 type FakeReadFiler struct {

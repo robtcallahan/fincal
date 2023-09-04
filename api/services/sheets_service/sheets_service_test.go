@@ -9,12 +9,12 @@ import (
 	"reflect"
 	"testing"
 
-	"register/pkg/models"
+	"vue-register/pkg/models"
 
 	"google.golang.org/api/sheets/v4"
 )
 
-const sheetsServiceJSONDir = "/Users/rob/ws/go/src/register/api/services/sheets_service/json/"
+const sheetsServiceJSONDir = "/Users/rob/ws/go/src/vue-register/api/services/sheets_service/json/"
 
 var months = []string{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
 

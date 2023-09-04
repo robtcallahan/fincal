@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/gorm/clause"
 
-	"register/pkg/models"
-	repo "register/pkg/repository"
+	"vue-register/pkg/models"
+	repo "vue-register/pkg/repository"
 
 	"gorm.io/gorm"
 )
@@ -56,6 +56,12 @@ func (r *postgresQueryRepo) GetColumns() []models.Column {
 	return cols
 }
 
+func (r *postgresQueryRepo) GetCategoryColumns() []models.Column {
+	var cols []models.Column
+	r.Conn.Where("is_category = 1").Order("name").Find(&cols)
+	return cols
+}
+
 // GetMerchants ...
 func (r *postgresQueryRepo) GetMerchants() []models.Merchant {
 	var merch []models.Merchant
@@ -63,8 +69,8 @@ func (r *postgresQueryRepo) GetMerchants() []models.Merchant {
 	return merch
 }
 
-func (r *postgresQueryRepo) GetMerchantsAndColumns() []models.MerchantAndColumns {
-	var merch []models.MerchantAndColumns
+func (r *postgresQueryRepo) GetMerchantsAndColumns() []models.MerchantsAndColumns {
+	var merch []models.MerchantsAndColumns
 	r.Conn.Order("name").Find(&merch)
 	return merch
 }
@@ -81,9 +87,17 @@ func (r *postgresQueryRepo) CreateMerchant(m *models.Merchant) {
 	}
 }
 
+func (r *postgresQueryRepo) UpdateMerchant(m *models.Merchant, column, value string) {
+	r.Conn.Model(m).Update(column, value)
+}
+
+func (r *postgresQueryRepo) DeleteMerchant(m *models.Merchant) {
+	r.Conn.Delete(m)
+}
+
 // GetLookupData ...
 func (r *postgresQueryRepo) GetLookupData() []*models.DataRow {
-	var merchants []models.MerchantAndColumns
+	var merchants []models.MerchantsAndColumns
 
 	r.Conn.Preload("Column").Find(&merchants)
 
@@ -114,7 +128,7 @@ func (r *postgresQueryRepo) GetNameMapToColumn() map[string]string {
 
 // PrintData ...
 func (r *postgresQueryRepo) PrintData() {
-	var merchants []models.MerchantAndColumns
+	var merchants []models.MerchantsAndColumns
 	r.Conn.Preload("Column").Find(&merchants)
 
 	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Column Name", "Column Index")
@@ -127,7 +141,7 @@ func (r *postgresQueryRepo) PrintData() {
 func (r *postgresQueryRepo) PrintTable(table string) {
 	switch table {
 	case "merchants":
-		var merchants []models.MerchantAndColumns
+		var merchants []models.MerchantsAndColumns
 		result := r.Conn.Find(&merchants)
 		fmt.Printf("%d rows found\n", result.RowsAffected)
 		for _, m := range merchants {

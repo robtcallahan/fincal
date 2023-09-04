@@ -1,7 +1,7 @@
 package sheets_service
 
 import (
-	"register/api/providers/sheets_provider"
+	"vue-register/api/providers/sheets_provider"
 
 	"google.golang.org/api/sheets/v4"
 )

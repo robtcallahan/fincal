@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"register/pkg/config"
+	"vue-register/pkg/config"
 
 	"google.golang.org/api/sheets/v4"
 )

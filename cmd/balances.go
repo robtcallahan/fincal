@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	cfg "register/pkg/config"
+	cfg "vue-register/pkg/config"
 
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"

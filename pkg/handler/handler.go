@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"register/pkg/driver"
-	"register/pkg/models"
-	"register/pkg/repository"
-	"register/pkg/repository/mysql"
-	"register/pkg/repository/postgres"
+	"vue-register/pkg/driver"
+	"vue-register/pkg/models"
+	"vue-register/pkg/repository"
+	"vue-register/pkg/repository/mysql"
+	"vue-register/pkg/repository/postgres"
 )
 
 // Query ...
@@ -45,14 +45,30 @@ func (q *Query) GetColumns() []models.Column {
 	return q.repo.GetColumns()
 }
 
+func (q *Query) GetCategoryColumns() []models.Column {
+	return q.repo.GetCategoryColumns()
+}
+
 // GetMerchants get all merchants
 func (q *Query) GetMerchants() []models.Merchant {
 	return q.repo.GetMerchants()
 }
 
+func (q *Query) GetMerchantsAndColumns() []models.MerchantsAndColumns {
+	return q.repo.GetMerchantsAndColumns()
+}
+
 // CreateMerchant ...
 func (q *Query) CreateMerchant(m *models.Merchant) {
 	q.repo.CreateMerchant(m)
+}
+
+func (q *Query) UpdateMerchant(m *models.Merchant, column, value string) {
+	q.repo.UpdateMerchant(m, column, value)
+}
+
+func (q *Query) DeleteMerchant(m *models.Merchant) {
+	q.repo.DeleteMerchant(m)
 }
 
 // GetLookupData ...
