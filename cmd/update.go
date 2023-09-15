@@ -1,19 +1,3 @@
-/*
-Copyright © 2020 Rob Callahan <robtcallahan@aol.com>
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package cmd
 
 import (
@@ -27,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/cobra"
 	"vue-register/api/providers/sheets_provider"
 	"vue-register/api/services/sheets_service"
 	"vue-register/pkg/banking"
@@ -36,6 +19,8 @@ import (
 	"vue-register/pkg/driver"
 	"vue-register/pkg/handler"
 	"vue-register/pkg/models"
+
+	"github.com/spf13/cobra"
 )
 
 var updateCmd = &cobra.Command{
@@ -46,7 +31,7 @@ and Citi, both the Register and Budget tabs from your Google Sheets financial sp
 removes duplicates and updates the Register tab with new transactions subtracting those
 amounts from the appropriate budget category columns.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		update(cmd, args)
+		update()
 	},
 }
 
@@ -65,7 +50,7 @@ func init() {
 	updateCmd.Flags().BoolVarP(&options.UseCSVFiles, "csv", "c", false, "Read CSV files; default=false")
 }
 
-func update(cmd *cobra.Command, args []string) {
+func update() {
 	var (
 		client       *Client
 		transactions []*models.Transaction
@@ -129,7 +114,7 @@ func update(cmd *cobra.Command, args []string) {
 
 	if needTransactionName(transactions) {
 		fmt.Println("Info needed...")
-		printColumns(qHandler)
+		printCategories(qHandler)
 		transactions, err = getBankNameToName(client.BankClient, qHandler, transactions)
 		checkError(err)
 	}
@@ -143,7 +128,7 @@ func update(cmd *cobra.Command, args []string) {
 
 	// add the needed number of rows for transactions
 	fmt.Println("Adding rows...")
-	_, _, err = shellout("register copy -n " + strconv.Itoa(len(transactions)))
+	_, _, err = shellOut("register copy -n " + strconv.Itoa(len(transactions)))
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -161,10 +146,10 @@ func update(cmd *cobra.Command, args []string) {
 		}
 
 		fmt.Printf("Updating spreadsheet...\n")
-		columns := qHandler.GetColumns()
+		categories := qHandler.GetCategories()
 		transNameToColName := qHandler.GetNameMapToColumn()
 
-		err = sheetsService.UpdateRows(columns, transNameToColName, transactions)
+		err = sheetsService.UpdateRows(categories, transNameToColName, transactions)
 		checkError(err)
 
 		lastRowUpdated := sheetsService.RegisterSheet.SheetCoords.FirstRowToUpdate + int64(len(transactions)*2) + 1
@@ -185,7 +170,7 @@ func update(cmd *cobra.Command, args []string) {
 	}
 }
 
-func shellout(command string) (string, string, error) {
+func shellOut(command string) (string, string, error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 	cmd := exec.Command("bash", "-c", command)
@@ -253,12 +238,12 @@ func printTransactions(trans []*models.Transaction) {
 	fmt.Println("")
 }
 
-func printRegister(trans []*sheets_service.RegisterEntry) {
-	for i, t := range trans {
-		fmt.Printf("    (%2d) [%-28s] %-12s %-10s %8.2f %8.2f %8.2f %s\n", i+1, t.Key, t.Source, t.Date, t.Withdrawal, t.Deposit, t.CreditCard, t.Name)
-	}
-	fmt.Println("")
-}
+//func printRegister(trans []*sheets_service.RegisterEntry) {
+//	for i, t := range trans {
+//		fmt.Printf("    (%2d) [%-28s] %-12s %-10s %8.2f %8.2f %8.2f %s\n", i+1, t.Key, t.Source, t.Date, t.Withdrawal, t.Deposit, t.CreditCard, t.Name)
+//	}
+//	fmt.Println("")
+//}
 
 func needTransactionName(trans []*models.Transaction) bool {
 	for _, t := range trans {
@@ -269,9 +254,9 @@ func needTransactionName(trans []*models.Transaction) bool {
 	return false
 }
 
-func printColumns(db *handler.Query) {
-	columns := db.GetColumns()
-	filtered := filterNonCategoryColumns(columns)
+func printCategories(db *handler.Query) {
+	categories := db.GetCategories()
+	filtered := filterNonCategoryColumns(categories)
 
 	// this will allow us to print 3 columns on the screen
 	numRows := int(math.Floor(float64(len(filtered)) / 3))
@@ -292,12 +277,9 @@ func printColumns(db *handler.Query) {
 	}
 }
 
-func filterNonCategoryColumns(columns []models.Column) []models.Column {
-	var filtered []models.Column
-	for _, col := range columns {
-		if !col.IsCategory {
-			continue
-		}
+func filterNonCategoryColumns(categories []models.Category) []models.Category {
+	var filtered []models.Category
+	for _, col := range categories {
 		filtered = append(filtered, col)
 	}
 	return filtered
@@ -337,7 +319,7 @@ func readFromUser(db *handler.Query, trans []*models.Transaction) (bool, []*mode
 
 			trans[i].Name = readString("            Name: ")
 			for err = fmt.Errorf(""); err != nil; {
-				trans[i].ColumnIndex, err = readInt("    Column Index: ")
+				trans[i].ColumnIndex, err = readInt("    Category Index: ")
 				if err != nil {
 					fmt.Println(err.Error())
 				}

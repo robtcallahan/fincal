@@ -50,17 +50,36 @@ func (r *mysqlQueryRepo) CreateDB(dbName string) (*gorm.DB, error) {
 	return db, db.Error
 }
 
-// GetColumns ...
-func (r *mysqlQueryRepo) GetColumns() []models.Column {
-	var cols []models.Column
-	r.Conn.Order("column_index").Find(&cols)
+func (r *mysqlQueryRepo) GetCategories() []models.Category {
+	var cols []models.Category
+	r.Conn.Where("is_category = 1").Order("column_index").Find(&cols)
 	return cols
 }
 
-func (r *mysqlQueryRepo) GetCategoryColumns() []models.Column {
-	var cols []models.Column
+func (r *mysqlQueryRepo) CreateCategory(category *models.Category) *models.Category {
+	tx := r.Conn.Create(category)
+	category.ID = tx.Statement.Model.(*models.Category).ID
+	return category
+}
+
+func (r *mysqlQueryRepo) UpdatesCategory(category *models.Category, values interface{}) {
+	r.Conn.Model(&category).Where("id = ?", category.ID).Updates(values)
+}
+
+func (r *mysqlQueryRepo) GetCategoriesForSelect() []models.CategoryForSelect {
+	var cols []models.Category
 	r.Conn.Where("is_category = 1").Order("name").Find(&cols)
-	return cols
+
+	var catsSelect []models.CategoryForSelect
+	for _, c := range cols {
+		s := models.CategoryForSelect{
+			ID:    c.ID,
+			Value: c.ID,
+			Text:  c.Name,
+		}
+		catsSelect = append(catsSelect, s)
+	}
+	return catsSelect
 }
 
 // GetMerchants ...
@@ -90,17 +109,17 @@ func (r *mysqlQueryRepo) DeleteMerchant(m *models.Merchant) {
 	r.Conn.Delete(m)
 }
 
-func (r *mysqlQueryRepo) GetMerchantsAndColumns() []models.MerchantsAndColumns {
-	var merch []models.MerchantsAndColumns
+func (r *mysqlQueryRepo) GetMerchantsAndCategories() []models.MerchantsAndCategories {
+	var merch []models.MerchantsAndCategories
 	r.Conn.Order("name").Find(&merch)
 	return merch
 }
 
 // GetLookupData ...
 func (r *mysqlQueryRepo) GetLookupData() []*models.DataRow {
-	var merchants []models.MerchantsAndColumns
+	var merchants []models.MerchantsAndCategories
 
-	r.Conn.Preload("Column").Find(&merchants)
+	r.Conn.Preload("Category").Find(&merchants)
 
 	var data []*models.DataRow
 	for _, m := range merchants {
@@ -130,10 +149,10 @@ func (r *mysqlQueryRepo) GetNameMapToColumn() map[string]string {
 
 // PrintData ...
 func (r *mysqlQueryRepo) PrintData() {
-	var merchants []models.MerchantsAndColumns
-	r.Conn.Preload("Column").Find(&merchants)
+	var merchants []models.MerchantsAndCategories
+	r.Conn.Preload("Category").Find(&merchants)
 
-	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Column Name", "Column Index")
+	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Category Name", "Category Index")
 	for i, m := range merchants {
 		fmt.Printf("[%3d] %-35s %-30s %-30s %2d\n", i+1, m.BankName, m.Name, m.Column.Name, m.Column.ColumnIndex)
 	}
@@ -143,7 +162,7 @@ func (r *mysqlQueryRepo) PrintData() {
 func (r *mysqlQueryRepo) PrintTable(table string) {
 	switch table {
 	case "merchants":
-		var merchants []models.MerchantsAndColumns
+		var merchants []models.MerchantsAndCategories
 		result := r.Conn.Find(&merchants)
 		fmt.Printf("%d rows found\n", result.RowsAffected)
 		for _, m := range merchants {

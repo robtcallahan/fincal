@@ -1,12 +1,5 @@
-<script setup lang="js">
-
-import "./Merchants.vue";
-
-</script>
-
 <template>
     <b-container fluid>
-        <!-- User Interface controls -->
         <b-row>
             <b-col class="w-75"><h1>Merchants</h1></b-col>
             <b-col class="w-25" style='margin-right: 20px'>
@@ -45,7 +38,7 @@ import "./Merchants.vue";
                     label-sort-desc=""
                     label-sort-clear=""
                     :items="merchants"
-                    :columns="columns"
+                    :categories="categories"
                     :fields="fields"
                     :filter="filter"
                     :filter-function="filterFunction"
@@ -68,9 +61,9 @@ import "./Merchants.vue";
                         <b-form-select
                                 v-if="editable && item.editing && this.selectedCell.fieldKey === key"
                                 :id="getCellId('select', item.id, key)"
+                                :options="categories" size="sm"
                                 @change="stopEditingAndSave(item, 'column_id')"
                                 v-model="item.column_id"
-                                :options="categories" size="sm"
                                 :style="'border-width: 0;'">
                         </b-form-select>
                         <span v-else :id="getCellId('span', item.id, key)">{{ item.column_name }}</span>
@@ -111,20 +104,12 @@ import "./Merchants.vue";
                     </div>
                 </template>
             </b-table>
-            <pre>{{ categories }}</pre>
+            <pre>{{ merchants }}</pre>
         </div>
     </b-container>
 </template>
 
 <script lang="js">
-
-import axios from "axios";
-
-const instance = axios.create({
-    baseURL: 'http://localhost:9000/api/',
-    timeout: 10000,
-});
-
 export default {
     name: "Merchants",
     data() {
@@ -197,7 +182,6 @@ export default {
             ],
             categories: [],
             merchants: [],
-            columns: [],
             selectedCell: {},
             previousCell: {
                 id: -1,
@@ -207,7 +191,6 @@ export default {
             fieldKeys: {},
             editableFieldKeys: {},
             rowsById: {},
-            selected: null,
             filter: null,
             filterOn: [],
             filterFields: [],
@@ -463,7 +446,7 @@ export default {
             }
             const j = `{"id": ` + this.selectedCell.id + `, "column": "` + fieldKey + `", "value": "` + this.selectedCell.newValue + `"}`;
             console.log("json: " + j);
-            instance
+            axiosInstance
                 .put("update_merchant", j, {
                     headers: {"Content-Type": "application/json"}
                 })
@@ -503,7 +486,7 @@ export default {
         async deleteMerchant(data) {
             const j = `{"id": ` + data.item.id + `}`;
             console.log("deleteMerchant() id: ", data.item.id, ", json: " + j);
-            instance
+            axiosInstance
                 .post("delete_merchant", j, {
                     headers: {"Content-Type": "application/json"}
                 })
@@ -525,7 +508,7 @@ export default {
                 });
         },
         async getMerchants() {
-            instance
+            axiosInstance
                 .get("get_merchants")
                 .then((response) => {
                     this.fieldKeys = {};
@@ -572,9 +555,9 @@ export default {
         sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         },
-        async getCategories() {
-            instance
-                .get("get_categories")
+        async getCategoriesForSelect() {
+            axiosInstance
+                .get("get_categories_for_select")
                 .then((response) => {
                     this.categories = response.data
                 })
@@ -611,7 +594,7 @@ export default {
         }
     },
     async mounted() {
-        await this.getCategories();
+        await this.getCategoriesForSelect();
         await this.getMerchants();
     }
 }
@@ -656,21 +639,6 @@ div.cell span input {
 
 .table-container {
     margin: 5px 20px 20px 20px;
-}
-
-.blue {
-    border-width: 0;
-    background-color: dodgerblue;
-}
-
-.yellow {
-    border-width: 0;
-    background-color: gold;
-}
-
-.green {
-    border-width: 0;
-    background-color: forestgreen;
 }
 
 .bank-name-col {

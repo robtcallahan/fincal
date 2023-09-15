@@ -9,8 +9,8 @@ import (
 	"google.golang.org/api/sheets/v4"
 )
 
-func (ss *SheetsService) UpdateMonthlyCategories(tabName string, catAgg map[string]map[string]float64, columns []models.Column) error {
-	rows := populateMonthlyCategories(catAgg, columns)
+func (ss *SheetsService) UpdateMonthlyCategories(tabName string, catAgg map[string]map[string]float64, Categories []models.Category) error {
+	rows := populateMonthlyCategories(catAgg, Categories)
 	id, err := ss.getSheetID(tabName)
 	if err != nil {
 		return fmt.Errorf("error: %s\n", err.Error())
@@ -58,7 +58,7 @@ func (ss *SheetsService) updateMonthly(sheetID int64, rows []*sheets.RowData) er
 	return nil
 }
 
-func (ss *SheetsService) Aggregate(cols []models.Column) (map[string]map[string]float64, map[string]map[string]float64) {
+func (ss *SheetsService) Aggregate(cols []models.Category) (map[string]map[string]float64, map[string]map[string]float64) {
 	// map of register entries by month and category
 	catAgg := make(map[string]map[string]float64)
 
@@ -97,7 +97,7 @@ func (ss *SheetsService) Aggregate(cols []models.Column) (map[string]map[string]
 	return catAgg, payeeAgg
 }
 
-func populateMonthlyCategories(catAgg map[string]map[string]float64, cats []models.Column) []*sheets.RowData {
+func populateMonthlyCategories(catAgg map[string]map[string]float64, cats []models.Category) []*sheets.RowData {
 	var rows []*sheets.RowData
 
 	months := sortAggregateMapKeys(&catAgg)

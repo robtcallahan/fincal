@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"vue-register/api/clients/sheets_client"
 	"vue-register/pkg/config"
 	"vue-register/pkg/sheets_auth"
 
@@ -12,7 +13,6 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
-	"vue-register/api/clients/sheets_client"
 )
 
 type SheetsProviderInterface interface {

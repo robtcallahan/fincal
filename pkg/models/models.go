@@ -2,6 +2,7 @@ package models
 
 import (
 	"gorm.io/gorm"
+	"time"
 )
 
 // Transaction ...
@@ -28,12 +29,14 @@ type Transaction struct {
 
 // Merchant ...
 type Merchant struct {
-	gorm.Model
-	ID            int    `json:"id"`
-	Name          string `json:"name"`
-	BankName      string `json:"bank_name"`
-	ColumnID      int    `json:"column_id"`
-	TaxDeductible bool   `json:"tax_deductible"`
+	ID            int            `json:"id"`
+	Name          string         `json:"name"`
+	BankName      string         `json:"bank_name"`
+	ColumnID      int            `json:"column_id"`
+	TaxDeductible bool           `json:"tax_deductible"`
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
+	DeletedAt     gorm.DeletedAt `json:"deleted_at"`
 }
 
 type MerchantColumn struct {
@@ -47,24 +50,48 @@ type MerchantColumn struct {
 	TaxDeductible    bool   `json:"tax_deductible"`
 }
 
-type MerchantsAndColumns struct {
+type MerchantsAndCategories struct {
 	ID            int
 	BankName      string
 	Name          string
 	ColumnID      int
-	Column        Column
+	Column        Category
 	TaxDeductible bool
 }
 
-// Column ...
-type Column struct {
-	gorm.Model
-	ID          int
-	Name        string
-	Color       string
-	ColumnIndex int
-	Letter      string
-	IsCategory  bool
+type Category struct {
+	ID                  int            `json:"id"`
+	Name                string         `json:"name"`
+	Color               string         `json:"color"`
+	BudgetAmount        float64        `json:"budget_amount"`
+	BudgetPeriod        string         `json:"budget_period"`
+	BudgetGroup         string         `json:"budget_group"`
+	WeeklyAmount        float64        `json:"weekly_amount"`
+	MonthlyAmount       float64        `json:"monthly_amount"`
+	TwiceMonthlyAmount  float64        `json:"twice_monthly_amount"`
+	EveryTwoWeeksAmount float64        `json:"every_two_weeks_amount"`
+	YearlyAmount        float64        `json:"yearly_amount"`
+	ColumnIndex         int            `json:"column_index"`
+	Letter              string         `json:"letter"`
+	IsCategory          bool           `json:"is_category"`
+	CreatedAt           time.Time      `json:"created_at"`
+	UpdatedAt           time.Time      `json:"updated_at"`
+	DeletedAt           gorm.DeletedAt `json:"deleted_at"`
+}
+
+type CategoryForSelect struct {
+	ID    int    `json:"id"`
+	Value int    `json:"value"`
+	Text  string `json:"text"`
+}
+
+type BudgetSheet struct {
+	Category            string  `json:"category"`
+	WeeklyAmount        float64 `json:"weekly_amount"`
+	MonthlyAmount       float64 `json:"monthly_amount"`
+	TwiceMonthlyAmount  float64 `json:"twice_monthly_amount"`
+	EveryTwoWeeksAmount float64 `json:"every_two_weeks_amount"`
+	YearlyAmount        float64 `json:"yearly_amount"`
 }
 
 // DataRow ...

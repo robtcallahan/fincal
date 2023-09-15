@@ -1,5 +1,7 @@
 <script setup>
+import Register from './components/Register.vue'
 import Merchants from './components/Merchants.vue'
+import Budget from './components/Budget.vue'
 </script>
 
 <style src="../style.css" type="text/css"></style>
@@ -29,7 +31,7 @@ import Merchants from './components/Merchants.vue'
             </div>
         </div>
     </nav>
-    <Merchants />
+    <Budget />
 </template>
 
 <style scoped>

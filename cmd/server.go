@@ -75,11 +75,14 @@ func server() {
 	router.HandleFunc("/api/get_accounts", client.getAccounts).Methods("GET")
 	router.HandleFunc("/api/get_balance", client.getBalance).Methods("GET")
 
+	router.HandleFunc("/api/get_register", client.getRegister).Methods("GET")
+
 	router.HandleFunc("/api/get_merchants", client.getMerchants).Methods("GET")
 	router.HandleFunc("/api/update_merchant", client.updateMerchant).Methods("PUT", "OPTIONS")
 	router.HandleFunc("/api/delete_merchant", client.deleteMerchant).Methods("POST", "OPTIONS")
 
 	router.HandleFunc("/api/get_categories", client.getCategories).Methods("GET")
+	router.HandleFunc("/api/get_categories_for_select", client.getCategoriesForSelect).Methods("GET")
 	router.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
 	router.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
 
@@ -99,6 +102,64 @@ func server() {
 	//log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, r))
 	log.Fatal(http.ListenAndServe(":9000", myHandler))
 }
+
+func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {
+	//sheetsProvider, err := sheets_provider.New(options.SpreadsheetID, config)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//sheetsService := sheets_service.New(sheetsProvider)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//err = sheetsService.NewRegisterSheet(config)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//googleSheet, err := sheetsService.ReadRegisterSheet()
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//
+	//j, err := json.Marshal(googleSheet.Register)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//err = os.WriteFile("./json/register_sheet.json", j, 0644)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+
+	j, err := os.ReadFile("./json/register_sheet.json")
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	//jString := string(j)
+
+	w.Header().Set("Content-Type", "application/json")
+	//_ = json.NewEncoder(w).Encode(googleSheet.Register)
+	_, err = w.Write(j)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
 func (c *Client) updateMerchant(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	b, err := io.ReadAll(r.Body)
@@ -157,7 +218,7 @@ func (c *Client) deleteMerchant(w http.ResponseWriter, r *http.Request) {
 
 func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
 	merchants := qHandler.GetMerchants()
-	columns := qHandler.GetColumns()
+	categories := qHandler.GetCategories()
 
 	var merCols []models.MerchantColumn
 	//var merCol models.MerchantColumn
@@ -168,7 +229,7 @@ func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
 			BankName:      m.BankName,
 			TaxDeductible: m.TaxDeductible,
 		}
-		for _, c := range columns {
+		for _, c := range categories {
 			if c.ID == m.ColumnID {
 				merCol.ColumnID = c.ID
 				merCol.ColumnName = c.Name
@@ -184,26 +245,17 @@ func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) getCategories(w http.ResponseWriter, r *http.Request) {
-	columns := qHandler.GetCategoryColumns()
+	columns := qHandler.GetCategories()
 
-	type CatsSelect struct {
-		ID    int    `json:"id"`
-		Value int    `json:"value"`
-		Text  string `json:"text"`
-		Color string `json:"color"`
-	}
-	var catsSelect []CatsSelect
-	for _, cat := range columns {
-		c := CatsSelect{
-			ID:    cat.ID,
-			Value: cat.ID,
-			Text:  cat.Name,
-			Color: cat.Color,
-		}
-		catsSelect = append(catsSelect, c)
-	}
 	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(catsSelect)
+	_ = json.NewEncoder(w).Encode(columns)
+}
+
+func (c *Client) getCategoriesForSelect(w http.ResponseWriter, r *http.Request) {
+	columns := qHandler.GetCategoriesForSelect()
+
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(columns)
 }
 
 func (c *Client) createLinkToken(w http.ResponseWriter, r *http.Request) {

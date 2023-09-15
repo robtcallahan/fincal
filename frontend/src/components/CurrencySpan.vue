@@ -1,11 +1,25 @@
-<script setup>
-
-</script>
-
 <template>
-  $END$
+    <span ref="inputRef">{{ ref }}</span>
 </template>
 
-<style scoped>
+<script>
+import {useCurrencyInput} from 'vue-currency-input'
 
-</style>
+export default {
+    name: 'CurrencySpan',
+    props: {
+        modelValue: Number, // Vue 2: value
+        options: {
+            accountingSign: true,
+            currency: 'USD',
+            currencyDisplay: 'hidden',
+            autoDecimalDigits: true,
+            precision: 2
+        }
+    },
+    setup(props) {
+        const {inputRef} = useCurrencyInput(props.options)
+        return {inputRef}
+    }
+}
+</script>

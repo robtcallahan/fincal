@@ -294,7 +294,7 @@ func Test_sheetsService_addAmountCell(t *testing.T) {
 func Test_sheetsService_addCategoryCells(t *testing.T) {
 	c, err := os.ReadFile(sheetsServiceJSONDir + "columns.json")
 	checkTestingError(t, err)
-	var cols []models.Column
+	var cols []models.Category
 	err = json.Unmarshal(c, &cols)
 	checkTestingError(t, err)
 
@@ -313,7 +313,7 @@ func Test_sheetsService_addCategoryCells(t *testing.T) {
 	type args struct {
 		cells              []*sheets.CellData
 		trans              *models.Transaction
-		columns            []models.Column
+		categories         []models.Category
 		transNameToColName map[string]string
 		totalsFormulas     []string
 	}
@@ -327,7 +327,7 @@ func Test_sheetsService_addCategoryCells(t *testing.T) {
 			args: args{
 				cells:              []*sheets.CellData{},
 				trans:              &models.Transaction{},
-				columns:            cols,
+				categories:         cols,
 				transNameToColName: name2Col,
 				totalsFormulas: []string{
 					"=A1+B1",
@@ -340,7 +340,7 @@ func Test_sheetsService_addCategoryCells(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := addCategoryCells(tt.args.cells, tt.args.trans, tt.args.columns, tt.args.transNameToColName, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
+			if got := addCategoryCells(tt.args.cells, tt.args.trans, tt.args.categories, tt.args.transNameToColName, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("addCategoryCells() = %v, want %v", got, tt.want)
 			}
 		})
@@ -350,7 +350,7 @@ func Test_sheetsService_addCategoryCells(t *testing.T) {
 func Test_sheetsService_addSalaryCells(t *testing.T) {
 	c, err := os.ReadFile("json/columns.json")
 	checkTestingError(t, err)
-	var cols []models.Column
+	var cols []models.Category
 	err = json.Unmarshal(c, &cols)
 	checkTestingError(t, err)
 
@@ -362,7 +362,7 @@ func Test_sheetsService_addSalaryCells(t *testing.T) {
 
 	type args struct {
 		cells          []*sheets.CellData
-		columns        []models.Column
+		categories     []models.Category
 		totalsFormulas []string
 	}
 	tests := []struct {
@@ -373,8 +373,8 @@ func Test_sheetsService_addSalaryCells(t *testing.T) {
 		{
 			name: "Test add salary cells",
 			args: args{
-				cells:   []*sheets.CellData{},
-				columns: cols,
+				cells:      []*sheets.CellData{},
+				categories: cols,
 				totalsFormulas: []string{
 					"=A1+B1",
 					"=C1+D1",
@@ -386,7 +386,7 @@ func Test_sheetsService_addSalaryCells(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ss.addSalaryCells(tt.args.cells, tt.args.columns, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
+			if got := ss.addSalaryCells(tt.args.cells, tt.args.categories, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("addSalaryCells() = %v, want %v", got, tt.want)
 			}
 		})
@@ -478,7 +478,7 @@ func Test_sheetsService_populateCells(t *testing.T) {
 		Verbose       bool
 	}
 	type args struct {
-		columns            []models.Column
+		categories         []models.Category
 		transNameToColName map[string]string
 		transactions       []*models.Transaction
 	}
@@ -500,7 +500,7 @@ func Test_sheetsService_populateCells(t *testing.T) {
 				Debug:         tt.fields.Debug,
 				Verbose:       tt.fields.Debug,
 			}
-			if got, _ := ss.populateCells(tt.args.columns, tt.args.transNameToColName, tt.args.transactions); !reflect.DeepEqual(got, tt.want) {
+			if got, _ := ss.populateCells(tt.args.categories, tt.args.transNameToColName, tt.args.transactions); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("populateCells() = %v, want %v", got, tt.want)
 			}
 		})
@@ -996,7 +996,7 @@ func Test_populateMonthlyCategories(t *testing.T) {
 	c, err := os.ReadFile("json/columns.json")
 	checkTestingError(t, err)
 
-	var cols []models.Column
+	var cols []models.Category
 	err = json.Unmarshal(c, &cols)
 	checkTestingError(t, err)
 
@@ -1009,7 +1009,7 @@ func Test_populateMonthlyCategories(t *testing.T) {
 
 	type args struct {
 		catAgg map[string]map[string]float64
-		cats   []models.Column
+		cats   []models.Category
 	}
 	tests := []struct {
 		name string

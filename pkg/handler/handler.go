@@ -40,13 +40,21 @@ func (q *Query) UpdateTransactionTables(trans []*models.Transaction) {
 	q.repo.UpdateTransactionTables(trans)
 }
 
-// GetColumns get all columns
-func (q *Query) GetColumns() []models.Column {
-	return q.repo.GetColumns()
+// GetCategories get all Categories
+func (q *Query) GetCategories() []models.Category {
+	return q.repo.GetCategories()
 }
 
-func (q *Query) GetCategoryColumns() []models.Column {
-	return q.repo.GetCategoryColumns()
+func (q *Query) CreateCategory(category *models.Category) *models.Category {
+	return q.repo.CreateCategory(category)
+}
+
+func (q *Query) UpdatesCategory(category *models.Category, values interface{}) {
+	q.repo.UpdatesCategory(category, values)
+}
+
+func (q *Query) GetCategoriesForSelect() []models.CategoryForSelect {
+	return q.repo.GetCategoriesForSelect()
 }
 
 // GetMerchants get all merchants
@@ -54,8 +62,8 @@ func (q *Query) GetMerchants() []models.Merchant {
 	return q.repo.GetMerchants()
 }
 
-func (q *Query) GetMerchantsAndColumns() []models.MerchantsAndColumns {
-	return q.repo.GetMerchantsAndColumns()
+func (q *Query) GetMerchantsAndCategories() []models.MerchantsAndCategories {
+	return q.repo.GetMerchantsAndCategories()
 }
 
 // CreateMerchant ...

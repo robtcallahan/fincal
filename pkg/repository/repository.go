@@ -10,11 +10,13 @@ import (
 type QueryRepo interface {
 	CreateDB(dbName string) (*gorm.DB, error)
 
-	GetColumns() []models.Column
-	GetCategoryColumns() []models.Column
+	GetCategories() []models.Category
+	GetCategoriesForSelect() []models.CategoryForSelect
+	CreateCategory(category *models.Category) *models.Category
+	UpdatesCategory(category *models.Category, values interface{})
 
 	GetMerchants() []models.Merchant
-	GetMerchantsAndColumns() []models.MerchantsAndColumns
+	GetMerchantsAndCategories() []models.MerchantsAndCategories
 	CreateMerchant(m *models.Merchant)
 	UpdateMerchant(m *models.Merchant, column string, value string)
 	DeleteMerchant(m *models.Merchant)
@@ -30,7 +32,7 @@ type QueryRepo interface {
 	PrintTable(table string)
 }
 
-func ColumnNames(cats []models.Column) *[]string {
+func ColumnNames(cats []models.Category) *[]string {
 	names := make([]string, 0, len(cats))
 	for _, c := range cats {
 		names = append(names, c.Name)

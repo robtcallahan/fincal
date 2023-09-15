@@ -2113,8 +2113,8 @@ func Test_addCategoryCells(t *testing.T) {
 
 	j, err = os.ReadFile(sheetsServiceJSONDir + "columns.json")
 	checkTestingError(t, err)
-	var columns []models.Column
-	err = json.Unmarshal(j, &columns)
+	var categories []models.Category
+	err = json.Unmarshal(j, &categories)
 	checkTestingError(t, err)
 
 	j, err = os.ReadFile(sheetsServiceJSONDir + "transNameToColName.json")
@@ -2132,7 +2132,7 @@ func Test_addCategoryCells(t *testing.T) {
 	type args struct {
 		cells              []*sheets.CellData
 		trans              *models.Transaction
-		columns            []models.Column
+		categories         []models.Category
 		transNameToColName map[string]string
 		totalsFormulas     []string
 	}
@@ -2145,7 +2145,7 @@ func Test_addCategoryCells(t *testing.T) {
 			name: "Test adding in a category column",
 			args: args{
 				cells:              []*sheets.CellData{},
-				columns:            columns,
+				categories:         categories,
 				trans:              &trans[0],
 				transNameToColName: transNameToColName,
 				totalsFormulas:     []string{"=A1*2", "=A2*5", "=A2*5"},
@@ -2155,7 +2155,7 @@ func Test_addCategoryCells(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := addCategoryCells(tt.args.cells, tt.args.trans, tt.args.columns, tt.args.transNameToColName, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
+			if got := addCategoryCells(tt.args.cells, tt.args.trans, tt.args.categories, tt.args.transNameToColName, tt.args.totalsFormulas); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("addCategoryCells() = %v, want %v", got, tt.want)
 			}
 		})

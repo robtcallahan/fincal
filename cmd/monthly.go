@@ -71,7 +71,7 @@ func monthly() {
 	_, err = sheetsService.ReadRegisterSheet()
 	checkError(err)
 
-	cols := qHandler.GetColumns()
+	cols := qHandler.GetCategories()
 
 	fmt.Println("Aggregating...")
 	catAgg, payeeAgg := sheetsService.Aggregate(cols)

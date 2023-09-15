@@ -312,7 +312,7 @@ func (c *Client) FormatMerchantNames(trans []*models.Transaction, lookup []*mode
 			//		trans[i].Name = "Margie Knight (Venmo)"
 			//		trans[i].Color = "blue"
 			//		// this index is not used. Refer to the merchants table instead
-			//		//trans[i].ColumnIndex = 41
+			//		//trans[i].Index = 41
 			//		trans[i].IsCategory = true
 			//	}
 		} else {

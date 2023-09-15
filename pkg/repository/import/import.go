@@ -17,10 +17,10 @@ const ConfigFile = "../config/config.json"
 // Column ...
 type Column struct {
 	gorm.Model
-	Name        string
-	Color       string
-	ColumnIndex int
-	IsCategory  bool
+	Name       string
+	Color      string
+	Index      int
+	IsCategory bool
 }
 
 // Merchant ...
@@ -175,10 +175,10 @@ func (c *Config) importColumns() {
 			name = fmt.Sprintf("old-%d", i)
 		}
 		c.DB.Create(&Column{
-			ColumnIndex: i,
-			Name:        name,
-			Color:       r.Color,
-			IsCategory:  isCat,
+			Index:      i,
+			Name:       name,
+			Color:      r.Color,
+			IsCategory: isCat,
 		})
 	}
 }

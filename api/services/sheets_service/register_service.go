@@ -2,11 +2,10 @@ package sheets_service
 
 import (
 	"fmt"
+	"google.golang.org/api/sheets/v4"
 	"log"
 	"vue-register/pkg/config"
 	"vue-register/pkg/models"
-
-	"google.golang.org/api/sheets/v4"
 )
 
 type SheetCoords struct {
@@ -19,20 +18,20 @@ type SheetCoords struct {
 }
 
 type RegisterEntry struct {
-	RowID        int64
-	IsCheck      bool
-	Key          string
-	Reconciled   string
-	Source       string
-	Date         string
-	Name         string
-	Amount       float64
-	Withdrawal   float64
-	Deposit      float64
-	CreditCard   float64
-	BankRegister float64
-	Cleared      float64
-	Delta        float64
+	RowID        int64   `json:"row_id"`
+	IsCheck      bool    `json:"is_check"`
+	Key          string  `json:"key"`
+	Reconciled   string  `json:"reconciled"`
+	Source       string  `json:"source"`
+	Date         string  `json:"date"`
+	Name         string  `json:"name"`
+	Amount       float64 `json:"amount"`
+	Withdrawal   float64 `json:"withdrawal"`
+	Deposit      float64 `json:"deposit"`
+	CreditCard   float64 `json:"credit_card"`
+	BankRegister float64 `json:"bank_register"`
+	Cleared      float64 `json:"cleared"`
+	Delta        float64 `json:"delta"`
 }
 
 type RegisterSheet struct {
@@ -82,7 +81,8 @@ func (ss *SheetsService) ReadRegisterSheet() (*RegisterSheet, error) {
 	ss.RegisterSheet.SheetCoords.LastRow = ss.getLastRow(resp.Values)
 	keysMap := make(map[string]bool)
 
-	for i = 0; i <= ss.RegisterSheet.SheetCoords.LastRow && !ss.isEmptyRow(resp.Values[i]); i += 2 {
+	//for i = 0; i <= ss.RegisterSheet.SheetCoords.LastRow && !ss.isEmptyRow(resp.Values[i]); i += 2 {
+	for i = 0; i <= ss.RegisterSheet.SheetCoords.LastRow && !ss.isEmptyRow(resp.Values[i]); i += 1 {
 		keysMap[getTransactionKey(resp.Values[i])] = true
 		registerEntry := ss.populateRegisterEntry(resp.Values[i])
 		registerEntry.RowID = ss.getRowID(i)
@@ -169,10 +169,10 @@ func (ss *SheetsService) WriteCell(cell string, value interface{}) (*sheets.Upda
 	return resp, nil
 }
 
-func (ss *SheetsService) UpdateRows(columns []models.Column, transNameToColName map[string]string, transactions []*models.Transaction) error {
+func (ss *SheetsService) UpdateRows(Categories []models.Category, transNameToColName map[string]string, transactions []*models.Transaction) error {
 	var requests []*sheets.Request
 
-	rows, err := ss.populateCells(columns, transNameToColName, transactions)
+	rows, err := ss.populateCells(Categories, transNameToColName, transactions)
 	if err != nil {
 		return err
 	}
@@ -210,7 +210,7 @@ func (ss *SheetsService) getGridCoordinate() *sheets.GridCoordinate {
 	}
 }
 
-func (ss *SheetsService) populateCells(columns []models.Column, transNameToColName map[string]string, transactions []*models.Transaction) ([]*sheets.RowData, error) {
+func (ss *SheetsService) populateCells(categories []models.Category, transNameToColName map[string]string, transactions []*models.Transaction) ([]*sheets.RowData, error) {
 	var rows []*sheets.RowData
 
 	rowIndex := ss.RegisterSheet.SheetCoords.FirstRowToUpdate
@@ -226,9 +226,9 @@ func (ss *SheetsService) populateCells(columns []models.Column, transNameToColNa
 
 		totalsFormulas := ss.readRangeFormulas(getRegisterToDeltaReadRange(rowIndex))
 		if isPaycheck(trans.Name) {
-			cells = ss.addSalaryCells(cells, columns, totalsFormulas)
+			cells = ss.addSalaryCells(cells, categories, totalsFormulas)
 		} else {
-			cells = addCategoryCells(cells, trans, columns, transNameToColName, totalsFormulas)
+			cells = addCategoryCells(cells, trans, categories, transNameToColName, totalsFormulas)
 		}
 
 		rows = append(rows, &sheets.RowData{Values: cells})
@@ -257,13 +257,13 @@ func (ss *SheetsService) makeNoteRow(note string) *sheets.RowData {
 	}
 }
 
-func (ss *SheetsService) addSalaryCells(cells []*sheets.CellData, columns []models.Column, totalsFormulas []string) []*sheets.CellData {
+func (ss *SheetsService) addSalaryCells(cells []*sheets.CellData, categories []models.Category, totalsFormulas []string) []*sheets.CellData {
 	// colOffset is because we've already taken care of cols A-G (0-6)
 	colOffset := BankRegister
 
 	// allocate out budgeted amounts and set background color appropriately
-	for i := 0; i < len(columns)-colOffset; i++ {
-		col := columns[colOffset+i]
+	for i := 0; i < len(categories)-colOffset; i++ {
+		col := categories[colOffset+i]
 		entry := ss.BudgetSheet.CategoriesMap[col.Name]
 
 		if isRegisterClearedOrDeltaColumn(i) {
@@ -271,7 +271,7 @@ func (ss *SheetsService) addSalaryCells(cells []*sheets.CellData, columns []mode
 			cells = append(cells, mkCellDataFormula(totalsFormulas[i], "right", col.Color, false))
 		} else if isBudgetColumn(col.Name) && entry != nil {
 			// enter the budgeted amount in this category column
-			cells = append(cells, mkCellDataDollars(entry.Monthly, "left", col.Color, true))
+			cells = append(cells, mkCellDataDollars(entry.MonthlyAmount, "left", col.Color, true))
 		} else {
 			// this cell doesn't apply. Just create an empty (opaque) cell.
 			cells = append(cells, mkCellDataDollars(0.00, "left", col.Color, true))
@@ -281,7 +281,7 @@ func (ss *SheetsService) addSalaryCells(cells []*sheets.CellData, columns []mode
 }
 
 func (ss *SheetsService) isEmptyRow(values []interface{}) bool {
-	if values[Date] == "" {
+	if values[Description] == "" {
 		return true
 	}
 	return false

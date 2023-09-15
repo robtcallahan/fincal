@@ -404,9 +404,9 @@ func isRegisterClearedOrDeltaColumn(i int) bool {
 }
 
 func getSourceField(values []interface{}) string {
-	if fmt.Sprintf("%v", values[Source]) == "" {
-		return CheckingAccountSourceName
-	}
+	//if fmt.Sprintf("%v", values[Source]) == "" {
+	//	return CheckingAccountSourceName
+	//}
 	return getStringField(values, Source)
 }
 
@@ -463,13 +463,13 @@ func addAmountCell(cells []*sheets.CellData, trans *models.Transaction, bgColor 
 	return cells
 }
 
-func addCategoryCells(cells []*sheets.CellData, trans *models.Transaction, columns []models.Column, transNameToColName map[string]string, totalsFormulas []string) []*sheets.CellData {
+func addCategoryCells(cells []*sheets.CellData, trans *models.Transaction, categories []models.Category, transNameToColName map[string]string, totalsFormulas []string) []*sheets.CellData {
 	// colOffset is because we've already taken care of cols A-G (0-6)
 	colOffset := BankRegister
-	for i := 0; i < len(columns)-colOffset; i++ {
-		col := columns[colOffset+i]
+	for i := 0; i < len(categories)-colOffset; i++ {
+		col := categories[colOffset+i]
 		if isRegisterClearedOrDeltaColumn(i) {
-			// first 3 columns are Register, Cleared & Delta. We copied the cell formulas above and are pasting here
+			// first 3 Categories are Register, Cleared & Delta. We copied the cell formulas above and are pasting here
 			cells = append(cells, mkCellDataFormula(totalsFormulas[i], "right", col.Color, false))
 		} else if isCreditCardTransaction(trans.Source, col.Name) {
 			// enter a positive value in the credit card column

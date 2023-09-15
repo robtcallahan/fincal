@@ -4,25 +4,24 @@ import (
 	"errors"
 	"fmt"
 
-	"vue-register/pkg/config"
-
 	"google.golang.org/api/sheets/v4"
+	"vue-register/pkg/config"
 )
 
 type BudgetEntry struct {
-	Category     string
-	Weekly       float64
-	Monthly      float64
-	Every2Weeks  float64
-	TwiceMonthly float64
-	Yearly       float64
+	Category            string
+	WeeklyAmount        float64
+	MonthlyAmount       float64
+	TwiceMonthlyAmount  float64
+	EveryTwoWeeksAmount float64
+	YearlyAmount        float64
 }
 
 type BudgetSheet struct {
 	ID            int64
 	SpreadsheetID string
 	TabName       string
-	Spreadsheet   sheets.Spreadsheet
+	x             sheets.Spreadsheet
 	SheetCoords   SheetCoords
 	BudgetEntries []*BudgetEntry
 	CategoriesMap map[string]*BudgetEntry
@@ -62,7 +61,7 @@ func (ss *SheetsService) ReadBudgetSheet() (*BudgetSheet, error) {
 		if ss.isEmptyBudgetRow(values) {
 			continue
 		}
-		entry := ss.populateBudgetEntry(values)
+		entry := ss.populateBudgetSheetEntry(values)
 		entries = append(entries, entry)
 		categoriesMap[ss.getBudgetCategory(values)] = entry
 	}
@@ -82,14 +81,13 @@ func (ss *SheetsService) getBudgetCategory(values []interface{}) string {
 	return fmt.Sprintf("%s", values[0])
 }
 
-func (ss *SheetsService) populateBudgetEntry(values []interface{}) *BudgetEntry {
+func (ss *SheetsService) populateBudgetSheetEntry(values []interface{}) *BudgetEntry {
 	return &BudgetEntry{
-		Category: ss.getBudgetCategory(values),
-		// Weekly:             readDollarsValue(values[2]),
-		Monthly: readDollarsValue(values[3]),
-		// Every2Weeks:        readDollarsValue(values[4]),
-		TwiceMonthly: readDollarsValue(values[5]),
-		// Yearly:             readDollarsValue(values[6]),
-		// RegisterColumnName: config.BudgetCategories[category],
+		Category:            ss.getBudgetCategory(values),
+		WeeklyAmount:        readDollarsValue(values[2]),
+		MonthlyAmount:       readDollarsValue(values[3]),
+		EveryTwoWeeksAmount: readDollarsValue(values[4]),
+		TwiceMonthlyAmount:  readDollarsValue(values[5]),
+		YearlyAmount:        readDollarsValue(values[6]),
 	}
 }
