@@ -151,6 +151,7 @@ export default {
             income: 600,
             payPeriod: 'Weekly',
             editing: false,
+            newCategoryIndex: 1,
             categories: [],
             dragging: false,
             draggedItem: {},
@@ -241,11 +242,18 @@ export default {
     },
     methods: {
         async addRow() {
+            let newName = "New Category " + this.newCategoryIndex;
+            this.categories.forEach(function(item) {
+                if (item.name === newName) {
+                    this.newCategoryIndex++;
+                    newName = "New Category " + this.newCategoryIndex;
+                }
+            }, this)
             const currentIndex = this.categories[this.categories.length-1].column_index;
             let newCategory = {
                 id: -1,
                 column_index: currentIndex+1,
-                name: "new",
+                name: newName,
                 color: "yellow",
                 budget_group: "Non-Discretionary",
                 budget_amount: 0,
@@ -345,7 +353,9 @@ export default {
 
                 const elementId = this.getCellId("input", item.id, fieldKey);
                 const element = document.getElementById(elementId);
-                element.blur();
+                if (element) {
+                    element.blur();
+                }
             }
         },
         async save(item, fieldKey) {
