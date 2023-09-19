@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"vue-register/api/providers/sheets_provider"
 	"vue-register/api/services/sheets_service"
 	cfg "vue-register/pkg/config"
@@ -57,24 +55,24 @@ func data() {
 		name2category[c.Name] = c
 	}
 
-	fmt.Println("Reading Budget...")
-	err = sheetsService.NewBudgetSheet(config)
-	checkError(err)
-	budgetSheet, err := sheetsService.ReadBudgetSheet()
-	checkError(err)
+	//fmt.Println("Reading Budget...")
+	//err = sheetsService.NewBudgetSheet(config)
+	//checkError(err)
+	//budgetSheet, err := sheetsService.ReadBudgetSheet()
+	//checkError(err)
 
-	for _, be := range budgetSheet.BudgetEntries {
-		if be.Category == "" {
-			continue
-		}
-		category := name2category[be.Category]
-
-		qHandler.UpdatesCategory(&category, models.Category{
-			WeeklyAmount:        be.WeeklyAmount,
-			MonthlyAmount:       be.MonthlyAmount,
-			EveryTwoWeeksAmount: be.EveryTwoWeeksAmount,
-			TwiceMonthlyAmount:  be.TwiceMonthlyAmount,
-			YearlyAmount:        be.YearlyAmount,
-		})
-	}
+	//for _, be := range budgetSheet.BudgetEntries {
+	//	if be.Category == "" {
+	//		continue
+	//	}
+	//	category := name2category[be.Category]
+	//
+	//	qHandler.UpdateCategory(&category, models.Category{
+	//		WeeklyAmount:        be.WeeklyAmount,
+	//		MonthlyAmount:       be.MonthlyAmount,
+	//		EveryTwoWeeksAmount: be.EveryTwoWeeksAmount,
+	//		TwiceMonthlyAmount:  be.TwiceMonthlyAmount,
+	//		YearlyAmount:        be.YearlyAmount,
+	//	})
+	//}
 }

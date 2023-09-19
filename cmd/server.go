@@ -83,6 +83,10 @@ func server() {
 
 	router.HandleFunc("/api/get_categories", client.getCategories).Methods("GET")
 	router.HandleFunc("/api/get_categories_for_select", client.getCategoriesForSelect).Methods("GET")
+	router.HandleFunc("/api/create_category", client.createCategory).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/update_category", client.updateCategory).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/delete_category", client.deleteCategory).Methods("POST", "OPTIONS")
+
 	router.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
 	router.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
 
@@ -160,6 +164,31 @@ func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
+	merchants := qHandler.GetMerchants()
+	categories := qHandler.GetCategories()
+
+	var merCols []models.MerchantColumn
+	for _, m := range merchants {
+		merCol := models.MerchantColumn{
+			ID:       m.ID,
+			Name:     m.Name,
+			BankName: m.BankName,
+		}
+		for _, c := range categories {
+			if c.ID == m.ColumnID {
+				merCol.ColumnID = c.ID
+				merCol.ColumnName = c.Name
+				merCol.ColumnColor = c.Color
+			}
+		}
+		merCols = append(merCols, merCol)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(merCols)
+}
+
 func (c *Client) updateMerchant(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	b, err := io.ReadAll(r.Body)
@@ -216,34 +245,6 @@ func (c *Client) deleteMerchant(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(ds)
 }
 
-func (c *Client) getMerchants(w http.ResponseWriter, r *http.Request) {
-	merchants := qHandler.GetMerchants()
-	categories := qHandler.GetCategories()
-
-	var merCols []models.MerchantColumn
-	//var merCol models.MerchantColumn
-	for _, m := range merchants {
-		merCol := models.MerchantColumn{
-			ID:            m.ID,
-			Name:          m.Name,
-			BankName:      m.BankName,
-			TaxDeductible: m.TaxDeductible,
-		}
-		for _, c := range categories {
-			if c.ID == m.ColumnID {
-				merCol.ColumnID = c.ID
-				merCol.ColumnName = c.Name
-				merCol.ColumnIsCategory = c.IsCategory
-				merCol.ColumnColor = c.Color
-			}
-		}
-		merCols = append(merCols, merCol)
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(merCols)
-}
-
 func (c *Client) getCategories(w http.ResponseWriter, r *http.Request) {
 	columns := qHandler.GetCategories()
 
@@ -256,6 +257,82 @@ func (c *Client) getCategoriesForSelect(w http.ResponseWriter, r *http.Request) 
 
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(columns)
+}
+
+func (c *Client) createCategory(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var category models.Category
+	err = json.Unmarshal(b, &category)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	category = *qHandler.CreateCategory(&category)
+	log.Printf("returning category ID: %d", category.ID)
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(category)
+}
+
+func (c *Client) updateCategory(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	type updateStruct struct {
+		ID     int         `json:"id"`
+		Column string      `json:"column"`
+		Value  interface{} `json:"value"`
+	}
+	var up updateStruct
+	err = json.Unmarshal(b, &up)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	category := models.Category{ID: up.ID}
+	qHandler.UpdateCategory(&category, up.Column, up.Value)
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(up)
+}
+
+func (c *Client) deleteCategory(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("json: %s", string(b))
+	type deleteStruct struct {
+		ID int `json:"id"`
+	}
+	var ds deleteStruct
+	err = json.Unmarshal(b, &ds)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	category := models.Category{ID: ds.ID}
+	qHandler.DeleteCategory(&category)
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(ds)
 }
 
 func (c *Client) createLinkToken(w http.ResponseWriter, r *http.Request) {

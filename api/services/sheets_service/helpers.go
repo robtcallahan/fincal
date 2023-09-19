@@ -81,8 +81,6 @@ func getRegisterToDeltaReadRange(i int64) string {
 func getBackgroundColor(trans *models.Transaction) string {
 	if isPaycheck(trans.Name) {
 		return "green"
-	} else if trans.TaxDeductible {
-		return "yellow"
 	}
 	return "white"
 }
@@ -485,8 +483,10 @@ func addCategoryCells(cells []*sheets.CellData, trans *models.Transaction, categ
 	return cells
 }
 
-func getDollarsCellByIndex(values []interface{}, i int) float64 {
-	return readDollarsValue(values[i])
+func getDollarsCellByIndex(values []interface{}, i float64) float64 {
+	//return readDollarsValue(values[i])
+	// TODO: need to fix
+	return 0
 }
 
 func getNameField(values []interface{}) string {

@@ -217,7 +217,13 @@
 </template>
 
 <script lang="js">
-import CurrencySpan from "./CurrencySpan.vue";
+import CurrencySpan from "./CurrencyTable.vue";
+import axios from 'axios';
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9000/api/',
+    timeout: 10000,
+});
 
 export default {
     name: "Register",

@@ -303,9 +303,7 @@ func (c *Client) FormatMerchantNames(trans []*models.Transaction, lookup []*mode
 	for i, t := range trans {
 		if t.Name == "CHECK" {
 			trans[i].Color = "white"
-			trans[i].ColumnIndex = 10
-			trans[i].IsCategory = false
-			trans[i].TaxDeductible = false
+			trans[i].CategoryID = 10
 			continue
 			//} else if t.BankName == "Venmo" {
 			//	if t.Amount == 150.00 {
@@ -320,9 +318,7 @@ func (c *Client) FormatMerchantNames(trans []*models.Transaction, lookup []*mode
 				if strings.Contains(strings.ToUpper(t.BankName), strings.ToUpper(l.BankName)) {
 					trans[i].Name = l.Name
 					trans[i].Color = l.Color
-					trans[i].ColumnIndex = l.ColumnIndex
-					trans[i].IsCategory = l.IsCategory
-					trans[i].TaxDeductible = l.TaxDeductible
+					trans[i].CategoryID = l.CategoryID
 
 					//if l.Name == "CrowdStrike Salary" && t.Amount > -3000 {
 					//	trans[i].Name = "CrowdStrike Bonus"

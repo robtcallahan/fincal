@@ -1,83 +1,137 @@
 <script setup lang="js">
-import RawDisplayer from "./raw-displayer.vue";
+import CurrencyTable from "./CurrencyTable.vue";
+import RawDisplayer from "./RawDisplayer.vue";
 </script>
 
 <template>
-    <div class="container-sm">
+    <div class="container-sm budget">
+        <div style="float:left;width:30%;">
+            <table class="income">
+                <tr>
+                    <td>Income:</td>
+                    <td>
+                        <b-form-input v-model="income"
+                                      id="income"
+                                      class="cell"
+                                      style="height: 28px;"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pay Period:</td>
+                    <td>
+                        <b-form-select v-model="payPeriod"
+                                       :options="periods"
+                                       id="pay_period"
+                                       class="cell"
+                                       style="height: 28px;">
+                        </b-form-select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="float:right;margin-right:4px;margin-top:35px;">
+            <b-button variant="primary"
+                      @click="this.addRow();"
+            >Add Category</b-button>
+        </div>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col"></th>
-                <th scope="col">ID</th>
-                <th scope="col">Index</th>
-                <th scope="col">Name</th>
-                <th scope="col">Group</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Period</th>
+                <th></th>
+                <th>Name</th>
+                <th>Group</th>
+                <th>Budget Amount</th>
+                <th style="text-align: center;">Budget Period</th>
+                <th>{{ payPeriod }} Contribution</th>
+                <th></th>
             </tr>
             </thead>
             <draggable
                     :list="categories"
                     tag="tbody"
                     item-key="id"
+                    handle=".handle"
                     @start="dragging=true"
-                    @end="dragging=false"
+                    @end="this.onDragEnd($event)"
             >
-                <template #item="{ element: category }">
-                    <tr>
+                <template #item="{ element: category, index }">
+                    <tr @dragstart="onDragStart($event, category)">
                         <td class="drag-icon handle">
                             <b-icon-grip-vertical></b-icon-grip-vertical>
                         </td>
-                        <td class="input" style="height: 28px;">{{ category.id }}</td>
-                        <td style="height: 28px;">{{ category.column_index }}</td>
-                        <td :class="[category.color]">
+                        <td class="cell" :class="[category.color]">
                             <b-form-input v-model="category.name"
                                           :value=category.name
-                                          @click="startEditing(category, 'name')"
+                                          :id="getCellId('input', category.id, 'name')"
+                                          @click="startEditing(category, 'name', index)"
                                           @keydown="handleKeydownEvent($event, category.name, category, 'name')"
-                                          :class="[category.color]"
-                                          class="input"
+                                          :class="[category.budget_group]"
+                                          class="cell"
                                           style="height: 28px;"
                             />
                         </td>
                         <td>
                             <b-form-select v-model="category.budget_group"
-                                           :id="getCellId('select', category.id, 'group')"
+                                           :id="getCellId('select', category.id, 'budget_group')"
                                            :options="groups"
-                                           @change="stopEditingAndSave(category, 'column_id')"
-                                           :class="[category.color]"
-                                           class="input"
+                                           @change="save(category, 'budget_group')"
+                                           :class="[category.budget_group]"
+                                           class="cell"
                                            style="height: 28px; width:90%;">
 
                             </b-form-select>
                         </td>
-                        <td>
-                            <b-form-input v-model="category.budget_amount"
-                                          class="input"
-                                          style="height: 28px;"
+                        <td @click="startEditing(category, 'budget_amount', index)" >
+                            <b-form-input v-if="editing"
+                                          v-model="category.budget_amount"
+                                          :id="getCellId('input', category.id, 'budget_amount')"
+                                          @blur="stopEditingAndSave(category, 'budget_amount')"
+                                          @keydown="handleKeydownEvent($event, category.budget_amount, category, 'budget_amount')"
+                                          class="cell"
+                                          style="height: 28px; text-align: right;"
                             />
+                            <currency-table v-else :value=category.budget_amount />
                         </td>
                         <td>
                             <b-form-select v-model="category.budget_period"
                                            :options="periods"
-                                           class="input"
-                                           style="height: 28px; width:90%;">
+                                           :id="getCellId('select', category.id, 'budget_period')"
+                                           @change="save(category, 'budget_period')"
+                                           class="cell"
+                                           style="height: 28px; width:90%; text-align: center;">
                             </b-form-select>
                         </td>
+                        <td>
+                            <currency-table :value=this.getContribution(category,index) />
+                        </td>
+                        <td>
+                            <div class="cell"
+                                 style="margin-left: 20px;"
+                                 @click="this.onDeleteClick(category)">
+                                <img src="../../red-cross.png" width="20" height="20">
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+                <template #footer>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4"></td>
+                        <td>
+                            <currency-table :value=totalContribution />
+                        </td>
+                        <td>&nbsp;</td>
                     </tr>
                 </template>
             </draggable>
         </table>
     </div>
-    <rawDisplayer class="col-3" :value="categories" title="Categories"/>
+    <raw-displayer class="col-3" :value="categories" title="Categories"/>
 </template>
 
 <script lang="js">
 import draggable from 'zhyswan-vuedraggable'
-
-// import "sortablejs/Sortable.min.js"
-// import "vuedraggable/dist/vuedraggable.umd.js"
-
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -85,24 +139,26 @@ const axiosInstance = axios.create({
     timeout: 10000,
 });
 
-draggable.compatConfig = { MODE: 3 };
+draggable.compatConfig = {MODE: 3};
 
 export default {
     name: "Budget",
-    props: ['groups', 'periods'],
     components: {
         draggable,
     },
     data() {
         return {
+            income: 600,
+            payPeriod: 'Weekly',
+            editing: false,
             categories: [],
             dragging: false,
+            draggedItem: {},
             fields: [
                 {
                     key: "id",
                     label: " ",
                     element: "",
-                    thStyle: {"width": "20px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"},
                     editable: false,
                     sortable: false
                 },
@@ -111,7 +167,6 @@ export default {
                     label: "Name",
                     element: "input",
                     type: "text",
-                    thStyle: {"width": "300px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"},
                     editable: true,
                     sortable: true
                 },
@@ -123,7 +178,6 @@ export default {
                     editable: true,
                     sortable: true,
                     class: "bank-name-col",
-                    thStyle: {"background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"}
                 },
                 {
                     key: "budget_group",
@@ -132,7 +186,6 @@ export default {
                     type: "text",
                     editable: true,
                     sortable: true,
-                    thStyle: {"width": "200px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"}
                 },
                 {
                     key: "budget_amount",
@@ -141,7 +194,6 @@ export default {
                     type: "text",
                     editable: true,
                     sortable: true,
-                    thStyle: {"width": "200px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"}
                 },
                 {
                     key: "budget_period",
@@ -149,8 +201,7 @@ export default {
                     element: "select",
                     type: "text",
                     editable: false,
-                    sortable: true, filterOn: false,
-                    thStyle: {"width": "90px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px"}
+                    sortable: true
                 }
             ],
             sleepMs: 300,
@@ -162,14 +213,15 @@ export default {
             },
             fieldKeys: {},
             groups: [
-                {value: null, text: 'Please select an group'},
+                {value: null, text: 'Please select a group'},
                 {value: "Discretionary", text: "Discretionary"},
                 {value: "Non-Discretionary", text: "Non-Discretionary"},
+                {value: "Charities", text: "Charities"},
                 {value: "Loans", text: "Loans"},
                 {value: "Savings", text: "Savings"},
             ],
             periods: [
-                {value: null, text: 'Please select an period'},
+                {value: null, text: 'Please select a period'},
                 {value: "Weekly", text: "Weekly"},
                 {value: "Monthly", text: "Monthly"},
                 {value: "Every 2 Weeks", text: "Every 2 Weeks"},
@@ -178,10 +230,75 @@ export default {
             ]
         }
     },
+    computed: {
+        totalContribution() {
+            let total = 0;
+            this.categories.forEach(function (item) {
+                total += Number.parseFloat(item.pay_period_contribution);
+            });
+            return total;
+        }
+    },
     methods: {
+        async addRow() {
+            const currentIndex = this.categories[this.categories.length-1].column_index;
+            let newCategory = {
+                id: -1,
+                column_index: currentIndex+1,
+                name: "new",
+                color: "yellow",
+                budget_group: "Non-Discretionary",
+                budget_amount: 0,
+                budget_period: "Monthly",
+                pay_period_contribution: 0
+            }
+            this.categories[this.categories.length] = newCategory;
+
+            await this.createCategory(newCategory);
+
+            const cellId = this.getCellId("input", this.categories[this.categories.length-1].id, "name");
+            const el = document.getElementById(cellId);
+            el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        },
+        onDragStart(event, item) {
+            this.draggedItem = item;
+        },
+        async onDragEnd(event, item) {
+            console.log("oldIndex: " + event.oldIndex + ", newIndex: "  + event.newIndex);
+            console.log(this.draggedItem);
+
+            let before = 0;
+            let after = this.categories.length;
+            if (this.categories[event.newIndex-1])  {
+                before = this.categories[event.newIndex-1].column_index;
+            }
+            if (this.categories[event.newIndex+1]) {
+                after = this.categories[event.newIndex+1].column_index;
+            }
+            this.draggedItem.column_index = (before + after) / 2;
+            await this.updateCategory(this.draggedItem, "column_index");
+        },
+        financial(x) {
+            return Number.parseFloat(x).toFixed(2);
+        },
+        getContribution(category, index) {
+            let contribution = 0;
+            switch (category.budget_period) {
+                case "Weekly":
+                    contribution = category.budget_amount;
+                    break;
+                case "Monthly":
+                    contribution = category.budget_amount * 12 / 52;
+                    break;
+                case "Yearly":
+                    contribution = category.budget_amount / 52;
+                    break;
+            }
+            this.categories[index].pay_period_contribution = contribution;
+            return contribution;
+        },
         async handleKeydownEvent(event, value, item, fieldKey) {
-            // if editing, allow cursor and alphanumeric keys to their default behavior
-            if (item.editing && event.key !== "Enter" && event.key !== "Tab") {
+            if (event.key !== "Enter" && event.key !== "Tab") {
                 return;
             }
             switch (event.key) {
@@ -189,38 +306,27 @@ export default {
                     this.cancelEdit(item, fieldKey);
                     break;
                 case "Enter":
-                    if (this.selectedCell.editing) {
-                        this.selectedCell.previousId = item.id;
-                        if (!item.editing) {
-                            return;
-                        }
-                        await this.stopEditingAndSave(item, fieldKey);
-                    } else {
-                        if (event.target === event.currentTarget) {
-                            await this.startEditing(item, fieldKey);
-                        }
-                    }
+                    this.selectedCell.previousId = item.id;
+                    await this.stopEditingAndSave(item, fieldKey);
                     break;
                 case "Tab":
                     event.preventDefault();
-                    if (this.selectedCell.editing) {
-                        await this.stopEditingAndSave(item, fieldKey);
-                    }
+                    await this.stopEditingAndSave(item, fieldKey);
                     break;
                 default:
             }
         },
-        async startEditing(item, fieldKey) {
+        async startEditing(item, fieldKey, index) {
+            this.editing = true;
             this.selectedCell = {
                 fieldKey: fieldKey,
-                editing: true,
+                rowIndex: index,
                 id: item.id,
                 previousId: item.id,
                 currentValue: item[fieldKey],
                 newValue: item[fieldKey],
                 dirty: false
             };
-            this.categories[this.selectedCell.rowIndex].editing = true;
 
             const element = this.fields[this.fieldKeys[fieldKey]].element;
             const elementId = this.getCellId(element, item.id, fieldKey);
@@ -228,52 +334,29 @@ export default {
             document.getElementById(elementId).select();
         },
         cancelEdit(item, fieldKey) {
-            if (!this.selectedCell.editable) {
-                return;
-            }
-            this.categories[this.selectedCell.rowIndex].editing = false;
-            item[fieldKey] = this.selectedCell.currentValue;
+            this.editing = false;
         },
         async stopEditingAndSave(item, fieldKey) {
-            if (!this.selectedCell.editable) {
-                return;
-            }
-            this.categories[this.selectedCell.rowIndex].editing = false;
-
+            this.editing = false;
             if (item[fieldKey] !== this.selectedCell.currentValue) {
                 this.selectedCell.dirty = true;
+                this.selectedCell.newValue = item[fieldKey];
+                await this.updateCategory(item, fieldKey);
 
-                let newSpanValue = "";
-                if (fieldKey === "column_id") {
-                    this.selectedCell.newValue = item.column_id;
-
-                    // set select text to its new value so the span will display it after editing is set to false
-                    this.categories.forEach(function (c) {
-                        if (c.id === item.column_id) {
-                            item.column_name = c.column_name;
-                            newSpanValue = c.text;
-                        }
-                    }, this);
-                } else {
-                    this.selectedCell.newValue = item[fieldKey];
-                }
-                await this.updateMerchant(fieldKey);
-
-                if (fieldKey === 'column_id') {
-                    const spanId = this.getCellId('span', item.id, 'column_name');
-                    document.getElementById(spanId).innerHTML = newSpanValue;
-                    fieldKey = 'column_name';
-                }
+                const elementId = this.getCellId("input", item.id, fieldKey);
+                const element = document.getElementById(elementId);
+                element.blur();
             }
-            this.highlightCell(item, fieldKey);
         },
-        async updateCategory(fieldKey) {
-            if (!this.selectedCell.dirty) {
-                this.selectedCell.editing = false;
-                this.categories[this.rowsById[this.selectedCell.rowIndex]].editing = false;
-                return;
-            }
-            const j = `{"id": ` + this.selectedCell.id + `, "column": "` + fieldKey + `", "value": "` + this.selectedCell.newValue + `"}`;
+        async save(item, fieldKey) {
+            this.editing = false;
+            await this.updateCategory(item, fieldKey);
+
+            const elementId = this.getCellId("select", item.id, fieldKey);
+            document.getElementById(elementId).blur();
+        },
+        async updateCategory(item, fieldKey) {
+            const j = `{"id": ` + item.id + `, "column": "` + fieldKey + `", "value": "` + item[fieldKey] + `"}`;
             console.log("json: " + j);
             axiosInstance
                 .put("update_category", j, {
@@ -285,11 +368,81 @@ export default {
                 })
                 .catch(function (error) {
                     alert(error);
-                    this.categories[this.selectedCell.rowIndex][this.selectedCell.fieldKey].value = this.selectedCell.currentValue;
-                    this.selectedCell.item[this.selectedCell.fieldKey] = this.selectedCell.currentValue;
+                    // this.categories[this.selectedCell.rowIndex][this.selectedCell.fieldKey].value = this.selectedCell.currentValue;
+                    // this.selectedCell.item[this.selectedCell.fieldKey] = this.selectedCell.currentValue;
                 });
-            this.selectedCell.editing = false;
-            this.categories[this.selectedCell.rowIndex].editing = false;
+        },
+        async createCategory(item) {
+            const c = {
+                column_index: item.column_index,
+                name: item.name,
+                budget_amount: item.budget_amount,
+                color: item.color,
+                budget_group: item.budget_group,
+                budget_period: item.budget_period
+            }
+            const j = JSON.stringify(c);
+            console.log("json: " + j);
+            axiosInstance
+                .post("create_category", j, {
+                    headers: {"Content-Type": "application/json"}
+                })
+                .then((response) => {
+                    const newCategory = response.data;
+                    // console.log(newCategory);
+                    this.categories[this.categories.length-1] = newCategory;
+                    this.selectedCell.dirty = false;
+                    return newCategory;
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
+        onDeleteClick(category) {
+            this.confirmDeleteEntry(category);
+        },
+        async confirmDeleteEntry(category) {
+            this.$bvModal.msgBoxConfirm('Are you sure you want to delete the category "' + category.name + '"?', {
+                title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'danger',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                centered: true
+            })
+                .then(async value => {
+                    if (value === true) {
+                        await this.deleteEntry(category);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        },
+        async deleteEntry(category) {
+            const j = `{"id": ` + category.id + `}`;
+            console.log("deleteCategory() id: ", category.id, ", json: " + j);
+            axiosInstance
+                .post("delete_category", j, {
+                    headers: {"Content-Type": "application/json"}
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log("category id: " + category.id + " deleted");
+                        const index = this.categories.findIndex(item => item.id === category.id) // find the post index
+                        if (~index) {
+                            this.categories.splice(index, 1) //delete the merchant
+                        }
+                    } else {
+                        console.log(response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         getCellId(el, id, fieldKey) {
             return el + '_' + id + '_' + fieldKey;
@@ -303,47 +456,13 @@ export default {
             el.focus();
             el.select();
         },
-        handleDragStart(e) {
-            e.dataTransfer.dropEffect = 'move'
-            e.dataTransfer.effectAllowed = 'move'
-            e.dataTransfer.setData('text/plain', e.currentTarget.dataset.index)
-        },
-        handleDragEnter(e) {
-            e.preventDefault()
-            e.currentTarget.classList.add('hover')
-        },
-        handleDragLeave(e) {
-            e.currentTarget.classList.remove('hover')
-        },
-        handleDragOver(e) {
-            e.preventDefault()
-        },
-        handleDrop(e) {
-            e.preventDefault()
-            console.log('current Target', e.currentTarget)
-            const itemIndex = e.dataTransfer.getData('text/plain'),
-                droppedIndex = e.target.parentNode.dataset.index
-            Array.from(e.currentTarget.parentNode.children).map(tr => {
-                tr.classList.remove('hover')
-            })
-            // this.handleListChange(itemIndex, droppedIndex)
-            const oldIndex = parseInt(itemIndex, 10),
-                newPositionIndex = parseInt(droppedIndex, 10),
-                movedItem = this.categories[oldIndex]
-            this.categories.splice(oldIndex, 1)
-            this.categories.splice(newPositionIndex, 0, movedItem)
-        },
         getCategories() {
             axiosInstance
                 .get("get_categories")
                 .then((response) => {
                     this.categories = response.data;
 
-                    this.categories.map(function (element, index) {
-                        this.categories[index].editing = false;
-                    }, this);
-
-                    this.fields.map(function (element, index) {
+                    this.fields.map(function(element, index) {
                         this.fieldKeys[element.key] = index;
                     }, this);
                 })
@@ -360,32 +479,8 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.container table tbody tr[draggable=true] {
-    cursor: move;
-}
-
-.container table tbody tr[draggable=true].hover {
-    margin-top: 49px;
-    opacity: 0.2;
-}
-
-.drop-zone {
-    background-color: #eee;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-.drag-el {
-    background-color: #fff;
-    margin-bottom: 10px;
-    padding: 5px;
+.budget {
+    margin-top: 50px;
 }
 
 .drag-icon {
@@ -394,26 +489,46 @@ export default {
     cursor: pointer;
 }
 
+.income {
+    margin: 10px;
+}
+
+.income td {
+    margin: 10px;
+    padding: 0 5px 5px 0 !important;
+}
+
+th {
+    background-color: #31475E !important;
+    color: #bfe8fc !important;
+    padding: 2px !important;
+}
+
 td {
     padding: 0 !important;
 }
 
-.input {
+.cell {
     border: 0;
     border-bottom: 0.01rem solid lightgray;
     vertical-align: bottom;
-    padding: 5px 0 0 2px;
+    --bs-border-radius: 0;
+//padding: 5px 0 0 2px;
 }
 
-.blue {
-    background-color: #00CCFF;
+.Discretionary {
+    background-color: #80FF00;
 }
-
-.yellow {
+.Non-Discretionary {
     background-color: #FFF58C;
 }
-
-.green {
-    background-color: #80FF00;
+.Charities {
+    background-color: violet;
+}
+.Loans {
+    background-color: indianred;
+}
+.Savings {
+    background-color: #00CCFF;
 }
 </style>

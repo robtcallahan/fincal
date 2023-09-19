@@ -12,5 +12,5 @@ csv/*.csv
 tmp/*
 *.txt
 bin/*
-sql/*
+database/sql/*
 vue-register

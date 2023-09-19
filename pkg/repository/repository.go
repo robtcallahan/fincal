@@ -13,7 +13,8 @@ type QueryRepo interface {
 	GetCategories() []models.Category
 	GetCategoriesForSelect() []models.CategoryForSelect
 	CreateCategory(category *models.Category) *models.Category
-	UpdatesCategory(category *models.Category, values interface{})
+	UpdateCategory(category *models.Category, column string, value interface{})
+	DeleteCategory(m *models.Category)
 
 	GetMerchants() []models.Merchant
 	GetMerchantsAndCategories() []models.MerchantsAndCategories

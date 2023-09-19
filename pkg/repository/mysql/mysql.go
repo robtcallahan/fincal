@@ -52,23 +52,26 @@ func (r *mysqlQueryRepo) CreateDB(dbName string) (*gorm.DB, error) {
 
 func (r *mysqlQueryRepo) GetCategories() []models.Category {
 	var cols []models.Category
-	r.Conn.Where("is_category = 1").Order("column_index").Find(&cols)
+	r.Conn.Order("column_index").Find(&cols)
 	return cols
 }
 
 func (r *mysqlQueryRepo) CreateCategory(category *models.Category) *models.Category {
-	tx := r.Conn.Create(category)
-	category.ID = tx.Statement.Model.(*models.Category).ID
+	_ = r.Conn.Create(category)
 	return category
 }
 
-func (r *mysqlQueryRepo) UpdatesCategory(category *models.Category, values interface{}) {
-	r.Conn.Model(&category).Where("id = ?", category.ID).Updates(values)
+func (r *mysqlQueryRepo) UpdateCategory(category *models.Category, column string, value interface{}) {
+	r.Conn.Model(category).Update(column, value)
+}
+
+func (r *mysqlQueryRepo) DeleteCategory(m *models.Category) {
+	r.Conn.Delete(m)
 }
 
 func (r *mysqlQueryRepo) GetCategoriesForSelect() []models.CategoryForSelect {
 	var cols []models.Category
-	r.Conn.Where("is_category = 1").Order("name").Find(&cols)
+	r.Conn.Order("name").Find(&cols)
 
 	var catsSelect []models.CategoryForSelect
 	for _, c := range cols {
@@ -124,13 +127,11 @@ func (r *mysqlQueryRepo) GetLookupData() []*models.DataRow {
 	var data []*models.DataRow
 	for _, m := range merchants {
 		data = append(data, &models.DataRow{
-			Name:          m.Name,
-			BankName:      m.BankName,
-			ColumnName:    m.Column.Name,
-			ColumnIndex:   m.Column.ColumnIndex,
-			Color:         m.Column.Color,
-			IsCategory:    m.Column.IsCategory,
-			TaxDeductible: m.TaxDeductible,
+			Name:       m.Name,
+			BankName:   m.BankName,
+			ColumnName: m.Category.Name,
+			CategoryID: m.Category.ID,
+			Color:      m.Category.Color,
 		})
 	}
 	return data
@@ -154,7 +155,7 @@ func (r *mysqlQueryRepo) PrintData() {
 
 	fmt.Printf("[Num] %-35s %-30s %-30s %-s\n", "Bank Name", "Name", "Category Name", "Category Index")
 	for i, m := range merchants {
-		fmt.Printf("[%3d] %-35s %-30s %-30s %2d\n", i+1, m.BankName, m.Name, m.Column.Name, m.Column.ColumnIndex)
+		fmt.Printf("[%3d] %-35s %-30s %-30s %6.2f\n", i+1, m.BankName, m.Name, m.Category.Name, m.Category.ColumnIndex)
 	}
 }
 
@@ -166,7 +167,7 @@ func (r *mysqlQueryRepo) PrintTable(table string) {
 		result := r.Conn.Find(&merchants)
 		fmt.Printf("%d rows found\n", result.RowsAffected)
 		for _, m := range merchants {
-			fmt.Printf("%d %s %s %s\n", m.ID, m.BankName, m.Name, m.Column.Name)
+			fmt.Printf("%d %s %s %s\n", m.ID, m.BankName, m.Name, m.Category.Name)
 		}
 	}
 }

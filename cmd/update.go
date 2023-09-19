@@ -319,7 +319,7 @@ func readFromUser(db *handler.Query, trans []*models.Transaction) (bool, []*mode
 
 			trans[i].Name = readString("            Name: ")
 			for err = fmt.Errorf(""); err != nil; {
-				trans[i].ColumnIndex, err = readInt("    Category Index: ")
+				trans[i].CategoryID, err = readInt("    Category Index: ")
 				if err != nil {
 					fmt.Println(err.Error())
 				}
@@ -329,7 +329,7 @@ func readFromUser(db *handler.Query, trans []*models.Transaction) (bool, []*mode
 			db.CreateMerchant(&models.Merchant{
 				Name:     trans[i].Name,
 				BankName: t.BankName,
-				ColumnID: trans[i].ColumnIndex,
+				ColumnID: trans[i].CategoryID,
 			})
 			return true, trans, nil
 		}

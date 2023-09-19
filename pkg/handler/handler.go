@@ -45,12 +45,16 @@ func (q *Query) GetCategories() []models.Category {
 	return q.repo.GetCategories()
 }
 
-func (q *Query) CreateCategory(category *models.Category) *models.Category {
-	return q.repo.CreateCategory(category)
+func (q *Query) CreateCategory(c *models.Category) *models.Category {
+	return q.repo.CreateCategory(c)
 }
 
-func (q *Query) UpdatesCategory(category *models.Category, values interface{}) {
-	q.repo.UpdatesCategory(category, values)
+func (q *Query) UpdateCategory(c *models.Category, column string, value interface{}) {
+	q.repo.UpdateCategory(c, column, value)
+}
+
+func (q *Query) DeleteCategory(c *models.Category) {
+	q.repo.DeleteCategory(c)
 }
 
 func (q *Query) GetCategoriesForSelect() []models.CategoryForSelect {
