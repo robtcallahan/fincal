@@ -1,7 +1,7 @@
 <template>
     <b-container fluid>
         <b-row>
-            <b-col class="w-75"><h1>Merchants</h1></b-col>
+            <b-col class="w-75"></b-col>
             <b-col class="w-25" style='margin-right: 20px'>
                 <b-form-group
                         label-for="filter-input"
@@ -19,8 +19,8 @@
                                 class="search-input"
                         ></b-form-input>
 
-                        <b-input-group-append>
-                            <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                        <b-input-group-append style="margin-left: 10px;">
+                            <b-button :disabled="!filter" @click="filter=''" class="btn-primary">Clear</b-button>
                         </b-input-group-append>
                     </b-input-group>
                 </b-form-group>

@@ -531,8 +531,6 @@ export default {
 
 <style scoped>
 .budget {
-    margin-top: 50px;
-    width: 65%;
 }
 
 .drag-icon {

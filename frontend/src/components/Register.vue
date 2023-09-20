@@ -3,7 +3,6 @@
 
 <template>
     <b-container fluid>
-        <div><h1>Register</h1></div>
         <div id="register" style="height: 800px;">
             <b-table
                     id="register-table"
@@ -254,7 +253,7 @@ export default {
                     label: "Source",
                     element: "input",
                     type: "text",
-                    thStyle: {"width": "140px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -263,7 +262,7 @@ export default {
                     label: "Date",
                     element: "input",
                     type: "text",
-                    thStyle: {"width": "100px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -272,7 +271,7 @@ export default {
                     label: "Name",
                     element: "input",
                     type: "text",
-                    thStyle: {"background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -282,7 +281,7 @@ export default {
                     element: "input",
                     type: "text",
                     formatter: this.formatDollars,
-                    thStyle: {"width": "100px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -292,7 +291,7 @@ export default {
                     element: "input",
                     type: "text",
                     formatter: this.formatDollars,
-                    thStyle: {"width": "100px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -302,7 +301,7 @@ export default {
                     element: "input",
                     type: "text",
                     formatter: this.formatDollars,
-                    thStyle: {"width": "100px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
@@ -312,7 +311,7 @@ export default {
                     element: "input",
                     type: "text",
                     formatter: this.formatDollars,
-                    thStyle: {"width": "100px", "background-color": "#C0C0C0", "padding": "2px"},
+                    thStyle: {"width": "100px", "background-color": "#31475E", "color": "#bfe8fc", "padding": "2px;"},
                     editable: true,
                     sortable: true,
                 },
