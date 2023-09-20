@@ -4,7 +4,7 @@ import RawDisplayer from "./RawDisplayer.vue";
 </script>
 
 <template>
-    <div class="container-sm budget">
+    <div class="container-sm budget" style="float: left;">
         <div style="float:left;width:30%;">
             <table class="income">
                 <tr>
@@ -13,7 +13,7 @@ import RawDisplayer from "./RawDisplayer.vue";
                         <b-form-input v-model="income"
                                       id="income"
                                       class="cell"
-                                      style="height: 28px;"
+                                      style="height: 24px;"
                         />
                     </td>
                 </tr>
@@ -24,7 +24,7 @@ import RawDisplayer from "./RawDisplayer.vue";
                                        :options="periods"
                                        id="pay_period"
                                        class="cell"
-                                       style="height: 28px;">
+                                       style="height: 24px;">
                         </b-form-select>
                     </td>
                 </tr>
@@ -41,9 +41,9 @@ import RawDisplayer from "./RawDisplayer.vue";
                 <th></th>
                 <th>Name</th>
                 <th>Group</th>
-                <th>Budget Amount</th>
-                <th style="text-align: center;">Budget Period</th>
-                <th>{{ payPeriod }} Contribution</th>
+                <th style="width: 130px;">Budget Amount</th>
+                <th style="width: 150px; text-align: center;">Budget Period</th>
+                <th style="width: 170px;">{{ payPeriod }} Contribution</th>
                 <th></th>
             </tr>
             </thead>
@@ -82,7 +82,7 @@ import RawDisplayer from "./RawDisplayer.vue";
 
                             </b-form-select>
                         </td>
-                        <td @click="startEditing(category, 'budget_amount', index)" >
+                        <td @click="startEditing(category, 'budget_amount', index)">
                             <b-form-input v-if="editing"
                                           v-model="category.budget_amount"
                                           :id="getCellId('input', category.id, 'budget_amount')"
@@ -116,18 +116,28 @@ import RawDisplayer from "./RawDisplayer.vue";
                 </template>
                 <template #footer>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td colspan="4"></td>
-                        <td>
-                            <currency-table :value=totalContribution />
-                        </td>
-                        <td>&nbsp;</td>
+                        <td class="cell-footer" colspan="4"></td>
+                        <td class="cell"><b>Total:</b></td>
+                        <td><currency-table :value=totalContribution /></td>
+                        <td class="cell-footer">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-footer" colspan="4"></td>
+                        <td class="cell"><b>Difference:</b></td>
+                        <td :class="{ 'text-danger': incomeDiffClass}"><currency-table :value=incomeDifference /></td>
+                        <td class="cell-footer">&nbsp;</td>
                     </tr>
                 </template>
             </draggable>
         </table>
     </div>
-    <raw-displayer class="col-3" :value="categories" title="Categories"/>
+    <div>
+        <b-modal id="modal-dup-name" title="Duplicate Name" hide-footer>
+            <p class="my-4"><b>{{ duplicateName }}</b> category already exists.</p>
+            <b-button class="mt-3" variant="primary" @click="this.resetDuplicateName">OK</b-button>
+        </b-modal>
+    </div>
+<!--    <raw-displayer class="col-3" :value="categories" title="Categories"/>-->
 </template>
 
 <script lang="js">
@@ -148,6 +158,7 @@ export default {
     },
     data() {
         return {
+            duplicateName: "",
             income: 600,
             payPeriod: 'Weekly',
             editing: false,
@@ -207,11 +218,6 @@ export default {
             ],
             sleepMs: 300,
             selectedCell: {},
-            previousCell: {
-                id: -1,
-                item: {},
-                fieldKey: ""
-            },
             fieldKeys: {},
             groups: [
                 {value: null, text: 'Please select a group'},
@@ -238,6 +244,15 @@ export default {
                 total += Number.parseFloat(item.pay_period_contribution);
             });
             return total;
+        },
+        incomeDifference() {
+            return 600 - this.totalContribution;
+        },
+        incomeDiffClass()  {
+            if (this.incomeDifference < 0) {
+                return true;
+            }
+            return false;
         }
     },
     methods: {
@@ -286,9 +301,6 @@ export default {
             this.draggedItem.column_index = (before + after) / 2;
             await this.updateCategory(this.draggedItem, "column_index");
         },
-        financial(x) {
-            return Number.parseFloat(x).toFixed(2);
-        },
         getContribution(category, index) {
             let contribution = 0;
             switch (category.budget_period) {
@@ -306,12 +318,12 @@ export default {
             return contribution;
         },
         async handleKeydownEvent(event, value, item, fieldKey) {
-            if (event.key !== "Enter" && event.key !== "Tab") {
+            if (event.key !== "Enter" && event.key !== "Tab" && event.key !== "Escape") {
                 return;
             }
             switch (event.key) {
                 case "Escape":
-                    this.cancelEdit(item, fieldKey);
+                    await this.cancelEdit(item, fieldKey);
                     break;
                 case "Enter":
                     this.selectedCell.previousId = item.id;
@@ -327,6 +339,7 @@ export default {
         async startEditing(item, fieldKey, index) {
             this.editing = true;
             this.selectedCell = {
+                item: item,
                 fieldKey: fieldKey,
                 rowIndex: index,
                 id: item.id,
@@ -339,24 +352,47 @@ export default {
             const element = this.fields[this.fieldKeys[fieldKey]].element;
             const elementId = this.getCellId(element, item.id, fieldKey);
             await this.focus(elementId, this.sleepMs);
-            document.getElementById(elementId).select();
         },
-        cancelEdit(item, fieldKey) {
+        async cancelEdit(item, fieldKey) {
             this.editing = false;
+            const elementId = this.getCellId('input', this.selectedCell.item.id, 'name');
+            await this.blur(elementId, this.sleepMs);
         },
         async stopEditingAndSave(item, fieldKey) {
             this.editing = false;
+
+            // check for duplicate name
+            if (fieldKey === 'name') {
+                let duplicateCount = 0;
+                this.categories.forEach(function(category) {
+                    if (category.name === item.name) {
+                        duplicateCount++;
+                    }
+                }, this);
+
+                if (duplicateCount > 1) {
+                    this.duplicateName = item.name;
+                    this.selectedCell.dirty = false;
+                    this.$bvModal.show("modal-dup-name");
+                    return;
+                }
+            }
+
             if (item[fieldKey] !== this.selectedCell.currentValue) {
                 this.selectedCell.dirty = true;
                 this.selectedCell.newValue = item[fieldKey];
                 await this.updateCategory(item, fieldKey);
-
-                const elementId = this.getCellId("input", item.id, fieldKey);
-                const element = document.getElementById(elementId);
-                if (element) {
-                    element.blur();
-                }
             }
+
+            const elementId = this.getCellId('input', this.selectedCell.item.id, 'name');
+            await this.blur(elementId, this.sleepMs);
+        },
+        async resetDuplicateName() {
+            this.$bvModal.hide("modal-dup-name");
+            this.categories[this.selectedCell.rowIndex].name = this.selectedCell.currentValue;
+
+            const elementId = this.getCellId('input', this.selectedCell.item.id, 'name');
+            await this.focus(elementId, this.sleepMs);
         },
         async save(item, fieldKey) {
             this.editing = false;
@@ -457,14 +493,19 @@ export default {
         getCellId(el, id, fieldKey) {
             return el + '_' + id + '_' + fieldKey;
         },
+        async blur(elementId, ms) {
+            await this.sleep(ms);
+            const el = document.getElementById(elementId);
+            el.blur();
+        },
         async focus(elementId, ms) {
-            if (!this.selectedCell.editable) {
-                return;
-            }
             await this.sleep(ms);
             const el = document.getElementById(elementId);
             el.focus();
             el.select();
+        },
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         },
         getCategories() {
             axiosInstance
@@ -491,6 +532,7 @@ export default {
 <style scoped>
 .budget {
     margin-top: 50px;
+    width: 65%;
 }
 
 .drag-icon {
@@ -523,8 +565,13 @@ td {
     border-bottom: 0.01rem solid lightgray;
     vertical-align: bottom;
     --bs-border-radius: 0;
-//padding: 5px 0 0 2px;
 }
+.cell-footer {
+    border: 0;
+    vertical-align: bottom;
+    --bs-border-radius: 0;
+}
+
 
 .Discretionary {
     background-color: #80FF00;
