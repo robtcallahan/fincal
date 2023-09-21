@@ -1,0 +1,6 @@
+config.json
+sql/*.bak
+csv/*.csv
+bin/*
+json/*
+vue-register
