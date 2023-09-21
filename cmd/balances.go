@@ -2,8 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	cfg "vue-register/pkg/config"
-
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"
 )
@@ -20,7 +18,7 @@ var balancesCmd = &cobra.Command{
 var ctx = context.Background()
 
 func init() {
-	config, _ = cfg.ReadConfig(ConfigFile)
+	//config, _ = cfg.ReadConfig(ConfigFile)
 	rootCmd.AddCommand(balancesCmd)
 
 	client = getBankingClient()

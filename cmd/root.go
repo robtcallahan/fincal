@@ -26,6 +26,7 @@ import (
 
 	"github.com/plaid/plaid-go/v15/plaid"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var rootCmd = &cobra.Command{
@@ -42,8 +43,6 @@ amounts from the appropriate budget category columns.`,
 		}
 	},
 }
-
-const ConfigFile = "config/config.json"
 
 var options = &cfg.Options{}
 var config = &cfg.Config{}
@@ -88,7 +87,15 @@ func init() {
 
 	cobra.OnInitialize()
 
-	config, err = cfg.ReadConfig(ConfigFile)
+	viper.SetConfigFile(".env")
+	err = viper.ReadInConfig()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	configFile := fmt.Sprintf("%s", viper.Get("CONFIG_FILE"))
+
+	config, err = cfg.ReadConfig(configFile)
 	if err != nil {
 		fmt.Println(err.Error())
 		return

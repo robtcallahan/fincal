@@ -14,7 +14,6 @@ import (
 	"vue-register/api/providers/sheets_provider"
 	"vue-register/api/services/sheets_service"
 	"vue-register/pkg/banking"
-	cfg "vue-register/pkg/config"
 	"vue-register/pkg/csv"
 	"vue-register/pkg/driver"
 	"vue-register/pkg/handler"
@@ -37,7 +36,7 @@ amounts from the appropriate budget category columns.`,
 
 /**/
 func init() {
-	config, _ = cfg.ReadConfig(ConfigFile)
+	//config, _ = cfg.ReadConfig(ConfigFile)
 	rootCmd.AddCommand(updateCmd)
 
 	// TODO: Fix default values

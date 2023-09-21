@@ -3,8 +3,6 @@
 .idea
 .vite
 *.json
-*.png
-*.png
 json
 node_modules
 sql/*.bak
@@ -15,3 +13,4 @@ bin/*
 database/sql/*
 vue-register
 .env
+

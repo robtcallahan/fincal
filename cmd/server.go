@@ -20,14 +20,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/rs/cors"
+	"github.com/spf13/viper"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	cfg "vue-register/pkg/config"
 	"vue-register/pkg/driver"
 	"vue-register/pkg/models"
 
-	cfg "vue-register/pkg/config"
 	"vue-register/pkg/handler"
 	"vue-register/pkg/plaid_auth"
 
@@ -49,8 +50,21 @@ var conn *driver.DB
 var qHandler *handler.Query
 
 func init() {
-	config, _ = cfg.ReadConfig(ConfigFile)
 	rootCmd.AddCommand(serveCmd)
+
+	viper.SetConfigFile(".env")
+	err := viper.ReadInConfig()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	configFile := fmt.Sprintf("%s", viper.Get("CONFIG_FILE"))
+
+	config, err = cfg.ReadConfig(configFile)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 
 	client = getBankingClient()
 
@@ -69,6 +83,8 @@ var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 
 func server() {
 	router := mux.NewRouter()
+
+	router.HandleFunc("/api/ok", client.ok).Methods("GET")
 
 	router.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
 	router.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
@@ -93,7 +109,7 @@ func server() {
 	router.Use(mux.CORSMethodMiddleware(router))
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5173"},
+		AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost"},
 		AllowCredentials: true,
 		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
 		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},
@@ -105,6 +121,18 @@ func server() {
 
 	//log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, r))
 	log.Fatal(http.ListenAndServe(":9000", myHandler))
+}
+
+func (c *Client) ok(w http.ResponseWriter, r *http.Request) {
+	type okStruct struct {
+		OK bool `json:"ok"`
+	}
+	ok := okStruct{
+		OK: true,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(ok)
 }
 
 func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {
@@ -366,6 +394,8 @@ func (c *Client) exchangePublicToken(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// TODO: me thinks that bank.Source is needed for the token file name
 	err = os.WriteFile(config.PlaidTokensDir+"/"+"AccessToken.txt", []byte(accessToken+"\n"), 0644)
 	if err != nil {
 		log.Printf("could not write access token: %s", err.Error())

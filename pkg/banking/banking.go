@@ -64,15 +64,15 @@ type ClientOptions struct {
 }
 
 type Client struct {
-	PlaidClient *plaid.APIClient
-	ClientID    string
-	Secret      string
-	Environment plaid.Environment
-	TokensDir   string
-	UserID      string
-	Banks       map[string]config.Bank
-	Debug       bool
-	Verbose     bool
+	PlaidClient    *plaid.APIClient
+	ClientID       string
+	Secret         string
+	Environment    plaid.Environment
+	PlaidTokensDir string
+	UserID         string
+	Banks          map[string]config.Bank
+	Debug          bool
+	Verbose        bool
 }
 
 type Balance struct {
@@ -83,14 +83,14 @@ type Balance struct {
 
 func NewClient(o *ClientOptions) *Client {
 	c := &Client{
-		ClientID:    o.PlaidClientID,
-		Secret:      o.PlaidSecret,
-		Environment: o.PlaidEnvironment,
-		TokensDir:   o.PlaidTokensDir,
-		UserID:      o.UserID,
-		Banks:       o.Banks,
-		Debug:       o.Debug,
-		Verbose:     o.Debug,
+		ClientID:       o.PlaidClientID,
+		Secret:         o.PlaidSecret,
+		Environment:    o.PlaidEnvironment,
+		PlaidTokensDir: o.PlaidTokensDir,
+		UserID:         o.UserID,
+		Banks:          o.Banks,
+		Debug:          o.Debug,
+		Verbose:        o.Debug,
 	}
 	configuration := plaid.NewConfiguration()
 	configuration.AddDefaultHeader("PLAID-CLIENT-ID", o.PlaidClientID)
@@ -124,7 +124,7 @@ func (c *Client) GetBalances(bankIDs []string) map[string]Balance {
 	for _, id := range bankIDs {
 		bank := c.Banks[id]
 
-		tok, err := os.ReadFile(c.TokensDir + "/" + bank.Source + "AccessToken.txt")
+		tok, err := os.ReadFile(c.PlaidTokensDir + "/" + bank.Source + "AccessToken.txt")
 		checkError(err)
 		accessToken := strings.ReplaceAll(string(tok), "\n", "")
 

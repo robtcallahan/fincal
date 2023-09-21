@@ -3,7 +3,6 @@ package cmd
 import (
 	"vue-register/api/providers/sheets_provider"
 	"vue-register/api/services/sheets_service"
-	cfg "vue-register/pkg/config"
 	"vue-register/pkg/driver"
 	"vue-register/pkg/handler"
 	"vue-register/pkg/models"
@@ -22,7 +21,7 @@ var dataCmd = &cobra.Command{
 
 /**/
 func init() {
-	config, _ = cfg.ReadConfig(ConfigFile)
+	//config, _ = cfg.ReadConfig(ConfigFile)
 	rootCmd.AddCommand(dataCmd)
 }
 

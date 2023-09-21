@@ -19,11 +19,9 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/spf13/cobra"
 	"vue-register/api/providers/sheets_provider"
 	"vue-register/api/services/sheets_service"
-	cfg "vue-register/pkg/config"
-
-	"github.com/spf13/cobra"
 )
 
 var copyCmd = &cobra.Command{
@@ -48,8 +46,8 @@ func init() {
 func copyRows() {
 	var err error
 
-	config, err = cfg.ReadConfig(ConfigFile)
-	checkError(err)
+	//config, err = cfg.ReadConfig(ConfigFile)
+	//checkError(err)
 
 	sheetsProvider, err := sheets_provider.New(options.SpreadsheetID, config)
 	checkError(err)

@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -8,11 +8,23 @@ import (
 	cfg "vue-register/pkg/config"
 
 	"github.com/gocarina/gocsv"
+	"github.com/spf13/cobra"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-const ConfigFile = "../config/config.json"
+var importCmd = &cobra.Command{
+	Use:   "import",
+	Short: "import",
+	Long:  ``,
+	Run: func(cmd *cobra.Command, args []string) {
+		doImport()
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(importCmd)
+}
 
 // Column ...
 type Column struct {
@@ -61,16 +73,16 @@ type Config struct {
 	DB         *gorm.DB
 }
 
-func main() {
+func doImport() {
 	var err error
 
 	//c, _ := cfg.ReadConfig()
-	c, _ := cfg.ReadConfig(ConfigFile)
+	//c, _ := cfg.ReadConfig(ConfigFile)
 	config := &Config{
-		AppConfig:  c,
-		DBName:     c.DBName,
-		DBUsername: c.DBUsername,
-		DBPassword: c.DBPassword,
+		AppConfig:  config,
+		DBName:     config.DBName,
+		DBUsername: config.DBUsername,
+		DBPassword: config.DBPassword,
 	}
 
 	dsn := config.DBUsername + ":" + config.DBPassword + "@tcp(127.0.0.1:3306)/" +

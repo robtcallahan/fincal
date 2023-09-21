@@ -1,0 +1,95 @@
+version: "3.4"
+
+x-app: &default-app
+  env_file:
+    - ".env"
+  restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+  stop_grace_period: "3s"
+  tty: true
+  deploy:
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s
+  healthcheck:
+    interval: 1m30s
+    timeout: 10s
+    retries: 3
+    start_period: 40s
+
+services:
+  frontend:
+    <<: *default-app
+    build:
+      context: ./frontend
+      target: ${NODE_ENV}
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV}
+#    image: fincal-frontend
+    container_name: fincal-frontend
+    entrypoint: npm run dev
+    working_dir: /app/frontend
+    ports:
+      - ${FRONTEND_CLIENT_PORT_FORWARD}:${FRONTEND_CLIENT_PORT}
+    expose:
+      - ${FRONTEND_CLIENT_PORT}
+    healthcheck:
+      test: "${FRONTEND_HEALTHCHECK_TEST}"
+    volumes:
+      - ./frontend:/app/frontend:delegated
+      - /app/frontend/node_modules
+    networks:
+      - backend
+      - frontend
+    tty: true
+
+  backend:
+    <<: *default-app
+    build:
+      context: "."
+      target: ${NODE_ENV}
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV}
+#    image: fincal-backend
+    working_dir: /app
+    container_name: fincal-backend
+    ports:
+      - ${BACKEND_CLIENT_PORT_FORWARD}:${BACKEND_CLIENT_PORT}
+    expose:
+      - ${BACKEND_CLIENT_PORT}
+    healthcheck:
+      test: "${FRONTEND_HEALTHCHECK_TEST}"
+    networks:
+      - backend
+      - frontend
+
+  db:
+    <<: *default-app
+    image: mysql:8.0.22
+    container_name: fincal-mysql
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    command: --init-file /data/fincal_init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./database/sql/fincal_init.sql:/data/fincal_init.sql
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  frontend:
+  backend:
