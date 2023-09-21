@@ -1,0 +1,3102 @@
+[
+  {
+    "ID": 0,
+    "Name": "Amazon",
+    "BankName": "AMAZON.COM",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon",
+    "BankName": "Amazon.com",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon",
+    "BankName": "AMZN Mktp",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Web Services",
+    "BankName": "Amazon web services",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Apple iTunes",
+    "BankName": "APPLE.COM/BILL",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AT\u0026T iPhone",
+    "BankName": "BILL PAY AT\u0026T",
+    "ColumnName": "AT\u0026T",
+    "ColumnIndex": 16,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Comcast/Xfinity",
+    "BankName": "BILL PAY COMCAST",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Blue Mount Nursery",
+    "BankName": "BLUE MOUNT NURSERY",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cascades Center for Dentistry",
+    "BankName": "CASCADES CNTR FOR DENT",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Chewy",
+    "BankName": "CHEWY",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "City of Vape",
+    "BankName": "CITY OF VAPE",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Costco",
+    "BankName": "COSTCO WHSE",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "CubeSmart",
+    "BankName": "CUBESMART",
+    "ColumnName": "Storage Rental",
+    "ColumnIndex": 26,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Dominion Power",
+    "BankName": "DOMINION POWER",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Exxon Gas",
+    "BankName": "EXXONMOBIL",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "EZ Pass",
+    "BankName": "E Z PASS",
+    "ColumnName": "Smart Tag",
+    "ColumnIndex": 30,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fidelity Visa",
+    "BankName": "Fidelity Visa",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fracture",
+    "BankName": "FRACTURE",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Harmony Hill Farms",
+    "BankName": "HARMONY HILL",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Harris Teeter",
+    "BankName": "HARRIS TEETER",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Homesite Renter's Insurance",
+    "BankName": "HOMESITE INS PREM",
+    "ColumnName": "Renters Insurance",
+    "ColumnIndex": 24,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Hulu",
+    "BankName": "HULU",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "HP Instant Ink",
+    "BankName": "INSTANT INK",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "IRS Tax Payment",
+    "BankName": "IRS USATAXPYMT",
+    "ColumnName": "IRS",
+    "ColumnIndex": 29,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Chase Subaru Car Payment",
+    "BankName": "JPMorgan Chase Ext Trnsfr",
+    "ColumnName": "Car Loan",
+    "ColumnIndex": 28,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Light In The Box",
+    "BankName": "LIGHTINTHEBOX",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun County District Court",
+    "BankName": "LOUDOUN COUNTY GENERAL",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun Club 12 - PayPal",
+    "BankName": "LOUDOUNCLUB",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": true
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun Heights Rent",
+    "BankName": "Loudoun Heights",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Deposit Check",
+    "BankName": "MOBILE DEPOSIT",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Netflix",
+    "BankName": "NETFLIX",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Plex Pass",
+    "BankName": "PLEXINCPASS",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Progressive Auto Insurance",
+    "BankName": "PROG ADVANCED INS PREM",
+    "ColumnName": "My Guys Storage Rental",
+    "ColumnIndex": 22,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "RedBox",
+    "BankName": "REDBOX",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "SlingTV",
+    "BankName": "SLING.COM",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "SnapSure Storage Rental Ins",
+    "BankName": "SNAPNSURE INSURANCE",
+    "ColumnName": "Storage Rental",
+    "ColumnIndex": 26,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Spotify",
+    "BankName": "Spotify",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "The Fermented Pig",
+    "BankName": "THE FERMENTED PIG",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "The UPS Store",
+    "BankName": "THE UPS STORE",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Valencia - Farmers Market",
+    "BankName": "VALENCIA",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Venmo Payment",
+    "BankName": "VENMO PAYMENT",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "VueMastery.com",
+    "BankName": "VUEMASTERY",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Walmart.com",
+    "BankName": "WALMART.COM",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "WITHDRAWAL MADE IN A BRANCH/STORE",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sierra Club",
+    "BankName": "SIERRA CLUB",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon",
+    "BankName": "Amazon",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Calzedonia",
+    "BankName": "FRGN TRANS FEE-CALZEDONIA SPA",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Calzedonia",
+    "BankName": "CALZEDONIA SPA MALCESINE",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Harris Teeter",
+    "BankName": "Harris Teeter Supermarkets, Inc.",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun Club 12 - PayPal",
+    "BankName": "LOUDOUN CLUB",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": true
+  },
+  {
+    "ID": 0,
+    "Name": "Costco Citi Visa",
+    "BankName": "Costco",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "CrowdStrike Salary",
+    "BankName": "CROWDSTRIKE INC",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Vape Juice",
+    "BankName": "VJUICETOBACCOPRODUCT",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Chase Visa",
+    "BankName": "BILL PAY CHASE CARD SERVICES ON-LINE xxxxxxxxxxx35652 ON 12-01",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Credit Card Payment (delete)",
+    "BankName": "Payment Thank You - Bill",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Margie Knight (Venmo)",
+    "BankName": "Venmo",
+    "ColumnName": "Mental Health",
+    "ColumnIndex": 38,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AA Meeting (Venmo)",
+    "BankName": "Venmo",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Wikipedia",
+    "BankName": "Donation to the Wikime 877-60094",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Web Services",
+    "BankName": "AWS",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Netflix",
+    "BankName": "Netflix",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Liberty Vapors",
+    "BankName": "LIBERTY VAPORS STERLING",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Target",
+    "BankName": "TARGET 00010090 STERLING",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "USPS",
+    "BankName": "USPS.COM POSTAL STORE",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "PayPal Transfer",
+    "BankName": "PAYPAL TRANSFER 201211 1011495056505 ROB CALLAHAN",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Lansdown Animal Hospital",
+    "BankName": "LANSDOWNE ANIMAL HOSPI LEESBURG",
+    "ColumnName": "Gifts",
+    "ColumnIndex": 36,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Comcast",
+    "BankName": "Comcast",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Chase Visa",
+    "BankName": "BILL PAY CHASE CARD SERVICES",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Exxon",
+    "BankName": "ExxonMobil",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Marketplace",
+    "BankName": "AMAZON MARKETPLACE",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Venmo Payment",
+    "BankName": "Venmo",
+    "ColumnName": "Mental Health",
+    "ColumnIndex": 38,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Venmo Payment",
+    "BankName": "Venmo",
+    "ColumnName": "Mental Health",
+    "ColumnIndex": 38,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cascades Center for Dentistry",
+    "BankName": "BILL PAY CASCADES CTR FOR DENTISTRY ON-LINE No Account Number ON 02-03",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Nirvana",
+    "BankName": "OPENPAY*BP WALLET CLEA SANTIAGO",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Foreign Transaction Fee",
+    "BankName": "FRGN TRANS FEE-OPENPAY*BP WALLET",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Feeding America",
+    "BankName": "FEEDING AMERICA WWW.FEEDIN",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sezzle",
+    "BankName": "SEZZLE ORDER P1 HTTPSSEZZL",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "DopeBoo",
+    "BankName": "DOPEBOO 413-68799",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "A N' D Tobacco",
+    "BankName": "A N' D TOBACCO LEESBURG",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "SOUNDIIZ PREMIUM COUERON FR",
+    "BankName": "SOUNDIIZ PREMIUM COUERON",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sezzle",
+    "BankName": "SEZZLE ODR 2MO0 P2",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sezzle",
+    "BankName": "FRGN TRANS FEE-SOUNDIIZ PREMIUM",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "7-Eleven",
+    "BankName": "7-Eleven",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fidelity Credit",
+    "BankName": "STATEMENT CREDIT OFFER",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Feeding America",
+    "BankName": "FEEDING AMERICA WWW.FEEDI",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sezzle",
+    "BankName": "SEZZLE ODR 2MO0 P3",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Houston Food Bank",
+    "BankName": "HOUSTON FOOD BANK",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Manhattan Pizza",
+    "BankName": "MANHATTAN PIZZA ASHBUR 703-85813",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sezzle",
+    "BankName": "SEZZLE ODR 2MO0 P4",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Tobacco Hut",
+    "BankName": "TOBACCO HUT AND VAPE ASBURN",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash Equivalent Fee",
+    "BankName": "CASH EQUIVALENT FEE",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "CVS",
+    "BankName": "CVS",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Nirvana Shop",
+    "BankName": "WYRE-114948 415-37473",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun Medical Group",
+    "BankName": "BILL PAY LOUDOUN MEDICAL GROUP",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Audible",
+    "BankName": "Audible",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Commando",
+    "BankName": "SP * COMMANDO HTTPSWWW.",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "DisneyPlus",
+    "BankName": "MEMBERSHIP FEE ",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "DisneyPlus",
+    "BankName": "Roku for Disney Electr 816-27281",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Navia Benefits FSA",
+    "BankName": "NAVIA BENEFIT SO FLEXIBLE B 210318 29647607 CALLAHAN ,ROBERT",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sensate, Inc",
+    "BankName": "SENSATE INC",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Dell Computer",
+    "BankName": "DMI* DELL SALES \u0026 SERV",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Steam Powered",
+    "BankName": "Steam Purchase 425-95229",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "DEN*VNDSTC.COM",
+    "BankName": "DEN*VNDSTC.COM",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Steam Games",
+    "BankName": "Steam Games",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Interest Charge",
+    "BankName": "MINIMUM INTEREST CHARGE FEE",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "DTWTVT.COM (canceled)",
+    "BankName": "DTWTVT.COM 877-39100",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "FFCWTH.COM (canceled)",
+    "BankName": "FFCWTH.COM",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Steam",
+    "BankName": "Steam Purchase",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "XSinsVR",
+    "BankName": "X. GENESIXSRO 353143690",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Foreign Transaction Fee",
+    "BankName": "FRGN TRANS FEE-PAYPAL *X. GENESI",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cheap Cheap Boxes",
+    "BankName": "CHEAP CHEAP",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Arduino Store",
+    "BankName": "ARDUINO STORE HTTPSSTOR",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "My Guys Moving \u0026 Storage",
+    "BankName": "MY GUYS MOVING \u0026 STORA",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brendan Gannon",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 04/14 REF #PP0B8TJSKC TEST DEPOSIT USING WELLS FARGO ZELLE SERVI",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "E*Trade Bank Transfer",
+    "BankName": "E*TRADE BANK TRANSFER 000002025601",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "E*Trade Bank Transfer",
+    "BankName": "E*TRADE BANK TRANSFER 000002025601",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Charge Off",
+    "BankName": "CHARGE OFF",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Avid Technology (fraud)",
+    "BankName": "DRI*AVID TECHNOLOGY avid.com",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Brendan Gannon - Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 04/17 REF #PP0B9",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brooklinen",
+    "BankName": "SP * BROOKLINEN WWW.BROOK",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Lowes",
+    "BankName": "Lowe's Home Improvement",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Canon",
+    "BankName": "CANON DIRECT",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Stohlman Subaru",
+    "BankName": "STOHLMAN SUBARU OF STE 000-00000",
+    "ColumnName": "Car Expenses",
+    "ColumnIndex": 31,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Firefly",
+    "BankName": "FIREFLY 720-72665",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "McAfee",
+    "BankName": "MFE*www.McAfee.com 866-62239",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Gobble.com Meals",
+    "BankName": "GOBBLE.COM MEALS HTTPSGOBB",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "McAfee",
+    "BankName": "PROV FR CR MFE*www.McAfee.com #",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "USPS",
+    "BankName": "USPS CHANGE OF ADDRESS",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AliExpress",
+    "BankName": "aliexpress 114-08785",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Gobble.com",
+    "BankName": "PROV FR CR GOBBLE.COM MEALS #",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "RMD Holdings",
+    "BankName": "RMD HOLDINGS LLC DBA E 888-55736",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Vaporizer Chief",
+    "BankName": "VAPORIZER CHIEF 866-31226",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Calzedonia",
+    "BankName": "LZEDONIA ONLINE",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "HRBlock",
+    "BankName": "HRB ONLINE TAX PRODUCT",
+    "ColumnName": "IRS",
+    "ColumnIndex": 29,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Walmart",
+    "BankName": "Walmart",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "GrubHub",
+    "BankName": "GrubHub",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Taco Bell",
+    "BankName": "Taco Bell",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "VA Dept of Taxation",
+    "BankName": "VA DEPT TAXATION WITHDRAWAL 210505 XXXXX2314 ROBERT CALLAH",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Etsy",
+    "BankName": "Etsy.com 718-85579",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Home Depot",
+    "BankName": "Home Depot",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Uber",
+    "BankName": "Uber",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Etsy",
+    "BankName": "Etsy.com - Multiple Sh 718-85579",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Etsy",
+    "BankName": "BCF Etsy Uplift 718-48075",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Dominos",
+    "BankName": "Domino's",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Italia New York Pizza, Adamstown",
+    "BankName": "ITALIA NEW YORK PIZZA ADAMSTOWN",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Chipotle Mexican Grill",
+    "BankName": "Chipotle Mexican Grill",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sweetwater",
+    "BankName": "SWEETWATER LTC STERLING",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Venmo ISP to James",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "MasterCard",
+    "BankName": "BILL PAY MasterCard ON-LINE xxxxxxxxxxx47471 ON 06-09",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 06/12 REF #PP0BPH9KG4 XXXXXX7479",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Venmo ISP to James",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Breathe Green Directions",
+    "BankName": "BREATHEGREENDIRECTIONS 888-32501",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Andys Pizza \u0026 Subs",
+    "BankName": "ANDYS PIZZA \u0026 SUBS LOVETTSVI",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rent Payment",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 07/10 REF #PP0BW",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Weis Markets",
+    "BankName": "Weis Markets",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Ally Bank",
+    "BankName": "ALLY BANK $TRANSFER 210713 3579306595 ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "ATM WITHDRAWAL AUTHORIZED ON 07/13 121 GATEWAY DR WINCHESTER VA 0002432 ATM ID 0642U CARD 9014",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "NOVEC/EZ-PAY UTILITYPMT 210712 4201306 ROBERT CALLAHAN",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "NOVA Junk",
+    "BankName": "IN *NOVA JUNK 571-43281",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "TotalAV",
+    "BankName": "WWW.TOTALAV.COM 03333706569 GB",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Evernote",
+    "BankName": "Evernote Corp 650-25708",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "ATM WITHDRAWAL AUTHORIZED ON 07/27 121 GATEWAY DR WINCHESTER VA 0006818 ATM ID 6704C CARD 9014",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Giant",
+    "BankName": "GIANT 0799 LEESBURG",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Tobacco Hut",
+    "BankName": "TOBACCO HUT \u0026 VAPE SHO LEESBURG",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Giant",
+    "BankName": "GIANT 0799 LEESBURG",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 08/09 REF #PP0C4",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "RMD Holdings",
+    "BankName": "RMD HOLDINGS LLC DBA E JU888-5573625",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "NOVEC/EZ-PAY UTILITYPMT 210810 0644216 ROBERT CALLAHAN",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "ATM WITHDRAWAL AUTHORIZED ON 08/15 611 E MAIN ST PURCELLVILLE VA 0003835 ATM ID 0275M CARD 9014",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "NON-WF ATM WITHDRAWAL AUTHORIZED ON 08/15 N VALLEY-BERRYVILLE BERRYVILLE VA 00381227761631619 ATM ID AB08 CARD 9014",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Cash",
+    "BankName": "NON-WELLS FARGO ATM TRANSACTION FEE",
+    "ColumnName": "Cash",
+    "ColumnIndex": 10,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "BILL PAY NOVEC MOBILE xxxxxx2-001 ON 08-30",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Fee",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 09/08 REF #PP0CC",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "NOVEC",
+    "BankName": "NOVEC/EZ-PAY UTILITYPMT 210907 3658276 ROBERT CALLAHAN",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Element Vape",
+    "BankName": "ELEMENT VAPE",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Dashlane",
+    "BankName": "CKO*Dashlane 212-59675",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sheetz",
+    "BankName": "Sheetz",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Wood",
+    "BankName": "Cash eWithdrawal in Branch/Store 09/28/2021 06:08 AM 701 E MARKET ST LEESBURG VA 8063",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "IFixIt",
+    "BankName": "SP * IFIXIT STORE.IFI",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AutoZone",
+    "BankName": "AutoZone",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Ally Bank",
+    "BankName": "ALLY BANK $TRANSFER 211001 3917167843 ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Carbon2Cobalt",
+    "BankName": "CARBON2COBAL",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Carbon2Cobalt",
+    "BankName": "CARBON2COBAL",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Food Lion",
+    "BankName": "Food Lion",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from Fidelity",
+    "BankName": "FID BKG SVC LLC MONEYLINE 211004 X15716928 VN3A4 ROBERT T CALLAHAN",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fidelity late fee",
+    "BankName": "LATE FEE",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Interest charge",
+    "BankName": "PURCHASE INTEREST CHARGE",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Brendan Gannon - Oct Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 10/08 REF #PP0CL89Z3M OCTOBER 2021 RENT",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "BILL PAY NOVEC ON-LINE xxxxxx2-001 ON 10-08",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "NOVEC",
+    "BankName": "NOVEC/EZ-PAY UTILITYPMT 211011 4252413 ROBERT CALLAHAN",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Farmer John's",
+    "BankName": "FARMER JOHN'S MARK Leesburg",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "GeekVape",
+    "BankName": "GEEKVAPE.COM",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "YouTube Videos (Bizarre Foods)",
+    "BankName": "YouTube Videos g.co/help",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Okada",
+    "BankName": "OKADA JAPANESE RESTAUR ASHBURN",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Foreign Transfer Fee",
+    "BankName": "FRGN TRANS FEE-DVDVIDEOSOFT.COM",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "VideoSoft",
+    "BankName": "DVDVIDEOSOFT.COM LONDON",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "BILL PAY NOVEC",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Ally Bank",
+    "BankName": "ALLY BANK P2P 211105 ROBERT T CALLAH ROBERT T CALLAHAN",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Finn Thai Restaurant",
+    "BankName": "FINN THAI RESTAURANT RESTON",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "JetBrains",
+    "BankName": "JetBrains Americas INC 165-05772",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Novec",
+    "BankName": "NOVEC/EZ-PAY UTILITYPMT 211108 3969664 ROBERT CALLAHAN",
+    "ColumnName": "Shenandoah Electric",
+    "ColumnIndex": 19,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AT\u0026T",
+    "BankName": "AT\u0026T K006 9968 ESTOR",
+    "ColumnName": "AT\u0026T",
+    "ColumnIndex": 16,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brendan Gannon - Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 11/10 REF #PP0CTLWR4J NOVEMBER RENT PAYMENT",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Leesburg Station Auto Wash",
+    "BankName": "LEESBURG STATION AUTO LEESBURG",
+    "ColumnName": "Car Expenses",
+    "ColumnIndex": 31,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brunswick Crossing Animal Hospital",
+    "BankName": "BRUNSWICK CROSSING ANI BRUNSWICK",
+    "ColumnName": "Gifts",
+    "ColumnIndex": 36,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Nancy Dymond",
+    "BankName": "BILL PAY Nancy Dymond RECURRING No Account Number ON 11-23",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sweetwater Sound",
+    "BankName": "SWEETWATER SOUND",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Vape Royalty",
+    "BankName": "VAPE ROYALTY",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Navia",
+    "BankName": "NAVIA BENEFIT SO FLEXIBLE B 211129 30218389 CALLAHAN ,ROBERT",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Aquila Recovery",
+    "BankName": "MED*AQUILA RECOVERY OF",
+    "ColumnName": "Mental Health",
+    "ColumnIndex": 38,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Istanbul Grill",
+    "BankName": "ISTANBUL GRILL LLC WILKES BA",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "PayPal transfer",
+    "BankName": "PAYPAL TRANSFER 211205 4AT22AY3LXTYJ ROB CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sunoco",
+    "BankName": "Sunoco",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Robinhood transfer",
+    "BankName": "Robinhood",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Coinbase transfer",
+    "BankName": "Coinbase.com 9PKS6JD2 9PKS6JD201cd ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Myshroom Grow Kits",
+    "BankName": "MYSHROOMSGROWKITS.COM MYSHROOMS",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brendan Gannon Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 12/12 REF #PP0D3YPGWR XXXXXX7479",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "QS Micro",
+    "BankName": "ZELLE TO QS MICRO ON 12/12 REF #RP0D3ZL9DW",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "McDonald's ",
+    "BankName": "McDonald's",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rancho Krupa Food Mart - Gas",
+    "BankName": "RANCHO KRUPA FOOD MART TAMAQUA",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "McDonald's",
+    "BankName": "McDonald's",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Telmate",
+    "BankName": "GTL*TELMATE INMATE SRV",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "PayPal",
+    "BankName": "PAYPAL TRANSFER 211216 101743626410",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Ally Bank",
+    "BankName": "ALLY BANK $TRANSFER 211216 4260230683 ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Starlink Internet",
+    "BankName": "Starlink Internet 310-68296",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Bonefish",
+    "BankName": "BONEFISH 0705 ASHBURN",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Alteon Health",
+    "BankName": "PAY* ALTEON HEALTH CEDAR.COM",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fidelity interest credit",
+    "BankName": "CIT0168332 - INTEREST CREDIT",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from E*Trade",
+    "BankName": "E*TRADE ACH TRNSFR 211222 42523624906 45469742",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Lovettsville Style",
+    "BankName": "LOVETTSVILLE STYLE Lovettsvi",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from Coinbase",
+    "BankName": "COINBASE INC. 211225 U6S65C57 ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Ren",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 12/31 REF #PP0D8C3D5K APOLOGIES THAT IM LATE THIS MONTH. SOMEHOW",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "",
+    "ColumnIndex": 0,
+    "Color": "",
+    "IsCategory": false,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "SoFi Personal Loan Payoff",
+    "BankName": "SOFI PAYMENTS PL PYMT 211231 T23543900 Robert T Callahan",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "January Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 01/03 REF #PP0D95Q3DG REMAINDER OF JANUARY RENT.",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer to Ally Bank",
+    "BankName": "ALLY BANK $TRANSFER 220104 4335553919 ROBERT T CALLAHAN",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP Payment",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Green Chef",
+    "BankName": "GRNCHEF*247881742",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Clydes",
+    "BankName": "CLYDE'S WILLOW CRK FAR BROADLAND",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "TechSmith Camtasia",
+    "BankName": "FS *TechSmith 877-32789",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Curiosity Stream",
+    "BankName": "CURIOSITYSTREAM HTTPSWWW.",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Crowdstrike Inc Payment (xmas gift)",
+    "BankName": "Crowdstrike Inc Payment 246736 Rob Callahan",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Green Chef",
+    "BankName": "GRNCHEF*278731142",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Green Chef",
+    "BankName": "GRNCHEF296155142",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Ashburn Vision Source",
+    "BankName": "Ashbrn Vision Source ASHBURN",
+    "ColumnName": "Medical",
+    "ColumnIndex": 37,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "WAMU charitble gift",
+    "BankName": "WAMU 88.5 202-88 Web Gift 011922 000001399989917 ROBERT T CALLAHAN",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Green Chef",
+    "BankName": "GREEN CHEF",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brunswick Liquors",
+    "BankName": "BRUNSWICK LIQUORS KNOXVILLE",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Brunswick Liquors",
+    "BankName": "BRUNSWICK LIQUORS KNOXVILLE",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AT\u0026T",
+    "BankName": "ATT Payment 012322 022491001EPAYD Family Name",
+    "ColumnName": "AT\u0026T",
+    "ColumnIndex": 16,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Green Chef",
+    "BankName": "GRNCHEF*232421222",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from Ally Bank",
+    "BankName": "ALLY BANK P2P 220202 ROBERT T CAL",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "ISP",
+    "BankName": "Venmo",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Law Office of Kelly King",
+    "BankName": "LAW OFFICE OF KELLY L LEESBURG",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "WMACTL Phone service (Jail)",
+    "BankName": "WMACTL *",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rent",
+    "BankName": "TRANSFER TO GANNON BRENNDAN ON 02/10 REF #PP0Q8KPBTD FEB RENT",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Christopher Gerric",
+    "BankName": "CHRISTOPHER GERRIC Falls Chu",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Dulles Super Tax",
+    "BankName": "DULLES SUPER TAXI",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "VA ABC",
+    "BankName": "VA ABC STORE 136",
+    "ColumnName": "Vision",
+    "ColumnIndex": 39,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from RobinHood",
+    "BankName": "ROBINHOOD CREDITS XXXXX6939 Robert Callahan",
+    "ColumnName": "Taxes",
+    "ColumnIndex": 41,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Rental Insurance",
+    "BankName": "AMERICAN STRATEG 8662748765 B3D4810CB7C1 ROBERT CALLAHAN",
+    "ColumnName": "Renters Insurance",
+    "ColumnIndex": 24,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Martins",
+    "BankName": "GIANT MARTINS 6078     800-573-2763  VA",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "GrubHub",
+    "BankName": "GRUBHUBEASTERNCHINA    GRUBHUB.COM   NY",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Uber",
+    "BankName": "UBER   TRIP            HELP.UBER.COM CA",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Jonathan Bishop Winchester",
+    "BankName": "SQ *JONATHAN BISHOP    Winchester    VA",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Freedom Agway",
+    "BankName": "FREEDOM AG \u0026 ENERGY CO WINCHESTER    VA",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Win Mart",
+    "BankName": "WIN MART LLC           WINCHESTER    VA",
+    "ColumnName": "Grocery",
+    "ColumnIndex": 13,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "MJ Hayes",
+    "BankName": "MJ HAYES               WINCHESTER    VA",
+    "ColumnName": "Misc",
+    "ColumnIndex": 14,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Uber",
+    "BankName": "UBER   TRIP            HELP.UBER.COM CA",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Bill Payment Return",
+    "BankName": "BILL PAY PAYMENT RETURN ON 06-22",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Uber",
+    "BankName": "UBER TRIP 8005928996 CA",
+    "ColumnName": "Uber",
+    "ColumnIndex": 12,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Fraud Dispute",
+    "BankName": "FRAUD DISPUTE",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Interest Returned",
+    "BankName": "INTEREST REF PURCHASES FEB 2023",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Marketplace",
+    "BankName": "AMZN MKTP US*Y33O45VA3 AMZN.COM/BILLWA",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Marketplace",
+    "BankName": "AMZN MKTP US*W110Q99G3 AMZN.COM/BILLWA",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Amazon Marketplace",
+    "BankName": "AMZN MKTP US*7J8F581I3 AMZN.COM/BILLWA",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Spotify",
+    "BankName": "SPOTIFY                877-778-1161  NY",
+    "ColumnName": "Content Subscriptions",
+    "ColumnIndex": 17,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "AT\u0026T",
+    "BankName": "ATT Payment 062323 489186002EPAYY Family Name",
+    "ColumnName": "AT\u0026T",
+    "ColumnIndex": 16,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Huff and Puffers",
+    "BankName": "HUFF AND PUFFERS       657-2335688   CA",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Loudoun County",
+    "BankName": "NCOURT *VALoudounCount 844-4008880   VA",
+    "ColumnName": "SoberLink",
+    "ColumnIndex": 25,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Sheetz",
+    "BankName": "SHEETZ 0207   00002071 WINCHESTER    VA",
+    "ColumnName": "Dining Out",
+    "ColumnIndex": 11,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Glo Fiber",
+    "BankName": "GLO FIBER BILLPAY 230702 GLO FIBER ROBERT CALLAHAN",
+    "ColumnName": "ISP",
+    "ColumnIndex": 18,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "VA Dept of Taxation",
+    "BankName": "BUSINESS TO BUSINESS ACH VA DEPT TAXATION TAX PAYMEN 230630 XXXXX2314 CALLAHAN, ROBERT T.",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Olive Tree Properties",
+    "BankName": "Olive Tree Prope WEB PMTS 070323 YP2MT7 Robert Callahan",
+    "ColumnName": "Rent",
+    "ColumnIndex": 23,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Apple Card",
+    "BankName": "APPLECARD GSBANK PAYMENT 063023 XXXXX5844 Robert Callahan",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from Fidelity - points",
+    "BankName": "FID BKG SVC LLC MONEYLINE 230705 X15716928 1JK7W ROBERT T CALLAHAN",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Harland Clarke Checks",
+    "BankName": "HARLAND CLARKE CHECK/ACC. 070323 00688487575488 ROBERT T CALLAHAN",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Shenandoah Valley Utilities",
+    "BankName": "SHENANDOAH VALLE UTILITY 230704 3957509 ROBERT T *CALLAHAN",
+    "ColumnName": "Water, Sewer, Trash",
+    "ColumnIndex": 21,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "MasterCard",
+    "BankName": "BILL PAY MasterCard ON-LINE xxxxxxxxxxxx5189 ON 07-07",
+    "ColumnName": "Credit Cards",
+    "ColumnIndex": 27,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "MyVaporStore",
+    "BankName": "MV STORE INC          718-7287838   NY",
+    "ColumnName": "Vape Supplies",
+    "ColumnIndex": 15,
+    "Color": "green",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Transfer from E*Trade",
+    "BankName": "MSPBNA ACH TRNSFR 230712 84178376906 45469742",
+    "ColumnName": "General Savings",
+    "ColumnIndex": 35,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Mavado",
+    "BankName": "SP MAVADO              SUDBURY       GB",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Foreign transaction fee",
+    "BankName": "FRGN TRANS FEE-SP MAVADO              SU",
+    "ColumnName": "Clothing \u0026 Household",
+    "ColumnIndex": 33,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "Refactoring Guru",
+    "BankName": "2COCOM*REFACTORINGGURU 888-2471614   GA",
+    "ColumnName": "Extra",
+    "ColumnIndex": 34,
+    "Color": "blue",
+    "IsCategory": true,
+    "TaxDeductible": false
+  },
+  {
+    "ID": 0,
+    "Name": "American Strategic Insurance",
+    "BankName": "AMERICAN STRATEG 8662748765 1A55EB86FCFE ROBERT CALLAHAN",
+    "ColumnName": "Renters Insurance",
+    "ColumnIndex": 24,
+    "Color": "yellow",
+    "IsCategory": true,
+    "TaxDeductible": false
+  }
+]

@@ -2,8 +2,7 @@
 .vscode
 .idea
 .vite
-*.json
-json
+config.json
 node_modules
 sql/*.bak
 csv/*.csv
@@ -14,3 +13,4 @@ database/sql/*
 vue-register
 .env
 
+services/backend/tmp

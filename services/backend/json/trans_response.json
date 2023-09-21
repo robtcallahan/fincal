@@ -1,0 +1,424 @@
+{
+  "request_id": "id60jLyXlvhzjx3",
+  "accounts": [
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "balances": {
+        "available": 13853.52,
+        "current": 13853.52,
+        "limit": 0,
+        "iso_currency_code": "USD",
+        "unofficial_currency_code": ""
+      },
+      "mask": "3201",
+      "name": "Rob Checking",
+      "official_name": "CHECKING",
+      "subtype": "checking",
+      "type": "depository",
+      "verification_status": ""
+    }
+  ],
+  "item": {
+    "available_products": [
+      "auth",
+      "balance"
+    ],
+    "billed_products": [
+      "transactions"
+    ],
+    "error": {
+      "request_id": "",
+      "error_type": "",
+      "error_code": "",
+      "error_message": "",
+      "display_message": "",
+      "StatusCode": 0
+    },
+    "institution_id": "ins_4",
+    "item_id": "kqjXR9Mar6TX1Dd5N3DXSb39x8jv15UorrQnE",
+    "webhook": "",
+    "consent_expiration_time": "0001-01-01T00:00:00Z"
+  },
+  "transactions": [
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": -150,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Credit"
+      ],
+      "category_id": "21005000",
+      "date": "2022-01-10",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "Crowdstrike Inc Payment 246736 Rob Callahan",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "AzRVnbY6vruR54voJVyRtwVPXmeQYYU6jbYrL",
+      "account_owner": "",
+      "transaction_id": "9p8OQ4eYd3u9py0VjAbPi3PPKbP9gJfd8D7qJ",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 219.9,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Billpay"
+      ],
+      "category_id": "21003000",
+      "date": "2022-01-07",
+      "authorized_date": "2022-01-07",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "Novec",
+      "name": "BILL PAY NOVEC ON-LINE xxxxxx2-001 ON 01-07",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "in store",
+      "pending": false,
+      "pending_transaction_id": "Vzx5RBDZ0ou946PmEjyzu4KPaEQye8IrnVq6Y",
+      "account_owner": "",
+      "transaction_id": "nyrw5M78amcndKXawk37TJqdpwnEJbHA0vZNZ",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 4000,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Debit"
+      ],
+      "category_id": "21006000",
+      "date": "2022-01-04",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "ALLY BANK $TRANSFER 220104 4335553919 ROBERT T CALLAHAN",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "kqjXR9Mar6TX1Dd5N3JZuOXdn0wyg7sRvn7Z8",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 400,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Debit"
+      ],
+      "category_id": "21006000",
+      "date": "2022-01-04",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "JPMorgan Chase Ext Trnsfr 220104 13140150613 ROBERT T CALLAHAN",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "AzRVnbY6vruR54voJVy7sJZgrmwdLMt6nzqxp",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 150,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Third Party",
+        "Venmo"
+      ],
+      "category_id": "21010001",
+      "date": "2022-01-04",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "Venmo",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "Braintree",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "Kz4oMn3kD8uK7Dgk9V1PuE63DzO7XZuQm6RKj",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 700,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Tax",
+        "Payment"
+      ],
+      "category_id": "20002000",
+      "date": "2022-01-03",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "Internal Revenue Service",
+      "name": "IRS USATAXPYMT 010322 221240302160605 ROBERT T CALLAHAN",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "online",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "Kz4oMn3kD8uK7Dgk9V18sq4NN5LxaVFQL03Zb",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 1424.27,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Payment"
+      ],
+      "category_id": "16000000",
+      "date": "2022-01-03",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "SOFI PAYMENTS PL PYMT 211231 T23543900 Robert T Callahan",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "yJEk5DqnmjSAKPxOXZVzT6RppKYAXLCOD0kLQ",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 25,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Debit"
+      ],
+      "category_id": "21006000",
+      "date": "2022-01-03",
+      "authorized_date": "2022-01-03",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "TRANSFER TO GANNON BRENNDAN ON 01/03 REF #PP0D95Q3DG REMAINDER OF JANUARY RENT.",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "rvR15ndN63SaDAPX1joYcqRoJ7ekbEtBrw6ww",
+      "account_owner": "",
+      "transaction_id": "AzRVnbY6vruR54voJVyASD9jjp60ONC6Zd8k4",
+      "transaction_type": "special",
+      "transaction_code": ""
+    },
+    {
+      "account_id": "NzXo4dk0q8urRMD07BMrTvL4Jooax7IRXAXAp",
+      "amount": 100,
+      "iso_currency_code": "USD",
+      "unofficial_currency_code": "",
+      "category": [
+        "Transfer",
+        "Third Party",
+        "Venmo"
+      ],
+      "category_id": "21010001",
+      "date": "2022-01-03",
+      "authorized_date": "",
+      "location": {
+        "address": "",
+        "city": "",
+        "lat": 0,
+        "lon": 0,
+        "region": "",
+        "store_number": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "merchant_name": "",
+      "name": "Venmo",
+      "payment_meta": {
+        "by_order_of": "",
+        "payee": "",
+        "payer": "",
+        "payment_method": "",
+        "payment_processor": "Braintree",
+        "ppd_id": "",
+        "reason": "",
+        "reference_number": ""
+      },
+      "payment_channel": "other",
+      "pending": false,
+      "pending_transaction_id": "",
+      "account_owner": "",
+      "transaction_id": "kqjXR9Mar6TX1Dd5N3JVszbaaqJN5eURpMx4O",
+      "transaction_type": "special",
+      "transaction_code": ""
+    }
+  ],
+  "total_transactions": 9
+}
