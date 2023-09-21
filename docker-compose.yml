@@ -66,9 +66,9 @@ services:
     image: mysql:8.0.22
     container_name: fincal-mysql
     ports:
-      - 3307:3306
+      - ${DB_CLIENT_PORT_FORWARD}:${DB_CLIENT_PORT}
     expose:
-      - 3306
+      - ${DB_CLIENT_PORT}
     command: --init-file /data/sql/fincal_init.sql
     restart: always
     environment:
