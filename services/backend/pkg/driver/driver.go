@@ -49,6 +49,9 @@ func ConnectSQL(c *ConnectParams) (*DB, error) {
 			c.Port,
 			c.DBName,
 		)
+		// TODO: remove
+		fmt.Printf("ConnectSQL() dsn: %s\n", dsn)
+
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	case PostgreSQL:
 		dsn := fmt.Sprintf(

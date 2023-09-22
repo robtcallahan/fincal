@@ -23,9 +23,8 @@ services:
     build:
       context: ./services/frontend
       dockerfile: Dockerfile
-#      args:
-#        - NODE_ENV=${NODE_ENV}
-#    image: fincal-frontend
+    depends_on:
+      - backend
     entrypoint: npm run dev
     working_dir: /app/frontend
     ports:
@@ -36,40 +35,38 @@ services:
       test: "${FRONTEND_HEALTHCHECK_TEST}"
     volumes:
       - frontend:/app/frontend:delegated
-#      - /app/frontend/node_modules
     networks:
-      - backend
-      - frontend
-    tty: true
+      - mynetwork
 
   backend:
     <<: *default-app
     build:
-      context: "./services/backend"
+      context: ./services/backend
       dockerfile: Dockerfile
-#    image: fincal-backend
+    depends_on:
+      - mysql
     working_dir: /app/backend
     ports:
       - ${BACKEND_CLIENT_PORT_FORWARD}:${BACKEND_CLIENT_PORT}
     expose:
       - ${BACKEND_CLIENT_PORT}
     healthcheck:
-      test: "${FRONTEND_HEALTHCHECK_TEST}"
+      test: ${FRONTEND_HEALTHCHECK_TEST}
     volumes:
       - backend:/app/backend:delegated
     networks:
-      - backend
-      - frontend
+      - mynetwork
 
-  db:
+  mysql:
     <<: *default-app
-    image: mysql:8.0.22
-    container_name: fincal-mysql
+    build:
+      context: ./services/database
+      dockerfile: Dockerfile
     ports:
       - ${DB_CLIENT_PORT_FORWARD}:${DB_CLIENT_PORT}
     expose:
       - ${DB_CLIENT_PORT}
-    command: --init-file /data/sql/fincal_init.sql
+    command: --init-file /database/sql/fincal_init.sql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -78,9 +75,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
-      - ./services/backend/database/sql:/data/sql
+      - ./services/database/sql:/database/sql
     networks:
-      - backend
+      - mynetwork
 
 volumes:
   frontend:
@@ -88,5 +85,4 @@ volumes:
   db-data:
 
 networks:
-  frontend:
-  backend:
+  mynetwork:

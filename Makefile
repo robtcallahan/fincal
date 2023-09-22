@@ -1,6 +1,7 @@
 DOCKER_USERNAME ?= robtcallahan
-BACKEND_NAME ?= fincal-backend
 FRONTEND_NAME ?= fincal-frontend
+BACKEND_NAME ?= fincal-backend
+DATABASE_NAME ?= fincal-database
 
 .PHONY: frontend
 
@@ -11,13 +12,10 @@ down:
 	docker-compose stop
 
 frontend:
-	cd ./frontend && docker build --tag ${FRONTEND_NAME} .
+	cd ./services/frontend && docker build --tag ${FRONTEND_NAME} .
 
 backend:
-	docker build --tag ${BACKEND_NAME} .
+	cd ./services/frontend && docker build --tag ${BACKEND_NAME} .
 
-server_backend:
-	docker run -p 9000:9000${BACKEND_NAME}
-
-server_frontend:
-	docker run -p 8000:5173 ${FRONTEND_NAME}
+database:
+	cd ./services/database && docker build --tag ${DATABASE_NAME} .

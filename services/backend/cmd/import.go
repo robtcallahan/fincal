@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/spf13/viper"
 	"os"
 	"os/exec"
 
@@ -76,8 +77,14 @@ type Config struct {
 func doImport() {
 	var err error
 
-	//c, _ := cfg.ReadConfig()
-	//c, _ := cfg.ReadConfig(ConfigFile)
+	viper.SetConfigFile(".env")
+	err = viper.ReadInConfig()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	dbHost := fmt.Sprintf("%s", viper.Get("DB_HOST"))
+
 	config := &Config{
 		AppConfig:  config,
 		DBName:     config.DBName,
@@ -85,7 +92,7 @@ func doImport() {
 		DBPassword: config.DBPassword,
 	}
 
-	dsn := config.DBUsername + ":" + config.DBPassword + "@tcp(127.0.0.1:3306)/" +
+	dsn := config.DBUsername + ":" + config.DBPassword + "@tcp(" + dbHost + ":3306)/" +
 		config.DBName + "?charset=utf8mb4&parseTime=True&loc=Local"
 	config.DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

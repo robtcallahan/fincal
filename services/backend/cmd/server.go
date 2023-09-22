@@ -69,6 +69,9 @@ func init() {
 
 	client = getBankingClient()
 
+	// TODO: remove
+	fmt.Println("connecting to MySQL...")
+
 	conn, _ = driver.ConnectSQL(&driver.ConnectParams{
 		DBType: driver.DBType(config.DBType),
 		Host:   dbHost,
