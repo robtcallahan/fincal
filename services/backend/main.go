@@ -16,7 +16,7 @@ limitations under the License.
 
 package main
 
-import "vue-register/cmd"
+import "fincall/cmd"
 
 func main() {
 	cmd.Execute()

@@ -2,13 +2,13 @@ package csv
 
 import (
 	//"bytes"
+	"fincall/pkg/config"
+	"fincall/pkg/models"
 	"fmt"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
-	"vue-register/pkg/config"
-	"vue-register/pkg/models"
 
 	"github.com/gocarina/gocsv"
 )

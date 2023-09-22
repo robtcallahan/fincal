@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/gorm/clause"
 
-	"vue-register/pkg/models"
-	repo "vue-register/pkg/repository"
+	"fincall/pkg/models"
+	repo "fincall/pkg/repository"
 
 	"gorm.io/gorm"
 )

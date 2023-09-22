@@ -1,8 +1,8 @@
 package sheets_service
 
 import (
+	"fincall/api/providers/sheets_provider"
 	"google.golang.org/api/sheets/v4"
-	"vue-register/api/providers/sheets_provider"
 )
 
 const (

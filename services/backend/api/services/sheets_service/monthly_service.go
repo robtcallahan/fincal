@@ -1,10 +1,10 @@
 package sheets_service
 
 import (
+	"fincall/pkg/models"
+	repo "fincall/pkg/repository"
 	"fmt"
 	"regexp"
-	"vue-register/pkg/models"
-	repo "vue-register/pkg/repository"
 
 	"google.golang.org/api/sheets/v4"
 )

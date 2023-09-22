@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"vue-register/pkg/driver"
-	"vue-register/pkg/models"
-	"vue-register/pkg/repository"
-	"vue-register/pkg/repository/mysql"
-	"vue-register/pkg/repository/postgres"
+	"fincall/pkg/driver"
+	"fincall/pkg/models"
+	"fincall/pkg/repository"
+	"fincall/pkg/repository/mysql"
+	"fincall/pkg/repository/postgres"
 )
 
 // Query ...

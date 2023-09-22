@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
+	"fincall/pkg/config"
 	"google.golang.org/api/sheets/v4"
-	"vue-register/pkg/config"
 )
 
 type BudgetEntry struct {

@@ -19,9 +19,9 @@ package cmd
 import (
 	"fmt"
 
+	"fincall/api/providers/sheets_provider"
+	"fincall/api/services/sheets_service"
 	"github.com/spf13/cobra"
-	"vue-register/api/providers/sheets_provider"
-	"vue-register/api/services/sheets_service"
 )
 
 var copyCmd = &cobra.Command{

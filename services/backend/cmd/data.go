@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"vue-register/api/providers/sheets_provider"
-	"vue-register/api/services/sheets_service"
-	"vue-register/pkg/driver"
-	"vue-register/pkg/handler"
-	"vue-register/pkg/models"
+	"fincall/api/providers/sheets_provider"
+	"fincall/api/services/sheets_service"
+	"fincall/pkg/driver"
+	"fincall/pkg/handler"
+	"fincall/pkg/models"
 
 	"github.com/spf13/cobra"
 )

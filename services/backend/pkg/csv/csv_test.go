@@ -8,8 +8,8 @@ import (
 	"reflect"
 	"testing"
 
-	cfg "vue-register/pkg/config"
-	"vue-register/pkg/models"
+	cfg "fincall/pkg/config"
+	"fincall/pkg/models"
 )
 
 const (

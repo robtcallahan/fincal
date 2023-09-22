@@ -17,13 +17,13 @@ limitations under the License.
 package cmd
 
 import (
+	"fincall/api/providers/sheets_provider"
 	"fmt"
-	"vue-register/api/providers/sheets_provider"
 
-	"vue-register/pkg/driver"
-	"vue-register/pkg/handler"
+	"fincall/pkg/driver"
+	"fincall/pkg/handler"
 
-	"vue-register/api/services/sheets_service"
+	"fincall/api/services/sheets_service"
 
 	"github.com/spf13/cobra"
 )

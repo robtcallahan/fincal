@@ -25,10 +25,10 @@ import (
 	"strconv"
 	"strings"
 
+	"fincall/pkg/config"
+	"fincall/pkg/models"
 	"github.com/plaid/plaid-go/v15/plaid"
 	"golang.org/x/net/context"
-	"vue-register/pkg/config"
-	"vue-register/pkg/models"
 )
 
 const (

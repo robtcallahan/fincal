@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"testing"
 
-	"vue-register/pkg/models"
+	"fincall/pkg/models"
 
 	"google.golang.org/api/sheets/v4"
 )

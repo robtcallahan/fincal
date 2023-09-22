@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"vue-register/api/clients/sheets_client"
-	"vue-register/pkg/config"
-	"vue-register/pkg/sheets_auth"
+	"fincall/api/clients/sheets_client"
+	"fincall/pkg/config"
+	"fincall/pkg/sheets_auth"
 
 	"github.com/googleapis/gax-go/v2/apierror"
 	"golang.org/x/net/context"

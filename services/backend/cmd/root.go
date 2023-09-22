@@ -21,8 +21,8 @@ import (
 	"os"
 	"strings"
 
-	"vue-register/pkg/banking"
-	cfg "vue-register/pkg/config"
+	"fincall/pkg/banking"
+	cfg "fincall/pkg/config"
 
 	"github.com/plaid/plaid-go/v15/plaid"
 	"github.com/spf13/cobra"

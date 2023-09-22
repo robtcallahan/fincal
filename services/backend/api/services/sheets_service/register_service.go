@@ -1,11 +1,11 @@
 package sheets_service
 
 import (
+	"fincall/pkg/config"
+	"fincall/pkg/models"
 	"fmt"
 	"google.golang.org/api/sheets/v4"
 	"log"
-	"vue-register/pkg/config"
-	"vue-register/pkg/models"
 )
 
 type SheetCoords struct {

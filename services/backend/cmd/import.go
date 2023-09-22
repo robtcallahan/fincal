@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	cfg "vue-register/pkg/config"
+	cfg "fincall/pkg/config"
 
 	"github.com/gocarina/gocsv"
 	"github.com/spf13/cobra"

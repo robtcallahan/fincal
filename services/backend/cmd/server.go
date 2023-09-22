@@ -18,6 +18,9 @@ package cmd
 
 import (
 	"encoding/json"
+	cfg "fincall/pkg/config"
+	"fincall/pkg/driver"
+	"fincall/pkg/models"
 	"fmt"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
@@ -25,12 +28,9 @@ import (
 	"log"
 	"net/http"
 	"os"
-	cfg "vue-register/pkg/config"
-	"vue-register/pkg/driver"
-	"vue-register/pkg/models"
 
-	"vue-register/pkg/handler"
-	"vue-register/pkg/plaid_auth"
+	"fincall/pkg/handler"
+	"fincall/pkg/plaid_auth"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"

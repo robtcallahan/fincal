@@ -2,6 +2,7 @@ package sheets_service
 
 import (
 	"encoding/json"
+	"fincall/pkg/models"
 	"fmt"
 	"google.golang.org/api/sheets/v4"
 	"log"
@@ -12,7 +13,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"vue-register/pkg/models"
 )
 
 var cellColors = map[string]*sheets.Color{

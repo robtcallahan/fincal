@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"vue-register/pkg/models"
+	"fincall/pkg/models"
 
 	"gorm.io/gorm"
 )

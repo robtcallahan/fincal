@@ -1,8 +1,8 @@
 package plaid_auth
 
 import (
+	"fincall/pkg/banking"
 	"fmt"
-	"vue-register/pkg/banking"
 
 	"github.com/plaid/plaid-go/v15/plaid"
 	"golang.org/x/net/context"

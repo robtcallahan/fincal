@@ -1,10 +1,10 @@
 package mysql
 
 import (
+	"fincall/pkg/models"
+	repo "fincall/pkg/repository"
 	"fmt"
 	"gorm.io/gorm/clause"
-	"vue-register/pkg/models"
-	repo "vue-register/pkg/repository"
 
 	"gorm.io/gorm"
 )
