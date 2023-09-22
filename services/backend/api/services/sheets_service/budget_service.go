@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"fincall/pkg/config"
+	"fincal/pkg/config"
 	"google.golang.org/api/sheets/v4"
 )
 

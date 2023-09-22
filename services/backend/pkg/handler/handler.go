@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"fincall/pkg/driver"
-	"fincall/pkg/models"
-	"fincall/pkg/repository"
-	"fincall/pkg/repository/mysql"
-	"fincall/pkg/repository/postgres"
+	"fincal/pkg/driver"
+	"fincal/pkg/models"
+	"fincal/pkg/repository"
+	"fincal/pkg/repository/mysql"
+	"fincal/pkg/repository/postgres"
 )
 
 // Query ...

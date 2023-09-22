@@ -2,7 +2,7 @@ FROM golang:1.21 as build
 
 #ENV WORKING_DIR=/src
 #ENV TARGET_DIR=/app
-#ENV EXEC=vue-register
+#ENV EXEC=fincal
 #ENV CONFIG_FILE=config.json
 #ENV TOKENS_DIR=tokens
 
@@ -20,8 +20,8 @@ FROM scratch
 WORKDIR /app/backend
 COPY --from=build /src/.env .
 COPY --from=build /src/config.json .
-COPY --from=build /src/tokens/* ./tokens
-COPY --from=build /src/vue-register .
+COPY --from=build /src/tokens/* ./tokens/
+COPY --from=build /src/fincal .
 
 EXPOSE 9000
-CMD ["./vue-register", "serve"]
+CMD ["./fincal", "serve"]

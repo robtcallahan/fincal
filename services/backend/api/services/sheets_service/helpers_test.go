@@ -2,7 +2,7 @@ package sheets_service
 
 import (
 	"encoding/json"
-	"fincall/pkg/models"
+	"fincal/pkg/models"
 	"os"
 	"reflect"
 	"testing"

@@ -1,8 +1,8 @@
 package sheets_service
 
 import (
-	"fincall/pkg/models"
-	repo "fincall/pkg/repository"
+	"fincal/pkg/models"
+	repo "fincal/pkg/repository"
 	"fmt"
 	"regexp"
 

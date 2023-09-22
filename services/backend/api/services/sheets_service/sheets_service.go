@@ -1,7 +1,7 @@
 package sheets_service
 
 import (
-	"fincall/api/providers/sheets_provider"
+	"fincal/api/providers/sheets_provider"
 	"google.golang.org/api/sheets/v4"
 )
 

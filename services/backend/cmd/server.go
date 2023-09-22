@@ -18,9 +18,9 @@ package cmd
 
 import (
 	"encoding/json"
-	cfg "fincall/pkg/config"
-	"fincall/pkg/driver"
-	"fincall/pkg/models"
+	cfg "fincal/pkg/config"
+	"fincal/pkg/driver"
+	"fincal/pkg/models"
 	"fmt"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
@@ -29,8 +29,8 @@ import (
 	"net/http"
 	"os"
 
-	"fincall/pkg/handler"
-	"fincall/pkg/plaid_auth"
+	"fincal/pkg/handler"
+	"fincal/pkg/plaid_auth"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"

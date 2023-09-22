@@ -1,7 +1,7 @@
 package plaid_auth
 
 import (
-	"fincall/pkg/banking"
+	"fincal/pkg/banking"
 	"fmt"
 
 	"github.com/plaid/plaid-go/v15/plaid"

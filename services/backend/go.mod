@@ -1,4 +1,4 @@
-module fincall
+module fincal
 
 go 1.21.0
 

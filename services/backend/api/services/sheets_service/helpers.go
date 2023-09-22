@@ -2,7 +2,7 @@ package sheets_service
 
 import (
 	"encoding/json"
-	"fincall/pkg/models"
+	"fincal/pkg/models"
 	"fmt"
 	"google.golang.org/api/sheets/v4"
 	"log"

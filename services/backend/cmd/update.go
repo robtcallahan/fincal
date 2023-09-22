@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
-	"fincall/api/providers/sheets_provider"
-	"fincall/api/services/sheets_service"
-	"fincall/pkg/banking"
-	"fincall/pkg/csv"
-	"fincall/pkg/driver"
-	"fincall/pkg/handler"
-	"fincall/pkg/models"
+	"fincal/api/providers/sheets_provider"
+	"fincal/api/services/sheets_service"
+	"fincal/pkg/banking"
+	"fincal/pkg/csv"
+	"fincal/pkg/driver"
+	"fincal/pkg/handler"
+	"fincal/pkg/models"
 
 	"github.com/spf13/cobra"
 )

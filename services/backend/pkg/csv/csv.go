@@ -2,8 +2,8 @@ package csv
 
 import (
 	//"bytes"
-	"fincall/pkg/config"
-	"fincall/pkg/models"
+	"fincal/pkg/config"
+	"fincal/pkg/models"
 	"fmt"
 	"os"
 	"regexp"

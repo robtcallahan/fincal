@@ -19,8 +19,8 @@ package cmd
 import (
 	"fmt"
 
-	"fincall/api/providers/sheets_provider"
-	"fincall/api/services/sheets_service"
+	"fincal/api/providers/sheets_provider"
+	"fincal/api/services/sheets_service"
 	"github.com/spf13/cobra"
 )
 

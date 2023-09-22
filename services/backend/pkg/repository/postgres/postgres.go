@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/gorm/clause"
 
-	"fincall/pkg/models"
-	repo "fincall/pkg/repository"
+	"fincal/pkg/models"
+	repo "fincal/pkg/repository"
 
 	"gorm.io/gorm"
 )

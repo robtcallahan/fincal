@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	"fincall/api/clients/sheets_client"
-	"fincall/pkg/config"
-	"fincall/pkg/sheets_auth"
+	"fincal/api/clients/sheets_client"
+	"fincal/pkg/config"
+	"fincal/pkg/sheets_auth"
 
 	"github.com/googleapis/gax-go/v2/apierror"
 	"golang.org/x/net/context"

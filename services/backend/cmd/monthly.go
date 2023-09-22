@@ -17,13 +17,13 @@ limitations under the License.
 package cmd
 
 import (
-	"fincall/api/providers/sheets_provider"
+	"fincal/api/providers/sheets_provider"
 	"fmt"
 
-	"fincall/pkg/driver"
-	"fincall/pkg/handler"
+	"fincal/pkg/driver"
+	"fincal/pkg/handler"
 
-	"fincall/api/services/sheets_service"
+	"fincal/api/services/sheets_service"
 
 	"github.com/spf13/cobra"
 )
@@ -43,8 +43,8 @@ func init() {
 }
 
 const (
-// jsonDir = "/Users/rob/ws/go/src/vue-register/services/sheets_service/json"
-// jsonDir = "/Users/rcallahan/workspace/go/src/vue-register/services/sheets_service/json"
+// jsonDir = "/Users/rob/ws/go/src/fincal/services/sheets_service/json"
+// jsonDir = "/Users/rcallahan/workspace/go/src/fincal/services/sheets_service/json"
 )
 
 func monthly() {

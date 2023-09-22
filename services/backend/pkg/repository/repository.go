@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"fincall/pkg/models"
+	"fincal/pkg/models"
 
 	"gorm.io/gorm"
 )

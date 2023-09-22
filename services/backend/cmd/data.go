@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"fincall/api/providers/sheets_provider"
-	"fincall/api/services/sheets_service"
-	"fincall/pkg/driver"
-	"fincall/pkg/handler"
-	"fincall/pkg/models"
+	"fincal/api/providers/sheets_provider"
+	"fincal/api/services/sheets_service"
+	"fincal/pkg/driver"
+	"fincal/pkg/handler"
+	"fincal/pkg/models"
 
 	"github.com/spf13/cobra"
 )

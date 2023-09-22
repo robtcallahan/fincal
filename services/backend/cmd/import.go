@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	cfg "fincall/pkg/config"
+	cfg "fincal/pkg/config"
 
 	"github.com/gocarina/gocsv"
 	"github.com/spf13/cobra"

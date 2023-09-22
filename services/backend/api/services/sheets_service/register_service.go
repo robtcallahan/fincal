@@ -1,8 +1,8 @@
 package sheets_service
 
 import (
-	"fincall/pkg/config"
-	"fincall/pkg/models"
+	"fincal/pkg/config"
+	"fincal/pkg/models"
 	"fmt"
 	"google.golang.org/api/sheets/v4"
 	"log"

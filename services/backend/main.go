@@ -16,7 +16,7 @@ limitations under the License.
 
 package main
 
-import "fincall/cmd"
+import "fincal/cmd"
 
 func main() {
 	cmd.Execute()

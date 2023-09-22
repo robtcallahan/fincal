@@ -21,8 +21,8 @@ import (
 	"os"
 	"strings"
 
-	"fincall/pkg/banking"
-	cfg "fincall/pkg/config"
+	"fincal/pkg/banking"
+	cfg "fincal/pkg/config"
 
 	"github.com/plaid/plaid-go/v15/plaid"
 	"github.com/spf13/cobra"

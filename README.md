@@ -7,13 +7,13 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/robtcallahan/vue-register.git
+   git clone https://github.com/robtcallahan/fincal.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd vue-register
+   cd fincal
    ```
 
 3. Install the dependencies:

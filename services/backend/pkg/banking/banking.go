@@ -25,8 +25,8 @@ import (
 	"strconv"
 	"strings"
 
-	"fincall/pkg/config"
-	"fincall/pkg/models"
+	"fincal/pkg/config"
+	"fincal/pkg/models"
 	"github.com/plaid/plaid-go/v15/plaid"
 	"golang.org/x/net/context"
 )
