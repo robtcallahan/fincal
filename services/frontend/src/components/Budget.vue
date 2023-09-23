@@ -145,7 +145,7 @@ import draggable from 'zhyswan-vuedraggable'
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:9000/api/',
+    // baseURL: 'http://localhost:9000/api/',
     timeout: 10000,
 });
 
@@ -405,7 +405,7 @@ export default {
             const j = `{"id": ` + item.id + `, "column": "` + fieldKey + `", "value": "` + item[fieldKey] + `"}`;
             console.log("json: " + j);
             axiosInstance
-                .put("update_category", j, {
+                .put(this.backendURL + "/update_category", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
@@ -430,7 +430,7 @@ export default {
             const j = JSON.stringify(c);
             console.log("json: " + j);
             axiosInstance
-                .post("create_category", j, {
+                .post(this.backendURL + "/create_category", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
@@ -472,7 +472,7 @@ export default {
             const j = `{"id": ` + category.id + `}`;
             console.log("deleteCategory() id: ", category.id, ", json: " + j);
             axiosInstance
-                .post("delete_category", j, {
+                .post(this.backendURL + "/delete_category", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
@@ -509,7 +509,7 @@ export default {
         },
         getCategories() {
             axiosInstance
-                .get("get_categories")
+                .get(this.backendURL + "/get_categories")
                 .then((response) => {
                     this.categories = response.data;
 

@@ -72,7 +72,7 @@ func init() {
 	// TODO: remove
 	fmt.Println("connecting to MySQL...")
 
-	conn, _ = driver.ConnectSQL(&driver.ConnectParams{
+	conn, err = driver.ConnectSQL(&driver.ConnectParams{
 		DBType: driver.DBType(config.DBType),
 		Host:   dbHost,
 		Port:   config.DBPort,
@@ -80,6 +80,10 @@ func init() {
 		User:   config.DBUsername,
 		Pass:   config.DBPassword,
 	})
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 	qHandler = handler.NewQueryHandler(conn)
 }
 
@@ -113,7 +117,7 @@ func server() {
 	router.Use(mux.CORSMethodMiddleware(router))
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost"},
+		//AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost"},
 		AllowCredentials: true,
 		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
 		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},

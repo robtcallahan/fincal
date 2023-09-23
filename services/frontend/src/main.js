@@ -15,6 +15,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const app = createApp(App);
+
+app.config.globalProperties.backendURL = 'http://localhost:9001/api'
+
 app
     .use(BootstrapVue)
     .use(BootstrapIconsPlugin)

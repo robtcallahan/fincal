@@ -47,36 +47,36 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestClient_ReadCSVFiles(t *testing.T) {
-	type fields struct {
-		FinanceDir string
-		Banks      map[string]cfg.Bank
-	}
-	tests := []struct {
-		name    string
-		fields  fields
-		want    []*models.Transaction
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{
-				FinanceDir: tt.fields.FinanceDir,
-				Banks:      tt.fields.Banks,
-			}
-			got, err := c.ReadCSVFiles()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("ReadCSVFiles() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ReadCSVFiles() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+//func TestClient_ReadCSVFiles(t *testing.T) {
+//	type fields struct {
+//		FinanceDir string
+//		Banks      map[string]cfg.Bank
+//	}
+//	tests := []struct {
+//		name    string
+//		fields  fields
+//		want    []*models.Transaction
+//		wantErr bool
+//	}{
+//		// TODO: Add test cases.
+//	}
+//	for _, tt := range tests {
+//		t.Run(tt.name, func(t *testing.T) {
+//			c := &Client{
+//				FinanceDir: tt.fields.FinanceDir,
+//				Banks:      tt.fields.Banks,
+//			}
+//			got, err := c.ReadCSVFiles()
+//			if (err != nil) != tt.wantErr {
+//				t.Errorf("ReadCSVFiles() error = %v, wantErr %v", err, tt.wantErr)
+//				return
+//			}
+//			if !reflect.DeepEqual(got, tt.want) {
+//				t.Errorf("ReadCSVFiles() got = %v, want %v", got, tt.want)
+//			}
+//		})
+//	}
+//}
 
 func TestClient_readWellsFargoCSV(t *testing.T) {
 	config, err := cfg.ReadConfig("../../config/config.json")

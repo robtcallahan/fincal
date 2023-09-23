@@ -1,4 +1,6 @@
-FROM node:alpine
+FROM node:alpine as base
+
+FROM base as dev
 
 ENV WORKINGDIR=/app/frontend
 

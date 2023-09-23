@@ -5,7 +5,7 @@ const authStore = useAuthStore();
 </script>
 
 <template>
-    <nav v-show="authStore.user" class="navbar navbar-expand navbar-dark bg-dark">
+    <nav v-show="authStore.user" class="navbar navbar-expand navbar-dark bg-dark sticky-top">
         <div class="navbar-nav">
 <!--            <router-link to="/" class="nav-item nav-link logo"><img src="../../public/64084-united-symbol-dollar-sign-states-currency_32x32.ico">FinCal</router-link>-->
             <router-link to="/" class="nav-item nav-link logo"><img src="../../public/favicon.ico"> FinCal</router-link>

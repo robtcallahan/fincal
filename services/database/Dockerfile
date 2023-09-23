@@ -117,6 +117,10 @@ VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY mysqld.cnf /etc/mysql
+
+WORKDIR /database/sql
+COPY ./sql/fincal_init.sql .
+
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 EXPOSE 3306 33060

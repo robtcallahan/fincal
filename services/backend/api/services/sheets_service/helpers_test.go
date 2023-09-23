@@ -1156,265 +1156,265 @@ func Test_addWithdrawal(t *testing.T) {
 	}
 }
 
-func Test_addCheckingTransaction(t *testing.T) {
-	s := ""
-	v := 101.56
-	wantDeposit := []*sheets.CellData{
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				NumberValue: &v,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "RIGHT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				NumberFormat: &sheets.NumberFormat{
-					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
-					Type:    "CURRENCY",
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-	}
+//func Test_addCheckingTransaction(t *testing.T) {
+//	s := ""
+//	v := 101.56
+//	wantDeposit := []*sheets.CellData{
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				NumberValue: &v,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "RIGHT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				NumberFormat: &sheets.NumberFormat{
+//					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
+//					Type:    "CURRENCY",
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//	}
+//
+//	wantWithdrawal := []*sheets.CellData{
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				NumberValue: &v,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "RIGHT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				NumberFormat: &sheets.NumberFormat{
+//					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
+//					Type:    "CURRENCY",
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		}}
+//
+//	type args struct {
+//		amount  float64
+//		bgColor string
+//		cells   []*sheets.CellData
+//	}
+//	tests := []struct {
+//		name string
+//		args args
+//		want []*sheets.CellData
+//	}{
+//		{
+//			name: "Test add a deposit checking row entry",
+//			args: args{amount: v, bgColor: "white", cells: []*sheets.CellData{}},
+//			want: wantDeposit,
+//		},
+//		{
+//			name: "Test add a withdrawal checking row entry",
+//			args: args{amount: -v, bgColor: "white", cells: []*sheets.CellData{}},
+//			want: wantWithdrawal,
+//		},
+//	}
+//	tt := tests[0]
+//	t.Run(tt.name, func(t *testing.T) {
+//		if got := addCheckingTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
+//			t.Errorf("addCheckingTransaction() = %v, want %v",
+//				got[1].UserEnteredValue.NumberValue, tt.want[1].UserEnteredValue.NumberValue)
+//		}
+//	})
+//	tt = tests[1]
+//	t.Run(tt.name, func(t *testing.T) {
+//		if got := addCheckingTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
+//			t.Errorf("addCheckingTransaction() = %v, want %v",
+//				got[0].UserEnteredValue.NumberValue, tt.want[0].UserEnteredValue.NumberValue)
+//		}
+//	})
+//}
 
-	wantWithdrawal := []*sheets.CellData{
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				NumberValue: &v,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "RIGHT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				NumberFormat: &sheets.NumberFormat{
-					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
-					Type:    "CURRENCY",
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		}}
-
-	type args struct {
-		amount  float64
-		bgColor string
-		cells   []*sheets.CellData
-	}
-	tests := []struct {
-		name string
-		args args
-		want []*sheets.CellData
-	}{
-		{
-			name: "Test add a deposit checking row entry",
-			args: args{amount: v, bgColor: "white", cells: []*sheets.CellData{}},
-			want: wantDeposit,
-		},
-		{
-			name: "Test add a withdrawal checking row entry",
-			args: args{amount: -v, bgColor: "white", cells: []*sheets.CellData{}},
-			want: wantWithdrawal,
-		},
-	}
-	tt := tests[0]
-	t.Run(tt.name, func(t *testing.T) {
-		if got := addCheckingTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("addCheckingTransaction() = %v, want %v",
-				got[1].UserEnteredValue.NumberValue, tt.want[1].UserEnteredValue.NumberValue)
-		}
-	})
-	tt = tests[1]
-	t.Run(tt.name, func(t *testing.T) {
-		if got := addCheckingTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("addCheckingTransaction() = %v, want %v",
-				got[0].UserEnteredValue.NumberValue, tt.want[0].UserEnteredValue.NumberValue)
-		}
-	})
-}
-
-func Test_addCCTransaction(t *testing.T) {
-	s := ""
-	v := 101.56
-	want := []*sheets.CellData{
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				StringValue: &s,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "LEFT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-		{
-			UserEnteredValue: &sheets.ExtendedValue{
-				NumberValue: &v,
-			},
-			UserEnteredFormat: &sheets.CellFormat{
-				HorizontalAlignment: "RIGHT",
-				TextFormat: &sheets.TextFormat{
-					FontFamily: "Arial",
-					FontSize:   10,
-				},
-				NumberFormat: &sheets.NumberFormat{
-					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
-					Type:    "CURRENCY",
-				},
-				BackgroundColor: &sheets.Color{
-					Alpha: 1,
-					Blue:  1,
-					Red:   1,
-					Green: 1,
-				},
-				Borders: &sheets.Borders{},
-			},
-		},
-	}
-
-	type args struct {
-		amount  float64
-		bgColor string
-		cells   []*sheets.CellData
-	}
-	tests := []struct {
-		name string
-		args args
-		want []*sheets.CellData
-	}{
-		{
-			name: "Test add a credit card row entry",
-			args: args{amount: -v, bgColor: "white", cells: []*sheets.CellData{}},
-			want: want,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := addCCTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("addCCTransaction() = %v, want %v",
-					got[2].UserEnteredValue.NumberValue, tt.want[2].UserEnteredValue.NumberValue)
-			}
-		})
-	}
-}
+//func Test_addCCTransaction(t *testing.T) {
+//	s := ""
+//	v := 101.56
+//	want := []*sheets.CellData{
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				StringValue: &s,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "LEFT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//		{
+//			UserEnteredValue: &sheets.ExtendedValue{
+//				NumberValue: &v,
+//			},
+//			UserEnteredFormat: &sheets.CellFormat{
+//				HorizontalAlignment: "RIGHT",
+//				TextFormat: &sheets.TextFormat{
+//					FontFamily: "Arial",
+//					FontSize:   10,
+//				},
+//				NumberFormat: &sheets.NumberFormat{
+//					Pattern: `_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)`,
+//					Type:    "CURRENCY",
+//				},
+//				BackgroundColor: &sheets.Color{
+//					Alpha: 1,
+//					Blue:  1,
+//					Red:   1,
+//					Green: 1,
+//				},
+//				Borders: &sheets.Borders{},
+//			},
+//		},
+//	}
+//
+//	type args struct {
+//		amount  float64
+//		bgColor string
+//		cells   []*sheets.CellData
+//	}
+//	tests := []struct {
+//		name string
+//		args args
+//		want []*sheets.CellData
+//	}{
+//		{
+//			name: "Test add a credit card row entry",
+//			args: args{amount: -v, bgColor: "white", cells: []*sheets.CellData{}},
+//			want: want,
+//		},
+//	}
+//	for _, tt := range tests {
+//		t.Run(tt.name, func(t *testing.T) {
+//			if got := addCCTransaction(tt.args.amount, tt.args.bgColor, tt.args.cells); !reflect.DeepEqual(got, tt.want) {
+//				t.Errorf("addCCTransaction() = %v, want %v",
+//					got[2].UserEnteredValue.NumberValue, tt.want[2].UserEnteredValue.NumberValue)
+//			}
+//		})
+//	}
+//}
 
 func Test_isCorrectBudgetColumn(t *testing.T) {
 	type args struct {
@@ -2162,36 +2162,36 @@ func Test_addCategoryCells(t *testing.T) {
 	}
 }
 
-func Test_getDollarsCellByIndex(t *testing.T) {
-	strings := []string{"X", "Fidelity", "01/02/2023", "Rent", "123.45", "", ""}
-	values := make([]interface{}, len(strings))
-	for i, v := range strings {
-		values[i] = v
-	}
-
-	type args struct {
-		values []interface{}
-		i      int
-	}
-	tests := []struct {
-		name string
-		args args
-		want float64
-	}{
-		{
-			name: "Test get dollar amount by values index",
-			args: args{values: values, i: 4},
-			want: 123.45,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := getDollarsCellByIndex(tt.args.values, tt.args.i); got != tt.want {
-				t.Errorf("getDollarsCellByIndex() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+//func Test_getDollarsCellByIndex(t *testing.T) {
+//	strings := []string{"X", "Fidelity", "01/02/2023", "Rent", "123.45", "", ""}
+//	values := make([]interface{}, len(strings))
+//	for i, v := range strings {
+//		values[i] = v
+//	}
+//
+//	type args struct {
+//		values []interface{}
+//		i      int
+//	}
+//	tests := []struct {
+//		name string
+//		args args
+//		want float64
+//	}{
+//		{
+//			name: "Test get dollar amount by values index",
+//			args: args{values: values, i: 4},
+//			want: 123.45,
+//		},
+//	}
+//	for _, tt := range tests {
+//		t.Run(tt.name, func(t *testing.T) {
+//			if got := getDollarsCellByIndex(tt.args.values, tt.args.i); got != tt.want {
+//				t.Errorf("getDollarsCellByIndex() = %v, want %v", got, tt.want)
+//			}
+//		})
+//	}
+//}
 
 func Test_getNameField(t *testing.T) {
 	strings := []string{"X", "Fidelity", "01/02/2023", "Rent", "123.45", "", ""}

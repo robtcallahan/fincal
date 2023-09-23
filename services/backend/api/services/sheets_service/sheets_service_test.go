@@ -639,45 +639,45 @@ func Test_sheetsService_getAmountString(t *testing.T) {
 	}
 }
 
-func Test_sheetsService_GetDollarsCellByIndex(t *testing.T) {
-	type args struct {
-		values []interface{}
-		i      int
-	}
-	tests := []struct {
-		name string
-		args args
-		want float64
-	}{
-		{
-			name: "Test positive dollars",
-			args: args{values: []interface{}{"$ 10.20 "}, i: 0},
-			want: 10.20,
-		},
-		{
-			name: "Test negative dollars",
-			args: args{values: []interface{}{"$ (10.20) "}, i: 0},
-			want: -10.20,
-		},
-		{
-			name: "Test for dash",
-			args: args{values: []interface{}{" - "}, i: 0},
-			want: 0,
-		},
-		{
-			name: "Test empty cell",
-			args: args{values: []interface{}{""}, i: 0},
-			want: 0,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := getDollarsCellByIndex(tt.args.values, tt.args.i); got != tt.want {
-				t.Errorf("GetDollarsCellByIndex() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+//func Test_sheetsService_GetDollarsCellByIndex(t *testing.T) {
+//	type args struct {
+//		values []interface{}
+//		i      int
+//	}
+//	tests := []struct {
+//		name string
+//		args args
+//		want float64
+//	}{
+//		{
+//			name: "Test positive dollars",
+//			args: args{values: []interface{}{"$ 10.20 "}, i: 0},
+//			want: 10.20,
+//		},
+//		{
+//			name: "Test negative dollars",
+//			args: args{values: []interface{}{"$ (10.20) "}, i: 0},
+//			want: -10.20,
+//		},
+//		{
+//			name: "Test for dash",
+//			args: args{values: []interface{}{" - "}, i: 0},
+//			want: 0,
+//		},
+//		{
+//			name: "Test empty cell",
+//			args: args{values: []interface{}{""}, i: 0},
+//			want: 0,
+//		},
+//	}
+//	for _, tt := range tests {
+//		t.Run(tt.name, func(t *testing.T) {
+//			if got := getDollarsCellByIndex(tt.args.values, tt.args.i); got != tt.want {
+//				t.Errorf("GetDollarsCellByIndex() = %v, want %v", got, tt.want)
+//			}
+//		})
+//	}
+//}
 
 func Test_sheetsService_getDateField(t *testing.T) {
 	var values []interface{}

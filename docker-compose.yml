@@ -12,10 +12,9 @@ x-app: &default-app
       max_attempts: 3
       window: 120s
   healthcheck:
-    interval: 1m30s
-    timeout: 10s
-    retries: 3
-    start_period: 40s
+    interval: 5s
+    timeout: 5s
+    retries: 20
 
 services:
   frontend:
@@ -23,41 +22,36 @@ services:
     build:
       context: ./services/frontend
       dockerfile: Dockerfile
+    entrypoint: npm run dev
     depends_on:
       - backend
-    entrypoint: npm run dev
     working_dir: /app/frontend
     ports:
       - ${FRONTEND_CLIENT_PORT_FORWARD}:${FRONTEND_CLIENT_PORT}
     expose:
       - ${FRONTEND_CLIENT_PORT}
     healthcheck:
-      test: "${FRONTEND_HEALTHCHECK_TEST}"
-    volumes:
-      - frontend:/app/frontend:delegated
-    networks:
-      - mynetwork
+      test: ["CMD", "curl", "-f", "http://frontend:8000"]
 
   backend:
     <<: *default-app
     build:
       context: ./services/backend
       dockerfile: Dockerfile
-    depends_on:
-      - mysql
+      target: dev
+    entrypoint: ./fincal serve
     working_dir: /app/backend
+    depends_on:
+      database:
+        condition: service_healthy
     ports:
       - ${BACKEND_CLIENT_PORT_FORWARD}:${BACKEND_CLIENT_PORT}
     expose:
       - ${BACKEND_CLIENT_PORT}
     healthcheck:
-      test: ${FRONTEND_HEALTHCHECK_TEST}
-    volumes:
-      - backend:/app/backend:delegated
-    networks:
-      - mynetwork
+      test: ["CMD", "curl", "-f", "http://backend:8000/api/ok"]
 
-  mysql:
+  database:
     <<: *default-app
     build:
       context: ./services/database
@@ -70,19 +64,14 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - db-data:/var/lib/mysql
       - ./services/database/sql:/database/sql
-    networks:
-      - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "--host=database", "--user=root", "--password=${MYSQL_ROOT_PASSWORD}"]
 
 volumes:
-  frontend:
-  backend:
   db-data:
-
-networks:
-  mynetwork:

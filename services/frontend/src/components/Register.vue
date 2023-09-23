@@ -220,7 +220,7 @@ import CurrencySpan from "./CurrencyTable.vue";
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:9000/api/',
+    // baseURL: this.backendURL,
     timeout: 10000,
 });
 
@@ -564,7 +564,7 @@ export default {
         },
         async getRegister() {
             axiosInstance
-                .get("get_register")
+                .get(this.backendURL + "/get_register")
                 .then((response) => {
                     this.fieldKeys = {};
                     this.editableFieldKeys = {};

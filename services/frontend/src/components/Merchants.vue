@@ -113,7 +113,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:9000/api/',
+    // baseURL: this.backendURL,
     timeout: 10000,
 });
 export default {
@@ -453,7 +453,7 @@ export default {
             const j = `{"id": ` + this.selectedCell.id + `, "column": "` + fieldKey + `", "value": "` + this.selectedCell.newValue + `"}`;
             console.log("json: " + j);
             axiosInstance
-                .put("update_merchant", j, {
+                .put(this.backendURL + "/update_merchant", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
@@ -493,7 +493,7 @@ export default {
             const j = `{"id": ` + data.item.id + `}`;
             console.log("deleteMerchant() id: ", data.item.id, ", json: " + j);
             axiosInstance
-                .post("delete_merchant", j, {
+                .post(this.backendURL + "/delete_merchant", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
@@ -515,7 +515,7 @@ export default {
         },
         async getMerchants() {
             axiosInstance
-                .get("get_merchants")
+                .get(this.backendURL + "/get_merchants")
                 .then((response) => {
                     this.fieldKeys = {};
                     this.editableFieldKeys = {};
@@ -563,7 +563,7 @@ export default {
         },
         async getCategoriesForSelect() {
             axiosInstance
-                .get("get_categories_for_select")
+                .get(this.backendURL + "/get_categories_for_select")
                 .then((response) => {
                     this.categories = response.data
                 })

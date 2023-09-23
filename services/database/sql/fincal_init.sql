@@ -1,8 +1,20 @@
 create database IF NOT EXISTS `fincal`;
 use `fincal`;
 
-GRANT ALL PRIVILEGES ON fincal.* TO 'register'@'%' IDENTIFIED BY 'Shut1tD0wn!';
-GRANT ALL PRIVILEGES ON * TO 'root'@'%' IDENTIFIED BY 'dinx9one';
+DROP USER IF EXISTS 'root'@'localhost';
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'Shut1tD0wn!';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED WITH caching_sha2_password BY 'Shut1tD0wn!';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'register'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'dinx9one';
+GRANT ALL PRIVILEGES ON fincal.* TO 'register'@'localhost' WITH GRANT OPTION;
+
+CREATE USER IF NOT EXISTS 'register'@'%' IDENTIFIED WITH caching_sha2_password BY 'dinx9one';
+GRANT ALL PRIVILEGES ON fincal.* TO 'register'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
