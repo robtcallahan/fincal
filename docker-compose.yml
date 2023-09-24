@@ -23,6 +23,7 @@ services:
       context: ./services/frontend
       dockerfile: Dockerfile
     entrypoint: npm run dev
+#    image: 941928517230.dkr.ecr.us-east-1.amazonaws.com/fincal-frontend
     depends_on:
       - backend
     working_dir: /app/frontend
@@ -41,6 +42,7 @@ services:
       target: dev
     entrypoint: ./fincal serve
     working_dir: /app/backend
+#    image: 941928517230.dkr.ecr.us-east-1.amazonaws.com/fincal-frontend
     depends_on:
       database:
         condition: service_healthy
@@ -56,11 +58,12 @@ services:
     build:
       context: ./services/database
       dockerfile: Dockerfile
+#    image: 941928517230.dkr.ecr.us-east-1.amazonaws.com/fincal-database
     ports:
       - ${DB_CLIENT_PORT_FORWARD}:${DB_CLIENT_PORT}
     expose:
       - ${DB_CLIENT_PORT}
-    command: --init-file /database/sql/fincal_init.sql
+    command: --init-file /tmp/fincal_init.sql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -69,7 +72,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - db-data:/var/lib/mysql
-      - ./services/database/sql:/database/sql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "--host=database", "--user=root", "--password=${MYSQL_ROOT_PASSWORD}"]
 

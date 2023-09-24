@@ -11,7 +11,7 @@ define newline
 endef
 
 .PHONY: frontend
-.SILENT: ecr-push
+.SILENT: ecr-push prune list
 
 run: build up
 runnc: buildnc upnc
@@ -46,17 +46,26 @@ database:
 	cd ./services/database && docker build --tag ${DATABASE_NAME} .
 
 ecr-push:
-	for service in $(services); do \
-		echo $$service ; \
-		docker tag $$service $(ecr_base)/$$service ; \
-		docker push $(ecr_base)/$$service ; \
-	done
+	echo fincal-database ; \
+	docker tag fincal-database $(ecr_base)/fincal-database ; \
+	docker push $(ecr_base)/fincal-database ; \
+#	for service in $(services); do \
+#		echo $$service ; \
+#		docker tag $$service $(ecr_base)/$$service ; \
+#		docker push $(ecr_base)/$$service ; \
+#	done
 #	$(foreach service,$(services),echo docker push $(ecr_base)/$(service); $(newline))
 
 list:
 	docker image ls
+	echo ""
 	docker container ls -a
+	echo ""
+	docker volume ls
 
 prune:
 	docker container prune --force
+	echo ""
 	docker image prune --force
+	echo ""
+	docker volume rm -f fincal_db-data

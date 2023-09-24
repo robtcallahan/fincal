@@ -117,7 +117,7 @@ func server() {
 	router.Use(mux.CORSMethodMiddleware(router))
 
 	c := cors.New(cors.Options{
-		//AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost"},
+		AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost", "http://www.wetdogsoftware.com"},
 		AllowCredentials: true,
 		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
 		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},
