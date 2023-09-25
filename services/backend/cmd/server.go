@@ -28,6 +28,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 
 	"fincal/pkg/handler"
 	"fincal/pkg/plaid_auth"
@@ -52,6 +53,7 @@ var qHandler *handler.Query
 func init() {
 	rootCmd.AddCommand(serveCmd)
 
+	// get and read config file
 	viper.SetConfigFile(".env")
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -59,7 +61,6 @@ func init() {
 		return
 	}
 	configFile := fmt.Sprintf("%s", viper.Get("CONFIG_FILE"))
-	dbHost := fmt.Sprintf("%s", viper.Get("DB_HOST"))
 
 	config, err = cfg.ReadConfig(configFile)
 	if err != nil {
@@ -67,10 +68,18 @@ func init() {
 		return
 	}
 
-	client = getBankingClient()
-
-	// TODO: remove
-	fmt.Println("connecting to MySQL...")
+	// get the hostname to determine the proper DB_HOST env var to use
+	hostname, err := os.Hostname()
+	log.Printf("hostname: %s\n", hostname)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	re := regexp.MustCompile(`.*MacBook.*`)
+	dbHost := fmt.Sprintf("%s", viper.Get("DB_HOST_REMOTE"))
+	if re.Match([]byte(hostname)) {
+		dbHost = fmt.Sprintf("%s", viper.Get("DB_HOST_LOCAL"))
+	}
 
 	conn, err = driver.ConnectSQL(&driver.ConnectParams{
 		DBType: driver.DBType(config.DBType),
@@ -85,6 +94,8 @@ func init() {
 		return
 	}
 	qHandler = handler.NewQueryHandler(conn)
+
+	client = getBankingClient()
 }
 
 var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
@@ -93,6 +104,8 @@ func server() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/api/ok", client.ok).Methods("GET")
+
+	router.HandleFunc("/api/auth/login", client.login).Methods("POST", "OPTIONS")
 
 	router.HandleFunc("/api/create_link_token", client.createLinkToken).Methods("GET", "OPTIONS")
 	router.HandleFunc("/api/exchange_public_token", client.exchangePublicToken).Methods("POST")
@@ -141,6 +154,20 @@ func (c *Client) ok(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(ok)
+}
+
+func (c *Client) login(w http.ResponseWriter, r *http.Request) {
+	//defer r.Body.Close()
+	//b, err := io.ReadAll(r.Body)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+
+	http.Error(w, "Username or password is incorrect", http.StatusUnauthorized)
+	return
+
 }
 
 func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {

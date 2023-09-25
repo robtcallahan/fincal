@@ -1,8 +1,8 @@
 version: "3.4"
 
 x-app: &default-app
-  env_file:
-    - ".env"
+  environment:
+
   stop_grace_period: "3s"
   tty: true
   deploy:

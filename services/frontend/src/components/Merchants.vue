@@ -298,8 +298,9 @@ export default {
             return newItem;
         },
         cellUpItem(item, fieldKey) {
-            console.log("cellUpItem()");
-            const newItem = this.merchants[this.selectedCell.rowIndex - 1]
+            if (this.environment === 'development') {
+                console.log("cellUpItem()");
+            }            const newItem = this.merchants[this.selectedCell.rowIndex - 1]
             this.unHighlightCell(item, fieldKey);
             this.highlightCell(newItem, fieldKey)
             this.previousCell = {
@@ -309,8 +310,9 @@ export default {
             }
         },
         cellLeftKey(item, fieldKey) {
-            console.log("cellLeftKey()");
-            let newFieldKey = "";
+            if (this.environment === 'development') {
+                console.log("cellLeftKey()");
+            }            let newFieldKey = "";
             if (this.editableFieldKeys[fieldKey] === 0) {
                 this.selectedCell.editableFieldsIndex = this.editableFields.length - 1;
             } else {
@@ -326,7 +328,9 @@ export default {
             }
         },
         cellRightKey(item, fieldKey) {
-            console.log("cellRightKey()");
+            if (this.environment === 'development') {
+                console.log("cellRightKey()");
+            }
             let newFieldKey = "";
             if (this.editableFieldKeys[fieldKey] === this.editableFields.length - 1) {
                 this.selectedCell.editableFieldsIndex = 0;
@@ -450,14 +454,25 @@ export default {
                 this.merchants[this.rowsById[this.selectedCell.rowIndex]].editing = false;
                 return;
             }
-            const j = `{"id": ` + this.selectedCell.id + `, "column": "` + fieldKey + `", "value": "` + this.selectedCell.newValue + `"}`;
-            console.log("json: " + j);
+            const merch = {
+                id: this.selectedCell.id,
+                column: fieldKey,
+                value: this.selectedCell.newValue
+            }
+            const json = JSON.stringify(merch);
+            if (this.environment === 'development') {
+                console.log("updateMerchant() PUT: ")
+                console.log(json);
+            }
             axiosInstance
                 .put(this.backendURL + "/update_merchant", j, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
-                    console.log("merchant id: " + response.data.id + ", value: " + response.data.value + ", status: " + response.status);
+                    if (this.environment === 'development') {
+                        console.log("updateMerchant() response:")
+                        console.log(response.data);
+                    }
                     this.selectedCell.dirty = false;
                 })
                 .catch(function (error) {
@@ -490,14 +505,26 @@ export default {
                 })
         },
         async deleteMerchant(data) {
-            const j = `{"id": ` + data.item.id + `}`;
-            console.log("deleteMerchant() id: ", data.item.id, ", json: " + j);
+            const merch = {
+                id: this.selectedCell.id,
+                column: fieldKey,
+                value: this.selectedCell.newValue
+            }
+            const json = JSON.stringify(merch);
+            if (this.environment === 'development') {
+                console.log("deleteMerchant() POST: " + this.backendURL + "/auth/login");
+                console.log(json);
+            }
             axiosInstance
-                .post(this.backendURL + "/delete_merchant", j, {
+                .post(this.backendURL + "/delete_merchant", json, {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
                     if (response.status === 200) {
+                        if (this.environment === 'development') {
+                            console.log("deleteMerchant() response:")
+                            console.log(response.data);
+                        }
                         console.log("merchant id: " + data.item.id + " deleted");
                         const index = this.merchants.findIndex(merchant => merchant.id === data.item.id) // find the post index
                         if (~index) {

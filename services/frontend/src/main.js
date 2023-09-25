@@ -16,7 +16,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const app = createApp(App);
 
-app.config.globalProperties.backendURL = 'http://localhost:9001/api'
+app.config.globalProperties.serverLocation = 'local';
+app.config.globalProperties.backendURL = 'http://localhost:9001/api';
+app.config.globalProperties.environment = 'development';
+
+if (app.config.globalProperties.serverLocation === 'local') {
+    app.config.globalProperties.backendURL = 'http://localhost:9000/api'
+}
 
 app
     .use(BootstrapVue)
