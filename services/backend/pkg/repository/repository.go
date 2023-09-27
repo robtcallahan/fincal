@@ -10,6 +10,11 @@ import (
 type QueryRepo interface {
 	CreateDB(dbName string) (*gorm.DB, error)
 
+	GetUserSecrets(id int) (*models.Secrets, error)
+	SaveSecrets(secrets *models.Secrets) (*models.Secrets, error)
+
+	GetUserByUsername(username string) (*models.User, error)
+
 	GetCategories() []models.Category
 	GetCategoriesForSelect() []models.CategoryForSelect
 	CreateCategory(category *models.Category) *models.Category

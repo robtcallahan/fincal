@@ -20,6 +20,27 @@ func NewMySQLQueryRepo(conn *gorm.DB) repo.QueryRepo {
 	}
 }
 
+func (r *mysqlQueryRepo) GetUserSecrets(id int) (*models.Secrets, error) {
+	var secrets models.Secrets
+	if result := r.Conn.First(&secrets, id); result.Error != nil {
+		return nil, result.Error
+	}
+	return &secrets, nil
+}
+
+func (r *mysqlQueryRepo) SaveSecrets(secrets *models.Secrets) (*models.Secrets, error) {
+	tx := r.Conn.Save(secrets)
+	return secrets, tx.Error
+}
+
+func (r *mysqlQueryRepo) GetUserByUsername(username string) (*models.User, error) {
+	var user models.User
+	if result := r.Conn.Where("username = ?", username).First(&user); result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
 func (r *mysqlQueryRepo) GetTransactions() []models.Transaction {
 	var trans []models.Transaction
 	r.Conn.Order("date").Find(&trans)

@@ -21,6 +21,27 @@ func NewPostgreSQLQueryRepo(conn *gorm.DB) repo.QueryRepo {
 	}
 }
 
+func (r *postgresQueryRepo) GetUserSecrets(id int) (*models.Secrets, error) {
+	var secrets models.Secrets
+	if result := r.Conn.First(&secrets, id); result.Error != nil {
+		return nil, result.Error
+	}
+	return &secrets, nil
+}
+
+func (r *postgresQueryRepo) SaveSecrets(secrets *models.Secrets) (*models.Secrets, error) {
+	tx := r.Conn.Save(secrets)
+	return secrets, tx.Error
+}
+
+func (r *postgresQueryRepo) GetUserByUsername(username string) (*models.User, error) {
+	var user models.User
+	if result := r.Conn.Where("username = ", username).First(&user); result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
 func (r *postgresQueryRepo) GetTransactions() []models.Transaction {
 	var trans []models.Transaction
 	r.Conn.Order("date").Find(&trans)

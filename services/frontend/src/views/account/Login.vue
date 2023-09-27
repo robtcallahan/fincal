@@ -1,5 +1,5 @@
 <script setup lang="js">
-import { Form, Field } from 'vee-validate';
+import {Form, Field} from 'vee-validate';
 import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
@@ -16,12 +16,12 @@ const schema = Yup.object().shape({
             <Form @submit="this.login" :validation-schema="schema" v-slot="{ errors, isSubmitting }">
                 <div class="form-group">
                     <label>Username</label>
-                    <Field name="username" type="text" class="form-control" :class="{ 'is-invalid': errors.username }" />
+                    <Field name="username" type="text" class="form-control" :class="{ 'is-invalid': errors.username }"/>
                     <div class="invalid-feedback">{{ errors.username }}</div>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <Field name="password" type="password" class="form-control" :class="{ 'is-invalid': errors.password }" />
+                    <Field name="password" type="password" class="form-control" :class="{ 'is-invalid': errors.password }"/>
                     <div class="invalid-feedback">{{ errors.password }}</div>
                 </div>
                 <div class="form-group">
@@ -37,8 +37,8 @@ const schema = Yup.object().shape({
 
 <script lang="js">
 import axios from 'axios';
-import { router } from "@/router/index.js";
-import { useAlertStore } from '@/stores';
+import {router} from "@/router/index.js";
+import {useAlertStore} from '@/stores';
 
 const axiosInstance = axios.create({
     timeout: 5000
@@ -47,13 +47,13 @@ const axiosInstance = axios.create({
 export default {
     methods: {
         async login(values) {
-            const { username, password } = values;
+            const {username, password} = values;
             const user = {
                 username: username,
                 password: password
             }
             const json = JSON.stringify(user);
-            if (this === 'development') {
+            if (this.environment === 'development') {
                 console.log("login() POST: " + this.backendURL + "/auth/login");
                 console.log(json);
             }
@@ -63,7 +63,7 @@ export default {
                     headers: {"Content-Type": "application/json"}
                 })
                 .then((response) => {
-                    if (this === 'development') {
+                    if (this.environment === 'development') {
                         console.log("login() response:")
                         console.log(response.data);
                     }
@@ -71,8 +71,14 @@ export default {
                     router.push(this.returnUrl || '/');
                 })
                 .catch((response) => {
+                    // TODO: need to filter errors we don't want users to see
                     const r = response.response;
-                    console.log(r);
+
+                    if (this.environment === 'development') {
+                        console.log("login() response:")
+                        console.log(response.data);
+                    }
+
                     const alertStore = useAlertStore();
                     alertStore.error(r.statusText + ': ' + r.data);
                 });
@@ -87,9 +93,11 @@ export default {
 .login {
     width: 350px;
 }
+
 label {
     float: left;
 }
+
 .form-group {
     margin-top: 20px;
     clear: both;

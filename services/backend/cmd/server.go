@@ -18,24 +18,28 @@ package cmd
 
 import (
 	"encoding/json"
-	cfg "fincal/pkg/config"
-	"fincal/pkg/driver"
-	"fincal/pkg/models"
+	"errors"
 	"fmt"
-	"github.com/rs/cors"
-	"github.com/spf13/viper"
+	"gorm.io/gorm"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"regexp"
 
+	"fincal/pkg/auth"
+	cfg "fincal/pkg/config"
+	"fincal/pkg/driver"
 	"fincal/pkg/handler"
+	"fincal/pkg/models"
 	"fincal/pkg/plaid_auth"
+	sess "fincal/pkg/sessions"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
+	"github.com/rs/cors"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var serveCmd = &cobra.Command{
@@ -157,17 +161,70 @@ func (c *Client) ok(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) login(w http.ResponseWriter, r *http.Request) {
-	//defer r.Body.Close()
-	//b, err := io.ReadAll(r.Body)
-	//if err != nil {
-	//	log.Println(err.Error())
-	//	http.Error(w, err.Error(), http.StatusInternalServerError)
-	//	return
-	//}
+	var (
+		clientUser       models.User
+		user, authedUser *models.User
+		b, retJson       []byte
+		ok               bool
+		err              error
+	)
+	salt := fmt.Sprintf("%s", viper.Get("SALT"))
 
-	http.Error(w, "Username or password is incorrect", http.StatusUnauthorized)
-	return
+	defer r.Body.Close()
+	if b, err = io.ReadAll(r.Body); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
+	if err = json.Unmarshal(b, &clientUser); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	if user, err = qHandler.GetUserByUsername(clientUser.Username); err != nil {
+		log.Println(err.Error())
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			http.Error(w, "User not found", http.StatusUnauthorized)
+			return
+		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	type tmp struct {
+		ClientPassword string `json:"password"`
+	}
+	var t tmp
+	if err = json.Unmarshal(b, &t); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	authClient := auth.New(qHandler)
+	if authedUser, ok, err = authClient.Login(salt, user, t.ClientPassword); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if !ok {
+		http.Error(w, "Username or password is incorrect", http.StatusUnauthorized)
+		return
+	}
+
+	if retJson, err = json.Marshal(authedUser); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	session, err := sessions.Store.Get(r, "session")
+	sess.SetLoggedIn(r)
+
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(string(retJson))
 }
 
 func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {
@@ -309,6 +366,11 @@ func (c *Client) deleteMerchant(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) getCategories(w http.ResponseWriter, r *http.Request) {
+	if !sess.IsLoggedIn(r) {
+		http.Redirect(w, r, "/account/login", 302)
+		return
+	}
+
 	columns := qHandler.GetCategories()
 
 	w.Header().Set("Content-Type", "application/json")

@@ -1,11 +1,33 @@
 package models
 
 import (
+	"database/sql"
 	"gorm.io/gorm"
 	"time"
 )
 
-// Transaction ...
+type User struct {
+	ID        int            `json:"id"`
+	Username  string         `json:"username"`
+	FirstName string         `json:"first_name"`
+	LastName  string         `json:"last_name"`
+	Email     string         `json:"email"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `json:"deleted_at"`
+}
+
+type Secrets struct {
+	ID          int            `json:"id"`
+	UsersID     int            `json:"users_id"`
+	Password    []byte         `json:"password"`
+	Token       string         `json:"token"`
+	TokenExpiry sql.NullTime   `json:"token_expiry"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
+	DeletedAt   gorm.DeletedAt `json:"deleted_at"`
+}
+
 type Transaction struct {
 	gorm.Model
 	Key            string
