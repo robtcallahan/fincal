@@ -28,8 +28,8 @@ func NewQueryHandler(db *driver.DB) *Query {
 	}
 }
 
-func (q *Query) GetUserSecrets(id int) (*models.Secrets, error) {
-	return q.repo.GetUserSecrets(id)
+func (q *Query) GetUserSecrets(userID int) (*models.Secrets, error) {
+	return q.repo.GetUserSecrets(userID)
 }
 
 func (q *Query) SaveSecrets(secrets *models.Secrets) (*models.Secrets, error) {

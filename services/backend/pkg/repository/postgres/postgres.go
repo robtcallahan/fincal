@@ -21,9 +21,9 @@ func NewPostgreSQLQueryRepo(conn *gorm.DB) repo.QueryRepo {
 	}
 }
 
-func (r *postgresQueryRepo) GetUserSecrets(id int) (*models.Secrets, error) {
+func (r *postgresQueryRepo) GetUserSecrets(userID int) (*models.Secrets, error) {
 	var secrets models.Secrets
-	if result := r.Conn.First(&secrets, id); result.Error != nil {
+	if result := r.Conn.Where("users_id = ?", userID).First(&secrets); result.Error != nil {
 		return nil, result.Error
 	}
 	return &secrets, nil

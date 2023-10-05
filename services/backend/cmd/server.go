@@ -33,10 +33,10 @@ import (
 	"fincal/pkg/handler"
 	"fincal/pkg/models"
 	"fincal/pkg/plaid_auth"
-	sess "fincal/pkg/sessions"
+	"fincal/pkg/session"
 
 	"github.com/gorilla/mux"
-	"github.com/gorilla/sessions"
+	//"github.com/gorilla/session"
 	"github.com/rs/cors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -51,8 +51,8 @@ var serveCmd = &cobra.Command{
 	},
 }
 
-var conn *driver.DB
 var qHandler *handler.Query
+var globalSessions *session.Manager
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
@@ -85,7 +85,7 @@ func init() {
 		dbHost = fmt.Sprintf("%s", viper.Get("DB_HOST_LOCAL"))
 	}
 
-	conn, err = driver.ConnectSQL(&driver.ConnectParams{
+	conn, err := driver.ConnectSQL(&driver.ConnectParams{
 		DBType: driver.DBType(config.DBType),
 		Host:   dbHost,
 		Port:   config.DBPort,
@@ -100,11 +100,35 @@ func init() {
 	qHandler = handler.NewQueryHandler(conn)
 
 	client = getBankingClient()
+
+	// Initialize the session manager
+	globalSessions, err = session.NewManager("memory", "gosessionid", 3600)
 }
 
-var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
+//var store = session.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 
 func server() {
+	router := getRoutes()
+	router.Use(mux.CORSMethodMiddleware(router))
+	router.Use(AuthMiddleware)
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost", "http://www.wetdogsoftware.com"},
+		AllowCredentials: true,
+		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
+		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},
+		MaxAge:           86400,
+	})
+	myHandler := c.Handler(router)
+
+	serverPort := viper.Get("BACKEND_CLIENT_PORT")
+
+	log.Printf("Server will start at http://localhost:%s/", serverPort)
+	//log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, r))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", serverPort), myHandler))
+}
+
+func getRoutes() *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/api/ok", client.ok).Methods("GET")
@@ -131,24 +155,25 @@ func server() {
 	router.HandleFunc("/api/get_transactions", client.getTransactions).Methods("GET")
 	router.HandleFunc("/api/is_account_connected", isAccountConnected).Methods("GET")
 
-	router.Use(mux.CORSMethodMiddleware(router))
+	return router
+}
 
-	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:8000", "http://localhost:5173", "http://localhost", "http://www.wetdogsoftware.com"},
-		AllowCredentials: true,
-		AllowedMethods:   []string{"POST", "OPTIONS", "GET", "DELETE", "PUT"},
-		AllowedHeaders:   []string{"Content-Type", "Origin", "Accept", "token"},
-		MaxAge:           86400,
+func AuthMiddleware(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("%s@%s %s - %s", r.UserAgent(), r.RemoteAddr, r.Method, r.URL.Path)
+
+		//if !sess.IsLoggedIn(r) && r.URL.Path != "/api/auth/login" {
+		//	log.Println("user NOT logged in")
+		//	http.Error(w, "user not logged in", http.StatusUnauthorized)
+		//	return
+		//}
+		h.ServeHTTP(w, r)
 	})
-	myHandler := c.Handler(router)
-
-	log.Println("Server will start at http://localhost:9000/")
-
-	//log.Fatal(http.ListenAndServeTLS(":9000", config.CertFile, config.KeyFile, r))
-	log.Fatal(http.ListenAndServe(":9000", myHandler))
 }
 
 func (c *Client) ok(w http.ResponseWriter, r *http.Request) {
+	sess := globalSessions.SessionStart(w, r)
+
 	type okStruct struct {
 		OK bool `json:"ok"`
 	}
@@ -156,54 +181,22 @@ func (c *Client) ok(w http.ResponseWriter, r *http.Request) {
 		OK: true,
 	}
 
+	_ = sess.Set("name", "Billie")
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(ok)
 }
 
 func (c *Client) login(w http.ResponseWriter, r *http.Request) {
-	var (
-		clientUser       models.User
-		user, authedUser *models.User
-		b, retJson       []byte
-		ok               bool
-		err              error
-	)
-	salt := fmt.Sprintf("%s", viper.Get("SALT"))
-
-	defer r.Body.Close()
-	if b, err = io.ReadAll(r.Body); err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	user, password, err := getUserPwdFromClient(r, w)
+	if err != nil {
 		return
 	}
 
-	if err = json.Unmarshal(b, &clientUser); err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	if user, err = qHandler.GetUserByUsername(clientUser.Username); err != nil {
-		log.Println(err.Error())
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			http.Error(w, "User not found", http.StatusUnauthorized)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	type tmp struct {
-		ClientPassword string `json:"password"`
-	}
-	var t tmp
-	if err = json.Unmarshal(b, &t); err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
+	salt := fmt.Sprintf("%s", viper.Get("ARGON2_SALT"))
 	authClient := auth.New(qHandler)
-	if authedUser, ok, err = authClient.Login(salt, user, t.ClientPassword); err != nil {
+
+	authedUser, ok, err := authClient.Login(salt, user, password)
+	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -214,17 +207,67 @@ func (c *Client) login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if retJson, err = json.Marshal(authedUser); err != nil {
+	//sess.SetLoggedIn(r, w, authedUser)
+
+	// TODO: remove user return value
+	retJson, err := json.Marshal(authedUser)
+	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	session, err := sessions.Store.Get(r, "session")
-	sess.SetLoggedIn(r)
-
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(string(retJson))
+}
+
+func getUserPwdFromClient(r *http.Request, w http.ResponseWriter) (*models.User, string, error) {
+	var clientUser, user *models.User
+
+	defer r.Body.Close()
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return nil, "", err
+	}
+
+	if err = json.Unmarshal(b, clientUser); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return nil, "", err
+	}
+
+	if user, err = qHandler.GetUserByUsername(clientUser.Username); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			http.Error(w, "User not found", http.StatusUnauthorized)
+			return nil, "", err
+		}
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return nil, "", err
+	}
+
+	password, err := getPasswordFromClient(b, w)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return nil, "", err
+	}
+
+	return user, password, nil
+}
+
+func getPasswordFromClient(b []byte, w http.ResponseWriter) (string, error) {
+	type feStruct struct {
+		ClientPassword string `json:"password"`
+	}
+	var frontEnd feStruct
+	if err := json.Unmarshal(b, &frontEnd); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return "", err
+	}
+	return frontEnd.ClientPassword, nil
 }
 
 func (c *Client) getRegister(w http.ResponseWriter, r *http.Request) {
@@ -366,10 +409,10 @@ func (c *Client) deleteMerchant(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) getCategories(w http.ResponseWriter, r *http.Request) {
-	if !sess.IsLoggedIn(r) {
-		http.Redirect(w, r, "/account/login", 302)
-		return
-	}
+	//if !sess.IsLoggedIn(r) {
+	//	http.Error(w, "user not logged in", http.StatusUnauthorized)
+	//	return
+	//}
 
 	columns := qHandler.GetCategories()
 
@@ -498,110 +541,110 @@ func (c *Client) exchangePublicToken(w http.ResponseWriter, r *http.Request) {
 		log.Printf("could not write access token: %s", err.Error())
 	}
 
-	session, err := store.Get(r, "register")
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	session.Values["AccessToken"] = accessToken
-	err = sessions.Save(r, w)
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	//session, err := store.Get(r, "register")
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//session.Values["AccessToken"] = accessToken
+	//err = session.Save(r, w)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
 }
 
 func (c *Client) getAccounts(w http.ResponseWriter, r *http.Request) {
 	log.Println("getAccounts()")
 
-	session, err := store.Get(r, "register")
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
-	if accessToken == "" {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	//session, err := store.Get(r, "register")
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
+	//if accessToken == "" {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
 
-	balances, err := c.BankClient.GetAccounts(accessToken, ctx)
-	if err != nil {
-		_, _ = w.Write([]byte(err.Error()))
-		return
-	}
-	_ = json.NewEncoder(w).Encode(balances)
+	//balances, err := c.BankClient.GetAccounts(accessToken, ctx)
+	//if err != nil {
+	//	_, _ = w.Write([]byte(err.Error()))
+	//	return
+	//}
+	//_ = json.NewEncoder(w).Encode(balances)
 }
 
 func (c *Client) getBalance(w http.ResponseWriter, r *http.Request) {
-	session, err := store.Get(r, "register")
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
-	if accessToken == "" {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	balance, err := c.BankClient.GetBalance(accessToken, "fidelity", ctx)
-	if err != nil {
-		_, _ = w.Write([]byte(err.Error()))
-		return
-	}
-	_ = json.NewEncoder(w).Encode(balance)
+	//session, err := store.Get(r, "register")
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
+	//if accessToken == "" {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//
+	//balance, err := c.BankClient.GetBalance(accessToken, "fidelity", ctx)
+	//if err != nil {
+	//	_, _ = w.Write([]byte(err.Error()))
+	//	return
+	//}
+	//_ = json.NewEncoder(w).Encode(balance)
 }
 
 func (c *Client) getTransactions(w http.ResponseWriter, r *http.Request) {
-	session, err := store.Get(r, "register")
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
-	if accessToken == "" {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// start from 2 weeks ago
-	startDate := weeksAgo(2)
-	endDate := today()
-	transactions, err := client.BankClient.GetTransactions(options.BankIDs, startDate, endDate)
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	_ = json.NewEncoder(w).Encode(transactions)
+	//session, err := store.Get(r, "register")
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
+	//if accessToken == "" {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//
+	//// start from 2 weeks ago
+	//startDate := weeksAgo(2)
+	//endDate := today()
+	//transactions, err := client.BankClient.GetTransactions(options.BankIDs, startDate, endDate)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//_ = json.NewEncoder(w).Encode(transactions)
 }
 
 func isAccountConnected(w http.ResponseWriter, r *http.Request) {
-	session, err := store.Get(r, "register")
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
-	type ConnectedResponse struct {
-		Status bool `json:"status"`
-	}
-	if accessToken != "" {
-		//_ = json.NewEncoder(w).Encode("{status: true}")
-		resp := ConnectedResponse{Status: true}
-		_ = json.NewEncoder(w).Encode(resp)
-	} else {
-		resp := ConnectedResponse{Status: false}
-		_ = json.NewEncoder(w).Encode(resp)
-	}
+	//session, err := store.Get(r, "register")
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, err.Error(), http.StatusInternalServerError)
+	//	return
+	//}
+	//accessToken := fmt.Sprintf("%s", session.Values["AccessToken"])
+	//type ConnectedResponse struct {
+	//	Status bool `json:"status"`
+	//}
+	//if accessToken != "" {
+	//	//_ = json.NewEncoder(w).Encode("{status: true}")
+	//	resp := ConnectedResponse{Status: true}
+	//	_ = json.NewEncoder(w).Encode(resp)
+	//} else {
+	//	resp := ConnectedResponse{Status: false}
+	//	_ = json.NewEncoder(w).Encode(resp)
+	//}
 }

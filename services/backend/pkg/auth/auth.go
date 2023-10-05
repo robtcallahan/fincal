@@ -5,6 +5,7 @@ import (
 
 	"fincal/pkg/handler"
 	"fincal/pkg/models"
+
 	"golang.org/x/crypto/argon2"
 )
 
@@ -22,6 +23,12 @@ func (c *Client) Login(salt string, user *models.User, clientPassword string) (*
 	var err error
 
 	key := argon2.Key([]byte(clientPassword), []byte(salt), 3, 32*1024, 4, 32)
+
+	//secrets := &models.Secrets{
+	//	UsersID:  user.ID,
+	//	Password: key,
+	//}
+	//_, _ = c.Handler.SaveSecrets(secrets)
 
 	secrets, err := c.Handler.GetUserSecrets(user.ID)
 	if err != nil {

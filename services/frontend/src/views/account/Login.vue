@@ -13,7 +13,7 @@ const schema = Yup.object().shape({
     <div class="card m-3 login">
         <h4 class="card-header">Login</h4>
         <div class="card-body">
-            <Form @submit="this.login" :validation-schema="schema" v-slot="{ errors, isSubmitting }">
+            <Form @submit="this.onSubmit" :validation-schema="schema" v-slot="{ errors, isSubmitting }">
                 <div class="form-group">
                     <label>Username</label>
                     <Field name="username" type="text" class="form-control" :class="{ 'is-invalid': errors.username }"/>
@@ -46,7 +46,7 @@ const axiosInstance = axios.create({
 
 export default {
     methods: {
-        async login(values) {
+        async onSubmit(values) {
             const {username, password} = values;
             const user = {
                 username: username,

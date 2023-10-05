@@ -20,9 +20,9 @@ func NewMySQLQueryRepo(conn *gorm.DB) repo.QueryRepo {
 	}
 }
 
-func (r *mysqlQueryRepo) GetUserSecrets(id int) (*models.Secrets, error) {
+func (r *mysqlQueryRepo) GetUserSecrets(userID int) (*models.Secrets, error) {
 	var secrets models.Secrets
-	if result := r.Conn.First(&secrets, id); result.Error != nil {
+	if result := r.Conn.Where("users_id = ?", userID).First(&secrets); result.Error != nil {
 		return nil, result.Error
 	}
 	return &secrets, nil
